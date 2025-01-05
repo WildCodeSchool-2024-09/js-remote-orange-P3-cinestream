@@ -1,0 +1,68 @@
+/* balise p de titre */
+.titreRecent {
+  color: white;
+  margin-top: 70px;
+  font-size: 2em;
+  padding-left: 60px;
+}
+
+/* le contener du slider */
+.sliderContainerCategorie {
+  padding-left: 50px;
+  box-sizing: border-box;
+  padding-right: 50px;
+}
+
+/* un élémeent du caroussel */
+.containerElement {
+  height: 32rem;
+}
+
+/* contener de image */
+.containerImage {
+  height: 100%;
+  width: 85%;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+/* image */
+.containerImage img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* titre filme */
+.pTitreFilme {
+  color: white;
+  position: absolute;
+  bottom: 30px;
+  font-size: 1.5em;
+  left: 10px;
+  z-index: 11;
+}
+
+/* notes filme */
+.pNotesType {
+  color: white;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 0.8em;
+  z-index: 11;
+}
+
+.shadowBottum {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  z-index: 10;
+  background: linear-gradient(rgba(0, 0, 0, 0), #0d0c0f);
+}
