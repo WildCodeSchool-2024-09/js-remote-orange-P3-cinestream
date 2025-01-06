@@ -1,6 +1,7 @@
 import BntFavorie from "./bntFavorie/BntFavorie";
 import BntLecture from "./bntLecture/BntLecture";
 import DesciptionAnonce from "./desciptionAnonce/DesciptionAnonce";
+import NavBarre from "../../../commun/navBarre/NavBarre";
 import style from "./homeHeader.module.css";
 import Point from "./point/Point";
 
@@ -8,6 +9,7 @@ const HomeHeader = () => {
   return (
     <div className={`${style.homeHeader}`}>
       {/* nave barre a mettre */}
+      <NavBarre />
       {/* fond */}
       <div className={`${style.shadowTop}`} />
       <img

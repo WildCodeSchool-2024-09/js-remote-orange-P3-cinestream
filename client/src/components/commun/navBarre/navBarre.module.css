@@ -1,3 +1,19 @@
 .navBarre {
-  background-color: blueviolet;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 0 20px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.logo img {
+  height: 90px;
+  display: block;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }

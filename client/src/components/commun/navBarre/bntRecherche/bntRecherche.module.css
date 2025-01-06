@@ -1,0 +1,11 @@
+.searchButton {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.4em;
+}
+
+.searchButton:hover {
+  color: #218838;
+}
