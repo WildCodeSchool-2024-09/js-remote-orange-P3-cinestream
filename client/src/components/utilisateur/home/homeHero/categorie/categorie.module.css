@@ -1,0 +1,28 @@
+/* le contener du slider */
+.sliderContainerCategorie {
+  margin-top: 80px;
+  padding-left: 50px;
+  box-sizing: border-box;
+  padding-right: 50px;
+}
+
+/* un élémeent du caroussel */
+.containerElement {
+  height: 8rem;
+}
+
+/* contener de image */
+.containerImage {
+  height: 100%;
+  width: 85%;
+  background-color: #08080a;
+  border-radius: 25px;
+}
+
+/* image */
+.containerImage img {
+  height: 100%;
+  width: 70%;
+  margin: auto;
+  object-fit: contain;
+}
