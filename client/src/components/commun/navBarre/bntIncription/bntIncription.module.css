@@ -1,0 +1,14 @@
+.signupButton {
+  background-color: transparent; /* Fond transparent */
+  color: white; /* Texte blanc */
+  border: 2px solid white; /* Bordure blanche */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 10px 20px; /* Espacement intérieur */
+  font-size: 16px; /* Taille du texte */
+  cursor: pointer; /* Curseur de type main */
+}
+
+.signupButton:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement blanc au survol */
+  border-color: white; /* Bordure reste blanche */
+}

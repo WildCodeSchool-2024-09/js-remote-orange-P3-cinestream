@@ -1,3 +1,4 @@
+
 # CineStream
 
 Ce projet est un monorepo JS, suivant l'architecture React-Express-MySQL telle qu'enseignée à la Wild Code School (v7.1.7) :
@@ -44,7 +45,7 @@ Il est pré-configuré avec un ensemble d'outils pour aider les étudiants à pr
 
 ## Table des Matières
 
-- [CineStream](#name)
+- [CineStream](#cinestream)
   - [Table des Matières](#table-des-matières)
   - [Utilisateurs Windows](#utilisateurs-windows)
   - [Installation \& Utilisation](#installation--utilisation)
