@@ -1,0 +1,61 @@
+/* effect focus (conture au clik) */
+.slick-slide *:focus {
+  outline: none;
+}
+
+/* case */
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  /* background-color: rgba(0, 255, 255, 0.084); */
+}
+
+/* flèche de gauche */
+.slick-prev {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  z-index: 6;
+}
+
+.slick-prev::before {
+  content: "<";
+  background-color: #28262d;
+  color: white;
+  font-size: 1.8rem;
+  padding: 0em .4em .15em .25em;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+/* flèche de droite */
+.slick-next {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  z-index: 6;
+}
+
+.slick-next::before {
+  content: ">";
+  background-color: #28262d;
+  color: white;
+  font-size: 1.8rem;
+  padding: 0em .25em .15em .4em;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+/* hover les 2 flèche */
+.slick-next:hover::before,
+.slick-prev:hover::before {
+  background-color: black;
+}
