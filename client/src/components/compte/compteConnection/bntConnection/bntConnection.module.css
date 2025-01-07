@@ -1,0 +1,10 @@
+.bntConnection {
+  margin: auto;
+  width: 80%;
+  height: 2em;
+  border: none;
+  border-radius: 10px;
+  background-color: #28262d;
+  color: #3e3c43;
+  font-size: 1.3em;
+}
