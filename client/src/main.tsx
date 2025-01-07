@@ -1,12 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AdminEpisode from "./pages/backOffice/adminEpisode/AdminEpisode";
+import AdminRecherche from "./pages/backOffice/adminRecherche/AdminRecherche";
+import AdminSeries from "./pages/backOffice/adminSeries/AdminSeries";
 import CompteConnection from "./pages/compte/compteConnection/CompteConnection";
-import Home from "./pages/utilisateur/home/Home";
-("./pages/compte/compteConnection/CompteConnection");
 import CompteInsciption from "./pages/compte/compteInsciption/CompteInsciption";
-("./pages/compte/compteInsciption/CompteInsciption");
+import CompteProfile from "./pages/compte/compteProfile/CompteProfile";
 import Error404Page from "./pages/error404Page/Error404Page";
+import Home from "./pages/utilisateur/home/Home";
+import Presentation from "./pages/utilisateur/presentation/Presentation";
+import Recherche from "./pages/utilisateur/recherche/Recherche";
 import "./main.css";
 
 const router = createBrowserRouter([
@@ -21,6 +25,30 @@ const router = createBrowserRouter([
   {
     path: "insciption",
     element: <CompteInsciption />,
+  },
+  {
+    path: "compte",
+    element: <CompteProfile />,
+  },
+  {
+    path: "detail",
+    element: <Presentation />,
+  },
+  {
+    path: "recherche",
+    element: <Recherche />,
+  },
+  {
+    path: "admin/recherche",
+    element: <AdminRecherche />,
+  },
+  {
+    path: "admin/organisation",
+    element: <AdminSeries />,
+  },
+  {
+    path: "admin/description",
+    element: <AdminEpisode />,
   },
   {
     path: "*",
