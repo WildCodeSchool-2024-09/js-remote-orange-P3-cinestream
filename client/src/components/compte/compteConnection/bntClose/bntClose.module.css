@@ -1,0 +1,15 @@
+.bntClose {
+  background-color: transparent;
+  color: white;
+  font-size: 110%;
+  border: white 1px solid;
+  border-radius: 15px;
+  padding: 0.7em 1em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+}
+
+.bntClose:hover {
+  background-color: rgb(58, 58, 58);
+  cursor: pointer;
+}

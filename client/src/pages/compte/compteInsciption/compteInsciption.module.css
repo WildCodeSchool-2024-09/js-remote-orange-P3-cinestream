@@ -1,0 +1,84 @@
+.allPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.fondModal {
+  background-color: #ffffff02;
+  border: #28262d 2px solid;
+  width: 25%;
+  height: 70%;
+  margin: auto;
+  border-radius: 40px;
+  overflow: auto;
+  scrollbar-width: none;
+
+  @media screen and (max-width: 1500px) {
+    width: 50%;
+    height: 70%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+/* image + bnt close */
+.contenerHeder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 2em 0 1em;
+}
+
+/* logo cinéstrem */
+.imgLogo {
+  width: 28%;
+  height: 28%;
+}
+
+/* tout les inupt*/
+.contenerInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  width: 80%;
+  margin: auto;
+  gap: 1.1em;
+}
+
+.contenerBntContinue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.2em;
+}
+
+/* texte compte éexite déja ? */
+.texteExite {
+  color: white;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  font-size: 1em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+}
+
+.texteExite strong {
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  color: #00925d;
+  cursor: pointer;
+  margin-bottom: 1em;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.texteExite strong:hover {
+  font-weight: 500;
+}
