@@ -17,10 +17,10 @@
 .contenerInputMDPConfirmation input {
   width: 100%;
   background-color: #08080a;
-  border: rgb(40, 38, 44) 2px solid;
   border-radius: 13px;
   font-size: 1.1em;
   padding: 0.8em;
+  padding-right: 3.3em;
   box-sizing: border-box;
   color: white;
   font-family: "Rubik", sans-serif;
@@ -60,4 +60,24 @@
 .contenerRelatif button:hover {
   transition: all 0.2s ease;
   transform: translateY(-50%) scale(1.1);
+}
+
+/* qaund c'est bon */
+.focusVert {
+  border: rgb(255, 255, 255) 2px solid;
+}
+
+.focusVert:focus {
+  outline: none;
+  border: green 2px solid;
+}
+
+/* quand c'est pas bon */
+.focusRouge {
+  border: rgb(40, 38, 44) 2px solid;
+}
+
+.focusRouge:focus {
+  outline: none;
+  border: red 2px solid;
 }

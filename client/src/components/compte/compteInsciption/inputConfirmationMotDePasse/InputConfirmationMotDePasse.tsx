@@ -1,14 +1,23 @@
 import { useState } from "react";
 import style from "./InputConfirmationMotDePasse.module.css";
 
+interface ValideProps {
+  nom: boolean;
+  email: boolean;
+  motDePasse: boolean;
+  motDePasse2: boolean;
+}
+
 interface Props {
   motDePasse2: string;
   setMotDePasse2: (value: string) => void;
+  valide: ValideProps;
 }
 
 const InputConfirmationMotDePasse: React.FC<Props> = ({
   motDePasse2,
   setMotDePasse2,
+  valide,
 }) => {
   const [cacher, setCacher] = useState(true);
 
@@ -20,11 +29,21 @@ const InputConfirmationMotDePasse: React.FC<Props> = ({
     return `${style.yeuxCacher}`;
   }
 
+  //verifie si le mot de passe est valide
+  // défnir la classe
+  function defClass() {
+    if (valide.motDePasse2) {
+      return `${style.focusVert}`;
+    }
+    return `${style.focusRouge}`;
+  }
+
   return (
     <div className={`${style.contenerInputMDPConfirmation}`}>
       <p>Confirmer mot de passe</p>
       <div className={`${style.contenerRelatif}`}>
         <input
+          className={defClass()}
           type={cacher ? "password" : "text"}
           placeholder="Confirmer mot de passe"
           value={motDePasse2}

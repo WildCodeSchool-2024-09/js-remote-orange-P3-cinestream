@@ -7,4 +7,19 @@
   background-color: #28262d;
   color: #3e3c43;
   font-size: 1.3em;
+  cursor: not-allowed;
+  font-family: "Rubik", sans-serif;
+}
+
+.bntContinueValide {
+  background-color: #00925d;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+}
+
+.bntContinueValide:hover {
+  background-color: rgb(2, 110, 70);
+  transition: all 0.3s;
+  scale: 1.02;
 }

@@ -12,6 +12,14 @@ const CompteInsciption = () => {
   const [email, setEmail] = useState("");
   const [motDePasse, setMotDePasse] = useState("");
   const [motDePasse2, setMotDePasse2] = useState("");
+  const [messageErreur, setMessageErreur] = useState("");
+  // savoir si les champs repsectent les conditions
+  const [valide, setValide] = useState({
+    nom: false,
+    email: false,
+    motDePasse: false,
+    motDePasse2: false,
+  });
 
   return (
     <div className={`${style.allPage}`}>
@@ -26,19 +34,37 @@ const CompteInsciption = () => {
         </div>
         <form>
           <div className={`${style.contenerInput}`}>
-            <InputNom nom={nom} setNom={setNom} />
-            <InputMail email={email} setEmail={setEmail} />
+            <InputNom
+              nom={nom}
+              setNom={setNom}
+              valide={valide}
+              setValide={setValide}
+            />
+            <InputMail
+              email={email}
+              setEmail={setEmail}
+              valide={valide}
+              setValide={setValide}
+            />
             <InputMotDePasse
               motDePasse={motDePasse}
               setMotDePasse={setMotDePasse}
+              valide={valide}
+              setValide={setValide}
+              motDePasse2={motDePasse2}
             />
             <InputConfirmationMotDePasse
               motDePasse2={motDePasse2}
               setMotDePasse2={setMotDePasse2}
+              valide={valide}
             />
           </div>
           <div className={`${style.contenerBntContinue}`}>
-            <BntContinue />
+            <BntContinue
+              valide={valide}
+              messageErreur={messageErreur}
+              setMessageErreur={setMessageErreur}
+            />
             <p className={`${style.texteExite}`}>
               déja un compte ?{" "}
               <a href="/connection">
