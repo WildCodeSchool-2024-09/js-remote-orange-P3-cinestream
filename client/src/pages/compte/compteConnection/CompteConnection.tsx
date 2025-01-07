@@ -1,3 +1,4 @@
+import { useState } from "react";
 import BntClose from "../../../components/compte/compteConnection/bntClose/BntClose";
 import BntConnection from "../../../components/compte/compteConnection/bntConnection/BntConnection";
 import InputMail from "../../../components/compte/compteConnection/inputMail/InputMail";
@@ -5,6 +6,9 @@ import InputMotDePasse from "../../../components/compte/compteConnection/inputMo
 import style from "./CompteConnection.module.css";
 
 const CompteConnection = () => {
+  const [email, setEmail] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
+
   return (
     <div className={`${style.allPage}`}>
       <div className={`${style.fondModal}`}>
@@ -18,8 +22,11 @@ const CompteConnection = () => {
         </div>
         <form>
           <div className={`${style.contenerInput}`}>
-            <InputMail />
-            <InputMotDePasse />
+            <InputMail email={email} setEmail={setEmail} />
+            <InputMotDePasse
+              motDePasse={motDePasse}
+              setMotDePasse={setMotDePasse}
+            />
           </div>
           <div className={`${style.contenerBntConnection}`}>
             <BntConnection />

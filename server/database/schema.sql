@@ -5,6 +5,7 @@ CREATE TABLE utilisateur (
   password VARCHAR(255) NOT NULL,
   speudo VARCHAR(255) NOT NULL,
   photo_profil VARCHAR(255) DEFAULT NULL
+  is_admin TINYINT(1) DEFAULT 0
 );
 
 -- abonement

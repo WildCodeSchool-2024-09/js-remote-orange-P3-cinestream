@@ -1,10 +1,20 @@
 import style from "./InputMail.module.css";
 
-const InputMail = () => {
+interface InputMailProps {
+  email: string;
+  setEmail: (email: string) => void;
+}
+
+const InputMail: React.FC<InputMailProps> = ({ email, setEmail }) => {
   return (
     <div className={`${style.contenerInputMail}`}>
       <p>Adresse mail</p>
-      <input type="text" placeholder="Adresse mail" />
+      <input
+        type="email"
+        placeholder="Adresse mail"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      />
     </div>
   );
 };
