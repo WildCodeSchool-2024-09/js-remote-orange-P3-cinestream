@@ -18,6 +18,7 @@ router.post(
   inscriptionIsbon.verifNom,
   inscriptionIsbon.verifMail,
   inscriptionIsbon.verifMotDePasse,
+  inscriptionIsbon.verifMotDePasse2,
   utilisateurActions.utilisateurIsExist,
   utilisateurActions.inscription,
 );

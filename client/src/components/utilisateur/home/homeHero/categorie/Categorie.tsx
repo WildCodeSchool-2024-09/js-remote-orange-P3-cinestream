@@ -16,6 +16,15 @@ const Categorie = () => {
     draggable: true, // Permet de glisser avec la souris
     focusOnSelect: false, // Empêche la mise au focus des slides
     arrows: true, // Active les flèches
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerMode: true,
+        },
+      },
+    ],
   };
 
   return (
@@ -23,62 +32,128 @@ const Categorie = () => {
       <Slider {...settings}>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
+            <img src="/temporaire/categorie/superHero.jpg" alt="" />
+            <p className={`${style.pType}`}>superhero</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
+            <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
+            <p className={`${style.pType}`}>siencefiction</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
+            <img src="/temporaire/categorie/moyenAge.jpg" alt="" />
+            <p className={`${style.pType}`}>historique</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
+            <img src="/temporaire/categorie/haurreur.jpg" alt="" />
+            <p className={`${style.pType}`}>horreur</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
+            <img src="/temporaire/categorie/drole.jpg" alt="" />
+            <p className={`${style.pType}`}>commique</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
+            <img src="/temporaire/categorie/drame.webp" alt="" />
+            <p className={`${style.pType}`}>drama</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
+            <img src="/temporaire/categorie/superHero.jpg" alt="" />
+            <p className={`${style.pType}`}>superhero</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
+            <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
+            <p className={`${style.pType}`}>siencefiction</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
+            <img src="/temporaire/categorie/moyenAge.jpg" alt="" />
+            <p className={`${style.pType}`}>historique</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
+            <img src="/temporaire/categorie/haurreur.jpg" alt="" />
+            <p className={`${style.pType}`}>horreur</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
+            <img src="/temporaire/categorie/drole.jpg" alt="" />
+            <p className={`${style.pType}`}>commique</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
+            <img src="/temporaire/categorie/drame.webp" alt="" />
+            <p className={`${style.pType}`}>drama</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/superHero.jpg" alt="" />
+            <p className={`${style.pType}`}>superhero</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
+            <p className={`${style.pType}`}>siencefiction</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/moyenAge.jpg" alt="" />
+            <p className={`${style.pType}`}>historique</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/haurreur.jpg" alt="" />
+            <p className={`${style.pType}`}>horreur</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/drole.jpg" alt="" />
+            <p className={`${style.pType}`}>commique</p>
+            <div className={`${style.flouGris}`} />
+          </div>
+        </div>
+        <div className={`${style.containerElement}`}>
+          <div className={`${style.containerImage}`}>
+            <img src="/temporaire/categorie/drame.webp" alt="" />
+            <p className={`${style.pType}`}>drama</p>
+            <div className={`${style.flouGris}`} />
           </div>
         </div>
       </Slider>

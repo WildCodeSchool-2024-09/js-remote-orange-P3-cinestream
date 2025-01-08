@@ -2,8 +2,11 @@
 .titreRecent {
   color: white;
   margin-top: 70px;
+  margin-bottom: 12px;
   font-size: 2em;
-  padding-left: 60px;
+  padding-left: 50px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
 }
 
 /* le contener du slider */
@@ -15,13 +18,13 @@
 
 /* un élémeent du caroussel */
 .containerElement {
-  height: 32rem;
+  height: auto;
 }
 
 /* contener de image */
 .containerImage {
-  height: 100%;
-  width: 85%;
+  width: 80%;
+  aspect-ratio: 1 / 1.5;
   border-radius: 25px;
   position: relative;
   overflow: hidden;
@@ -43,9 +46,15 @@
   color: white;
   position: absolute;
   bottom: 30px;
-  font-size: 1.5em;
+  font-size: 1.2em;
   left: 10px;
   z-index: 11;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 
 /* notes filme */
@@ -54,8 +63,14 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   z-index: 11;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+.pNotesType span {
+  color: #9ca4ab;
 }
 
 .shadowBottum {

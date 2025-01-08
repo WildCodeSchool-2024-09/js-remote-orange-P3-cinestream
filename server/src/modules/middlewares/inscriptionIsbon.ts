@@ -3,13 +3,13 @@ import type { RequestHandler } from "express";
 const verifNom: RequestHandler = async (req, res, next) => {
   try {
     const { nom } = req.body;
-    if (!/^[a-zA-Z0-9_-]+$/.test(nom)) {
-      res.send({
-        message: "le nom peut avoir que - et _ comme caractères spéciaux",
-      });
-    } else if (!(nom.length >= 4 && nom.length <= 30)) {
+    if (!(nom.length >= 4 && nom.length <= 30)) {
       res.send({
         message: "le nom doit avoir entre 4 et 30 caractères",
+      });
+    } else if (!/^[a-zA-Z0-9_-]+$/.test(nom)) {
+      res.send({
+        message: "le nom peut avoir que - et _ comme caractères spéciaux",
       });
     } else {
       next();
@@ -57,4 +57,20 @@ const verifMotDePasse: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { verifNom, verifMail, verifMotDePasse };
+const verifMotDePasse2: RequestHandler = async (req, res, next) => {
+  try {
+    const { motDePasse, motDePasse2 } = req.body;
+
+    if (motDePasse !== motDePasse2) {
+      res.send({
+        message: "la confirmation du mot de passe ne correspond pas",
+      });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { verifNom, verifMail, verifMotDePasse, verifMotDePasse2 };

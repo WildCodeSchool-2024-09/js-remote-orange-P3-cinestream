@@ -25,6 +25,7 @@ const inscription: RequestHandler = async (req, res, next) => {
 
     res.status(201).send({
       message: "Utilisateur créé avec succès",
+      success: true,
     });
   } catch (err) {
     next(err);
@@ -34,6 +35,7 @@ const inscription: RequestHandler = async (req, res, next) => {
 const connexion: RequestHandler = async (req, res, next) => {
   try {
     const user = req.user;
+
     if (!user) {
       throw new Error("utilisateur non défini");
     }

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { UseTokenContext } from "../../../../context/tokenContext";
 import style from "./bntConnection.module.css";
 
 interface BntConnectionProps {
@@ -19,6 +21,12 @@ const BntConnection: React.FC<BntConnectionProps> = ({
   email,
   motDePasse,
 }) => {
+  //pour changer de routes
+  const navigate = useNavigate();
+
+  //utiliser le contexte
+  const { setToken } = UseTokenContext();
+
   //change la classe en fonction de si tout est bon
   function defClass() {
     if (valide.email && valide.motDePasse) {
@@ -44,6 +52,11 @@ const BntConnection: React.FC<BntConnectionProps> = ({
         },
       );
       setMessageErreur(data.message);
+      if (data.token) {
+        //navigation
+        setToken(data.token);
+        navigate("/");
+      }
     } catch (error) {
       setMessageErreur("Erreur lors de l'inscription");
     }

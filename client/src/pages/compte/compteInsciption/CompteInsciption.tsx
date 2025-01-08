@@ -67,6 +67,7 @@ const CompteInsciption = () => {
               nom={nom}
               email={email}
               motDePasse={motDePasse}
+              motDePasse2={motDePasse2}
             />
             <p className={`${style.texteExite}`}>
               déja un compte ?{" "}
