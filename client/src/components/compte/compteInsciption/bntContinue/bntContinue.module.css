@@ -23,3 +23,8 @@
   transition: all 0.3s;
   scale: 1.02;
 }
+
+.messageErreur {
+  color: red;
+  font-size: 1.2em;
+}

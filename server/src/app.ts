@@ -1,11 +1,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
 import type { ErrorRequestHandler } from "express";
 import router from "./router";
 
+dotenv.config();
+
 const app = express();
+
+app.use(express.json());
 
 if (process.env.CLIENT_URL != null) {
   app.use(cors({ origin: [process.env.CLIENT_URL] }));
@@ -42,11 +47,8 @@ if (fs.existsSync(clientBuildPath)) {
 // Important: Error-handling middleware should be defined last, after other app.use() and routes calls.
 // Define a middleware function to log errors
 const logErrors: ErrorRequestHandler = (err, req, res, next) => {
-  // Log the error to the console for debugging purposes
   console.error(err);
   console.error("on req:", req.method, req.path);
-
-  // Pass the error to the next middleware in the stack
   next(err);
 };
 
