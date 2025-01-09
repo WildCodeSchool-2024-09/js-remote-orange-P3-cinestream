@@ -12,8 +12,8 @@ const app = express();
 
 app.use(express.json());
 
-if (process.env.CLIENT_URL != null) {
-  app.use(cors({ origin: [process.env.CLIENT_URL] }));
+if (process.env.CLIENT_URL != null && process.env.CLIENT_URL2 != null) {
+  app.use(cors({ origin: [process.env.CLIENT_URL, process.env.CLIENT_URL2] }));
 }
 
 // Import the API router

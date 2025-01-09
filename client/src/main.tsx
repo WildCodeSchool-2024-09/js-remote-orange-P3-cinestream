@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+//import pages
 import AdminEpisode from "./pages/backOffice/adminEpisode/AdminEpisode";
 import AdminRecherche from "./pages/backOffice/adminRecherche/AdminRecherche";
 import AdminSeries from "./pages/backOffice/adminSeries/AdminSeries";
@@ -11,6 +13,11 @@ import Error404Page from "./pages/error404Page/Error404Page";
 import Home from "./pages/utilisateur/home/Home";
 import Presentation from "./pages/utilisateur/presentation/Presentation";
 import Recherche from "./pages/utilisateur/recherche/Recherche";
+
+//conexte
+import { TokenProvider } from "./context/tokenContext";
+
+//import css
 import "./main.css";
 
 const router = createBrowserRouter([
@@ -64,6 +71,8 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <TokenProvider>
+      <RouterProvider router={router} />
+    </TokenProvider>
   </StrictMode>,
 );

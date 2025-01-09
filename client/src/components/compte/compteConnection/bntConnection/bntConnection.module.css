@@ -24,5 +24,8 @@
 
 .messageErreur {
   color: red;
-  font-size: 1.2em;
+  font-size: 1.1em;
+  margin: 0 auto 1em auto;
+  width: 80%;
+  text-align: center;
 }

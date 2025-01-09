@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import style from "./BntContinue.module.css";
 
 interface BntContinueProps {
@@ -13,6 +14,7 @@ interface BntContinueProps {
   nom: string;
   email: string;
   motDePasse: string;
+  motDePasse2: string;
 }
 const BntContinue: React.FC<BntContinueProps> = ({
   valide,
@@ -21,7 +23,11 @@ const BntContinue: React.FC<BntContinueProps> = ({
   nom,
   email,
   motDePasse,
+  motDePasse2,
 }) => {
+  //pour naviguer
+  const navigate = useNavigate();
+
   //change la classe en fonction de si tout est bon
   function defClass() {
     if (valide.nom && valide.email && valide.motDePasse && valide.motDePasse2) {
@@ -35,6 +41,7 @@ const BntContinue: React.FC<BntContinueProps> = ({
       nom: nom,
       email: email,
       motDePasse: motDePasse,
+      motDePasse2: motDePasse2,
     };
 
     try {
@@ -48,6 +55,9 @@ const BntContinue: React.FC<BntContinueProps> = ({
         },
       );
       setMessageErreur(data.message);
+      if (data.success) {
+        navigate("/connection");
+      }
     } catch (error) {
       setMessageErreur("Erreur lors de l'inscription");
     }
