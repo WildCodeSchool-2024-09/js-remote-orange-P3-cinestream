@@ -1,9 +1,14 @@
 import crypto from "node:crypto";
 import dotenv from "dotenv";
 import type { Request, RequestHandler } from "express";
+import type { NextFunction, Response } from "express";
 import originResquetSQL from "./originResquetSQL";
 
-const serveur: RequestHandler = async (req, res, next) => {
+const serveur: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
   dotenv.config();
   // Récupérer l'URL du serveur depuis .env
   const serverUrl = process.env.SERVEUR_URL || "";
@@ -14,13 +19,16 @@ const serveur: RequestHandler = async (req, res, next) => {
   if (origin?.startsWith(serverUrl)) {
     if (origin === serverUrl) {
       next();
+      return;
     }
     res
       .status(403)
       .send({ message: "Requête non autorisée (origine invalide)" });
+    return;
   }
   // Si l'origine ne correspond pas, bloquer l'accès
-  res.status(403).json({ message: "Requête non autorisée (origine invalide)" });
+  res.status(403).send({ message: "Requête non autorisée (origine invalide)" });
+  return;
 };
 
 //pas un midelware juste une fonction
