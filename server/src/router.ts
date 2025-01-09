@@ -2,7 +2,7 @@ import express from "express";
 import itemActions from "./modules/item/itemActions";
 import connection from "./modules/middlewares/connection";
 import inscriptionIsbon from "./modules/middlewares/inscriptionIsbon";
-import originResquet from "./modules/middlewares/originResquet";
+import originResquet from "./modules/originResquet/originResquet";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
 
 const router = express.Router();
@@ -34,12 +34,17 @@ router.post(
 );
 
 //verifie si uttilisateur est admin
-router.post("/api/isAdmin");
+router.post(
+  "/api/isAdmin",
+  utilisateurActions.tokenIsCorrect,
+  utilisateurActions.utilisateurIsAdmin,
+);
 
 //crée un compte admin (uniquement via le serveur)
 router.post(
   "/api/newAdmin",
   originResquet.serveur,
+  originResquet.checkToken,
   inscriptionIsbon.verifNom,
   utilisateurActions.utilisateurIsExist,
   inscriptionIsbon.verifMail,

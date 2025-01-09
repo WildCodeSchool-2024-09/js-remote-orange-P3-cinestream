@@ -119,3 +119,9 @@ CREATE TABLE categorie_article (
     FOREIGN KEY (article_id) REFERENCES article(id),
     FOREIGN KEY (categorie_id) REFERENCES categorie(id)
 );
+
+
+CREATE TABLE token_serveur(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL
+)

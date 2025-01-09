@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import type { ErrorRequestHandler } from "express";
+import originResquet from "./modules/originResquet/originResquet";
 import router from "./router";
 
 dotenv.config();
@@ -12,11 +13,24 @@ const app = express();
 
 app.use(express.json());
 
-if (process.env.CLIENT_URL != null && process.env.CLIENT_URL2 != null) {
-  app.use(cors({ origin: [process.env.CLIENT_URL, process.env.CLIENT_URL2] }));
+if (
+  process.env.CLIENT_URL != null &&
+  process.env.CLIENT_URL2 != null &&
+  process.env.SERVEUR_URL != null
+) {
+  app.use(
+    cors({
+      origin: [
+        process.env.CLIENT_URL,
+        process.env.CLIENT_URL2,
+        process.env.SERVEUR_URL,
+      ],
+    }),
+  );
 }
 
-// Import the API router
+//génère un token pour le serveur
+originResquet.setToken();
 
 // Mount the API router under the "/api" endpoint
 app.use(router);

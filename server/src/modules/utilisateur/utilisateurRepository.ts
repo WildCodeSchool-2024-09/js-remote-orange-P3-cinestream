@@ -71,6 +71,15 @@ class UtilisateurRepository {
     const [rows] = await databaseClient.query(query, [id]);
     return rows;
   }
+
+  async findAllById(id: number) {
+    const query = `
+            SELECT * FROM utilisateur WHERE id = ?
+        `;
+
+    const [rows] = await databaseClient.query(query, [id]);
+    return rows;
+  }
 }
 
 export default new UtilisateurRepository();
