@@ -4,6 +4,7 @@ import BntConnection from "./bntConnection/BntConnection";
 import BntIncription from "./bntIncription/BntIncription";
 import BntRecherche from "./bntRecherche/BntRecherche";
 import style from "./navBarre.module.css";
+import Routes from "./routes/Routes";
 
 const NavBarre: React.FC = () => {
   //utiliser le contexte
@@ -16,6 +17,8 @@ const NavBarre: React.FC = () => {
         <div className={style.logo}>
           <img src="/images/Cinestream.png" alt="Cinestream Logo" />
         </div>
+
+        <Routes />
 
         {/* Conteneur des boutons à droite */}
         <div className={style.buttons}>

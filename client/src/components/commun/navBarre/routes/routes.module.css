@@ -1,0 +1,17 @@
+.divFlex {
+  display: flex;
+  gap: 2.5em;
+}
+
+.pRoutes {
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: capitalize;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  font-size: 1.3em;
+}
+
+.active {
+  font-weight: 600;
+  color: white;
+}

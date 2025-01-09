@@ -7,7 +7,9 @@
     "db:seed": "tsx ./bin/seed",
     "build": "tsx ./bin/migrate && tsc ./src/main --outDir ../dist --esModuleInterop",
     "start": "node ../dist/src/main",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "sleep": "sleep 5",
+    "new:admin": "concurrently \"npm run dev\" \"npm run sleep && tsx ./bin/newAdmin.ts\""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

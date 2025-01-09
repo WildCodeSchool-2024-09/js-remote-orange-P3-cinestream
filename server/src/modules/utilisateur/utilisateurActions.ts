@@ -32,6 +32,34 @@ const inscription: RequestHandler = async (req, res, next) => {
   }
 };
 
+const inscriptionAdmin: RequestHandler = async (req, res, next) => {
+  try {
+    //récupér le boy de la requête
+    const { nom, email, motDePasse } = req.body;
+    //date actuelle
+    const date = new Date();
+    const dateFormatter = date.toISOString().split("T")[0];
+
+    //hasher le mot de passe
+    const motDePasseCrypte = await bcrypt.hash(motDePasse, 10);
+
+    //mettre les données dans la base de données
+    const items = await utilisateurRepository.createAdmin({
+      nom,
+      email,
+      motDePasseCrypte,
+      dateFormatter,
+    });
+
+    res.status(201).send({
+      message: "Utilisateur créé avec succès",
+      success: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const connexion: RequestHandler = async (req, res, next) => {
   try {
     const user = req.user;
@@ -78,4 +106,4 @@ const utilisateurIsExist: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { inscription, utilisateurIsExist, connexion };
+export default { inscription, inscriptionAdmin, utilisateurIsExist, connexion };
