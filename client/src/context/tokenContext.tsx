@@ -13,13 +13,13 @@ const TokenContext = createContext<
 const UseTokenContext = () => {
   const context = useContext(TokenContext);
   if (!context) {
-    throw new Error("UseTokenContext must be used within a TokenProvider");
+    throw new Error("eurreur l'ore de l'utilisation du contexte");
   }
   return context;
 };
 
 const TokenProvider = ({ children }: { children: ReactNode }) => {
-  // Vérifie si une valeur est stockée dans le localStorage, sinon initialise avec une valeur par défaut
+  // récupérer le token du localStorage
   const [token, setToken] = useState<string | null>(() => {
     return localStorage.getItem("token");
   });
