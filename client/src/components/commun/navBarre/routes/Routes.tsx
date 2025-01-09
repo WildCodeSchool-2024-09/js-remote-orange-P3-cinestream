@@ -19,11 +19,27 @@ const Routes = () => {
 
   return (
     <div className={style.divFlex}>
-      <p className={defClasse("/")}>home</p>
-      <p className={defClasse("/recherche")}>recherche</p>
-      {token && <p className={defClasse("")}>compte</p>}
-      {pageName === "/detail" && <p className={defClasse("/detail")}>film</p>}
-      {isAdmin && <p className={defClasse("")}>admin</p>}
+      <p className={defClasse("/")}>
+        <a href="/">home</a>
+      </p>
+      <p className={defClasse("/recherche")}>
+        <a href="/recherche">recherche</a>
+      </p>
+      {token && (
+        <p className={defClasse("")}>
+          <a href="/compte">compte</a>
+        </p>
+      )}
+      {pageName === "/detail" && (
+        <p className={defClasse("/detail")}>
+          <a href="/detail">film</a>
+        </p>
+      )}
+      {isAdmin && (
+        <p className={defClasse("")}>
+          <a href="/admin/recherche">admin</a>
+        </p>
+      )}
     </div>
   );
 };

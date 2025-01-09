@@ -15,7 +15,7 @@ const NavBarre: React.FC = () => {
       <div className={style.navBarre}>
         {/* Logo à gauche */}
         <div className={style.logo}>
-          <img src="/images/Cinestream.png" alt="Cinestream Logo" />
+          <img src="/images/logo/Cinestream.png" alt="Cinestream Logo" />
         </div>
 
         <Routes />
