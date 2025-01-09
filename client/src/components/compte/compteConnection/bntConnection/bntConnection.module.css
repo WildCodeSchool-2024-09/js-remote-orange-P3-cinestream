@@ -8,3 +8,21 @@
   color: #3e3c43;
   font-size: 1.3em;
 }
+
+.bntContinueValide {
+  background-color: #00925d;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+}
+
+.bntContinueValide:hover {
+  background-color: rgb(2, 110, 70);
+  transition: all 0.3s;
+  scale: 1.02;
+}
+
+.messageErreur {
+  color: red;
+  font-size: 1.2em;
+}

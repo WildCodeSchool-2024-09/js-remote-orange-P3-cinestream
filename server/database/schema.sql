@@ -6,7 +6,7 @@ CREATE TABLE utilisateur (
   speudo VARCHAR(255) NOT NULL,
   photo_profil VARCHAR(255) DEFAULT NULL,
   is_admin TINYINT(1) DEFAULT 0,
-  date_inscription DATE DEFAULT NULL
+  date_inscription DATE NOT NULL
 );
 
 -- abonement

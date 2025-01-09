@@ -8,6 +8,12 @@ import style from "./CompteConnection.module.css";
 const CompteConnection = () => {
   const [email, setEmail] = useState("");
   const [motDePasse, setMotDePasse] = useState("");
+  const [messageErreur, setMessageErreur] = useState("");
+  // state pour valider les champs
+  const [valide, setValide] = useState({
+    email: false,
+    motDePasse: false,
+  });
 
   return (
     <div className={`${style.allPage}`}>
@@ -22,14 +28,27 @@ const CompteConnection = () => {
         </div>
         <form>
           <div className={`${style.contenerInput}`}>
-            <InputMail email={email} setEmail={setEmail} />
+            <InputMail
+              email={email}
+              setEmail={setEmail}
+              valide={valide}
+              setValide={setValide}
+            />
             <InputMotDePasse
               motDePasse={motDePasse}
               setMotDePasse={setMotDePasse}
+              valide={valide}
+              setValide={setValide}
             />
           </div>
           <div className={`${style.contenerBntConnection}`}>
-            <BntConnection />
+            <BntConnection
+              valide={valide}
+              email={email}
+              motDePasse={motDePasse}
+              messageErreur={messageErreur}
+              setMessageErreur={setMessageErreur}
+            />
             <p className={`${style.texteExite}`}>
               Pas de compte ?{" "}
               <a href="/insciption">

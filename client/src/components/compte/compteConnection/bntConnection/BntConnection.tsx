@@ -1,9 +1,65 @@
+import axios from "axios";
 import style from "./bntConnection.module.css";
 
-const BntConnection = () => {
+interface BntConnectionProps {
+  valide: {
+    email: boolean;
+    motDePasse: boolean;
+  };
+  messageErreur: string;
+  setMessageErreur: (value: React.SetStateAction<string>) => void;
+  email: string;
+  motDePasse: string;
+}
+
+const BntConnection: React.FC<BntConnectionProps> = ({
+  valide,
+  messageErreur,
+  setMessageErreur,
+  email,
+  motDePasse,
+}) => {
+  //change la classe en fonction de si tout est bon
+  function defClass() {
+    if (valide.email && valide.motDePasse) {
+      return `${style.bntConnection} ${style.bntContinueValide}`;
+    }
+    return `${style.bntConnection}`;
+  }
+
+  const handleConection = async () => {
+    const values = {
+      email: email,
+      motDePasse: motDePasse,
+    };
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3310/api/connection",
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      setMessageErreur(data.message);
+    } catch (error) {
+      setMessageErreur("Erreur lors de l'inscription");
+    }
+  };
   return (
     <>
-      <button className={`${style.bntConnection}`} type="button">
+      {messageErreur && (
+        <p className={`${style.messageErreur}`}>{messageErreur}</p>
+      )}
+      <button
+        className={defClass()}
+        type="button"
+        onClick={() => {
+          handleConection();
+        }}
+      >
         continue
       </button>
     </>

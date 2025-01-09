@@ -64,6 +64,9 @@ const CompteInsciption = () => {
               valide={valide}
               messageErreur={messageErreur}
               setMessageErreur={setMessageErreur}
+              nom={nom}
+              email={email}
+              motDePasse={motDePasse}
             />
             <p className={`${style.texteExite}`}>
               déja un compte ?{" "}
