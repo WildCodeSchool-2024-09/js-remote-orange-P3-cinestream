@@ -1,0 +1,15 @@
+.hero {
+    padding: 20px;
+}
+
+.filterBar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filmComposent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

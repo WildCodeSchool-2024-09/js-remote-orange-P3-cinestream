@@ -1,0 +1,42 @@
+.filterDate {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; 
+    padding: 10px;
+    background-color: #000; 
+    color: #fff; 
+    cursor: pointer;
+    position: relative; 
+    height: 25px; 
+}
+
+.filterDate .icon {
+    margin-left: 10px;
+    color: #fff; 
+}
+
+.dropdown {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #000; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    width: 100%;
+    z-index: 1;
+}
+
+.filterDate:hover .dropdown {
+    display: block; 
+}
+
+.dropdown-item {
+    padding: 10px;
+    color: #fff; 
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #333; 
+}
