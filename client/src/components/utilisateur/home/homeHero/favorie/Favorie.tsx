@@ -29,7 +29,7 @@ const Favorie = () => {
 
   return (
     <>
-      <p className={`${style.titreRecent}`}>Favorie</p>
+      <p className={`${style.titreRecent}`}>Favoris</p>
       <div className={`slider-container ${style.sliderContainerCategorie}`}>
         <Slider {...settings}>
           <div className={`${style.containerElement}`}>

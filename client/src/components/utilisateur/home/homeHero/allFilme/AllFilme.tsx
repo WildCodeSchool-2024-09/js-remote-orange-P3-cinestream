@@ -20,7 +20,7 @@ const AllFilme = () => {
 
   return (
     <>
-      <p className={`${style.titreSectionFilme}`}>Filme</p>
+      <p className={`${style.titreSectionFilme}`}>Film</p>
       <div className={`slider-container ${style.sliderContainerFilme}`}>
         <div>
           <Slider {...settings}>

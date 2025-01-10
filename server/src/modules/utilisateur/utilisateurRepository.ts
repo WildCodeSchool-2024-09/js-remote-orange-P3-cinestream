@@ -33,6 +33,25 @@ class UtilisateurRepository {
     ]);
   }
 
+  //crée un utilisateur admin
+  async createAdmin({
+    nom,
+    email,
+    motDePasseCrypte,
+    dateFormatter,
+  }: CreateUserParams) {
+    const query = `
+            INSERT INTO utilisateur (mail, password, speudo, date_inscription, is_admin)
+            VALUES(?, ?, ?, ?, 1)
+        `;
+    await databaseClient.query(query, [
+      email,
+      motDePasseCrypte,
+      nom,
+      dateFormatter,
+    ]);
+  }
+
   //récupére un utilisateur avec son mail
   async findByEmail(email: string): Promise<Utilisateur[]> {
     const query = `
@@ -47,6 +66,15 @@ class UtilisateurRepository {
   async findMotDePasse(id: number) {
     const query = `
             SELECT password FROM utilisateur WHERE id = ?
+        `;
+
+    const [rows] = await databaseClient.query(query, [id]);
+    return rows;
+  }
+
+  async findAllById(id: number) {
+    const query = `
+            SELECT * FROM utilisateur WHERE id = ?
         `;
 
     const [rows] = await databaseClient.query(query, [id]);
