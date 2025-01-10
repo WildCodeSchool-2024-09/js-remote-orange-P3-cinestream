@@ -4,7 +4,7 @@ const DesciptionAnonce = () => {
   return (
     <div className={`${style.desciptionAnonce}`}>
       {/* type de filme */}
-      <p className={`${style.headerType}`}>Movie</p>
+      <p className={`${style.headerType}`}>Film</p>
       {/* titre du filme */}
       <p className={`${style.headerTitre}`}>Star Wars: The force Awaken</p>
       {/* info filme */}

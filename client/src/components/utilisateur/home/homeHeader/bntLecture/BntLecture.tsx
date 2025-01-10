@@ -4,7 +4,7 @@ const BntLecture = () => {
   return (
     <div>
       <button className={`${style.bntLecture}`} type="button">
-        ▶️ Regarder les info
+        ▶️ Regarder les infos
       </button>
     </div>
   );

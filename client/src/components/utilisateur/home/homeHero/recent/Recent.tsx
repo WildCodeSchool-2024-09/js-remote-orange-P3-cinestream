@@ -29,7 +29,7 @@ const Recent = () => {
 
   return (
     <>
-      <p className={`${style.titreRecent}`}>Sortie récente</p>
+      <p className={`${style.titreRecent}`}>Sorties récentes</p>
       <div className={`slider-container ${style.sliderContainerCategorie}`}>
         <Slider {...settings}>
           <div className={`${style.containerElement}`}>

@@ -1,15 +1,21 @@
 .filterBar {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center; 
-    padding: 10px; 
-    gap: 15px; 
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
 }
 
-.recherche, .categorie, .filterDate, .type {
-    margin-right: 15px; 
+.recherche,
+.categorie,
+.filterDate,
+.type {
+  margin-right: 15px;
 }
 
-.recherche:last-child, .categorie:last-child, .filterDate:last-child, .type:last-child {
-    margin-right: 0; 
+.recherche:last-child,
+.categorie:last-child,
+.filterDate:last-child,
+.type:last-child {
+  margin-right: 0;
 }

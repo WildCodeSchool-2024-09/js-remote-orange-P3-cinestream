@@ -1,37 +1,37 @@
 .filmComposent {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 10px; 
-    padding: 10px;
-    background-color: #000; 
-    color: #fff; 
-    justify-content: flex-start; 
-    align-items: flex-start; 
-    box-sizing: border-box; 
-    width: 100%; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  background-color: #000;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .filmCard {
-    border: 1px solid #ccc; 
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #333; 
-    color: #fff; 
-    width: calc(25% - 10px); 
-    box-sizing: border-box; 
-    text-align: center;
-    margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  width: calc(25% - 10px);
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .filmCard img {
-    width: 100%;
-    aspect-ratio: 2/3; 
-    overflow: hidden;
-    object-fit: cover;
-    border-radius: 5px;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .filmCard .title {
-    margin-top: 10px;
-    font-size: 1.2em;
+  margin-top: 10px;
+  font-size: 1.2em;
 }

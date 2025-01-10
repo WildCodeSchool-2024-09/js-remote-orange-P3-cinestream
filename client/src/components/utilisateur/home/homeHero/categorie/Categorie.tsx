@@ -33,14 +33,14 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/superHero.jpg" alt="" />
-            <p className={`${style.pType}`}>superhero</p>
+            <p className={`${style.pType}`}>super héros</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
-            <p className={`${style.pType}`}>siencefiction</p>
+            <p className={`${style.pType}`}>science fiction</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
@@ -61,7 +61,8 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/drole.jpg" alt="" />
-            <p className={`${style.pType}`}>commique</p>
+            {/* <p className={`${style.pType}`}>comique</p> */}
+            <p className={`${style.pType}`}>yavuz</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
@@ -75,14 +76,14 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/superHero.jpg" alt="" />
-            <p className={`${style.pType}`}>superhero</p>
+            <p className={`${style.pType}`}>super héros</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
-            <p className={`${style.pType}`}>siencefiction</p>
+            <p className={`${style.pType}`}>science fiction</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
@@ -103,7 +104,8 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/drole.jpg" alt="" />
-            <p className={`${style.pType}`}>commique</p>
+            {/* <p className={`${style.pType}`}>comique</p> */}
+            <p className={`${style.pType}`}>yavuz</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
@@ -117,14 +119,14 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/superHero.jpg" alt="" />
-            <p className={`${style.pType}`}>superhero</p>
+            <p className={`${style.pType}`}>super héros</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/sienceFiction.jpg" alt="" />
-            <p className={`${style.pType}`}>siencefiction</p>
+            <p className={`${style.pType}`}>science fiction</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
@@ -145,7 +147,8 @@ const Categorie = () => {
         <div className={`${style.containerElement}`}>
           <div className={`${style.containerImage}`}>
             <img src="/temporaire/categorie/drole.jpg" alt="" />
-            <p className={`${style.pType}`}>commique</p>
+            {/* <p className={`${style.pType}`}>comique</p> */}
+            <p className={`${style.pType}`}>yavuz</p>
             <div className={`${style.flouGris}`} />
           </div>
         </div>
