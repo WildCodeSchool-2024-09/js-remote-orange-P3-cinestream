@@ -4,7 +4,7 @@ const BntFavorie = () => {
   return (
     <div>
       <button className={`${style.bntFavorie}`} type="button">
-        🤍 Ajouter au favorie
+        🤍 Ajouter aux favoris
       </button>
     </div>
   );

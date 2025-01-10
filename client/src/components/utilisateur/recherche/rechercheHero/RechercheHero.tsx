@@ -1,6 +1,6 @@
+import FilmComposent from "./filmComposent/filmComposent";
+import FilterBarre from "./filterBarre/filterBarre";
 import styles from "./rechercheHero.module.css";
-import FilmComposent from "./filmComposent/FilmComposent";
-import FilterBarre from "./filterBarre/FilterBarre";
 
 const RechercheHero = () => {
   return (

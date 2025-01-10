@@ -42,6 +42,8 @@
   font-size: 2em;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
+  text-transform: capitalize;
+  text-align: center;
 }
 
 .flouGris {

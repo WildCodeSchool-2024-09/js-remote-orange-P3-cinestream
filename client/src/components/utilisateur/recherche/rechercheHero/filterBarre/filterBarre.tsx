@@ -1,5 +1,5 @@
-import styles from "./filterBarre.module.css";
 import Categorie from "./categorie/Categorie";
+import styles from "./filterBarre.module.css";
 import FilterDate from "./filterdate/Filterdate";
 import Recherche from "./recherche/Recherche";
 import TypeFiltre from "./type/TypeFiltre";

@@ -20,7 +20,7 @@ const TopNotes = () => {
 
   return (
     <>
-      <p className={`${style.titreTopNotes}`}>Les plus populaire</p>
+      <p className={`${style.titreTopNotes}`}>Les plus populaires</p>
       <div className={`slider-container ${style.sliderContainerTopNotes}`}>
         <div>
           <Slider {...settings}>

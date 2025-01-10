@@ -1,4 +1,4 @@
-import styles from './rechercheHeader.module.css';
+import styles from "./rechercheHeader.module.css";
 
 const Header = () => {
   return (
@@ -9,4 +9,3 @@ const Header = () => {
 };
 
 export default Header;
-  
