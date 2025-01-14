@@ -1,5 +1,7 @@
 import type React from "react";
 import { UseTokenContext } from "../../../context/tokenContext";
+import BntAdmin from "./bntAdmin/BntAdmin";
+import BntCompte from "./bntCompte/BntCompte";
 import BntConnection from "./bntConnection/BntConnection";
 import BntIncription from "./bntIncription/BntIncription";
 import BntRecherche from "./bntRecherche/BntRecherche";
@@ -8,7 +10,7 @@ import Routes from "./routes/Routes";
 
 const NavBarre: React.FC = () => {
   //utiliser le contexte
-  const { token } = UseTokenContext();
+  const { token, isAdmin } = UseTokenContext();
 
   return (
     <div className={style.contenerNavBarre}>
@@ -25,6 +27,8 @@ const NavBarre: React.FC = () => {
           <BntRecherche />
           {!token && <BntIncription />}
           {!token && <BntConnection />}
+          {token && <BntCompte />}
+          {isAdmin && <BntAdmin />}
         </div>
       </div>
     </div>

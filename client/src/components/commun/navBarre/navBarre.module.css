@@ -22,7 +22,7 @@
 .buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 1.3em;
   margin-top: 2em;
   margin-right: 1.5em;
 }

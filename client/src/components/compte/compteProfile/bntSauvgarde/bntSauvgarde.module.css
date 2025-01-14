@@ -1,0 +1,27 @@
+.bntSauvgarde {
+  color: white;
+  border: none;
+  background-color: #00925d;
+  border: 1px solid #00925d;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.3em;
+  padding: 0.5em 1em;
+  border-radius: 11px;
+  align-self: start;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  gap: 0.3em;
+  transition: all 0.3s;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+  }
+}
+
+.bntSauvgarde:hover {
+  background-color: #007a4d;
+  border: 1px solid #007a4d;
+  scale: 1.05;
+  transition: all 0.3s;
+}

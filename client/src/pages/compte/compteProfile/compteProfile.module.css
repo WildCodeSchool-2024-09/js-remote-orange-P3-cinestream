@@ -1,0 +1,36 @@
+.contenerHeder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em 2em 0 2em;
+
+  @media screen and (max-width: 1024px) {
+    padding: 1em 1em 0 1em;
+  }
+}
+
+.pTitrePage {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1em;
+  }
+}
+
+.flexBnt {
+  display: flex;
+  gap: 1.5em;
+
+  @media screen and (max-width: 1024px) {
+    gap: 0.8em;
+  }
+}
+
+.contenerBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

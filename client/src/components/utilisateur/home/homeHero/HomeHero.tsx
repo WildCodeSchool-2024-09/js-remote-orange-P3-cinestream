@@ -1,3 +1,5 @@
+import { UseTokenContext } from "../../../../context/tokenContext";
+import style from "./HomeHero.module.css";
 import AllFilme from "./allFilme/AllFilme";
 import AllSerie from "./allSerie/AllSerie";
 import Categorie from "./categorie/Categorie";
@@ -7,6 +9,8 @@ import Source from "./source/Source";
 import TopNotes from "./topNotes/TopNotes";
 
 const HomeHero = () => {
+  const { token } = UseTokenContext();
+
   return (
     <>
       <Source />
@@ -15,7 +19,8 @@ const HomeHero = () => {
       <Categorie />
       <AllFilme />
       <AllSerie />
-      <Favorie />
+      {token && <Favorie />}
+      <div className={`${style.espaceBottom}`} />
     </>
   );
 };
