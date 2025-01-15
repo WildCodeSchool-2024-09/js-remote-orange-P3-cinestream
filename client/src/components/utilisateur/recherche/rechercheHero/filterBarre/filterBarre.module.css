@@ -2,8 +2,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
-  gap: 15px;
+  padding: 20px;
+  gap: 25px;
+  margin-left: 30px;
 }
 
 .recherche,
@@ -18,4 +19,39 @@
 .filterDate:last-child,
 .type:last-child {
   margin-right: 0;
+}
+
+/* Media queries pour rendre le design responsive */
+@media (max-width: 768px) {
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 15px;
+    margin-left: 20px;
+  }
+
+  .recherche,
+  .categorie,
+  .filterDate,
+  .type {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+    gap: 10px;
+    margin-left: 10px;
+  }
+
+  .recherche,
+  .categorie,
+  .filterDate,
+  .type {
+    margin-right: 5px;
+  }
 }
