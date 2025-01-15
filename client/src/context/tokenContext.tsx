@@ -7,6 +7,7 @@ const TokenContext = createContext<
       token: string | null;
       setToken: React.Dispatch<React.SetStateAction<string | null>>;
       isAdmin: boolean;
+      setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
     }
   | undefined
 >(undefined);
@@ -65,7 +66,7 @@ const TokenProvider = ({ children }: { children: ReactNode }) => {
   }, [token]);
 
   return (
-    <TokenContext.Provider value={{ token, setToken, isAdmin }}>
+    <TokenContext.Provider value={{ token, setToken, isAdmin, setIsAdmin }}>
       {children}
     </TokenContext.Provider>
   );

@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import style from "./bntRecherche.module.css";
 
 const BntRecherche = () => {
   return (
     <>
-      <button className={`${style.searchButton}`} type="button">
-        🔍
-      </button>
+      <Link to={"/recherche"}>
+        <button className={`${style.searchButton}`} type="button">
+          🔍
+        </button>
+      </Link>
     </>
   );
 };
