@@ -1,0 +1,39 @@
+.divInputRecherche {
+  position: relative;
+  width: 100%;
+}
+
+.iconRecherche {
+  color: rgb(156, 163, 175);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.5em;
+  font-size: 1.3em;
+}
+
+.inputRecherche {
+  background-color: rgb(17, 24, 39);
+  width: 100%;
+  border: rgb(55, 65, 81) 2px solid;
+  border-radius: 8px;
+  font-size: 1.3em;
+  box-sizing: border-box;
+  padding: 0.4em 0.5em 0.4em 1.9em;
+  color: white;
+  font-family: "Rubik", sans-serif;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1em;
+    padding: 0.5em 0.5em 0.5em 2.4em;
+  }
+}
+
+.inputRecherche::placeholder {
+  color: rgb(156, 163, 175);
+}
+
+.inputRecherche:focus {
+  border: rgb(59, 130, 246) 2px solid;
+  outline: none;
+}
