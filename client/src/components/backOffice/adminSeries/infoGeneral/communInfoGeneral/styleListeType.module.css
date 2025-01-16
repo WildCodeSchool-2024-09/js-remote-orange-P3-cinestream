@@ -1,0 +1,49 @@
+.flexContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5em;
+}
+
+.pTitreInput {
+  color: white;
+  font-size: 1.2em;
+}
+
+.divContour {
+  border: rgb(55, 65, 81) 2px solid;
+  border-radius: 15px;
+  height: 10em;
+  overflow: scroll;
+  scrollbar-width: none;
+  padding: 1.2em;
+  box-sizing: border-box;
+  display: flex;
+  gap: 0.7em;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  @media screen and (max-width: 1024px) {
+    padding: 0.9em;
+  }
+}
+
+.divContour:hover {
+  border: rgb(59, 130, 246) 2px solid;
+  cursor: pointer;
+}
+
+.pElement {
+  color: white;
+  height: auto;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  background-color: rgb(31, 41, 55);
+  padding: 0.4em 0.5em;
+  border-radius: 50px;
+  border: rgb(55, 65, 81) 1.5px solid;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.7em;
+  }
+}

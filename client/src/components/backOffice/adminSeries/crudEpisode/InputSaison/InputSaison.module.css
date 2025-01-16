@@ -1,0 +1,19 @@
+.InputSaison {
+  width: 100%;
+  border: rgb(55, 65, 81) 2px solid;
+  background-color: rgb(31, 41, 55);
+  border-radius: 8px;
+  font-size: 1.3em;
+  box-sizing: border-box;
+  padding: 0.4em 0.5em 0.4em 0.7em;
+  color: white;
+}
+
+.InputSaison:hover {
+  cursor: pointer;
+}
+
+.InputSaison:focus {
+  border: rgb(59, 130, 246) 2px solid;
+  outline: none;
+}

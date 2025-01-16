@@ -1,0 +1,49 @@
+.contenerTitreAndImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex: 2;
+  gap: 0.5em;
+}
+
+.pTitreInputImage {
+  color: white;
+  font-size: 1.2em;
+}
+
+.inputImage {
+  display: none;
+}
+
+/* label en entier */
+.labelInputImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1.53 / 1;
+  border: 2px dashed rgb(55, 65, 81);
+  border-radius: 8px;
+  background-color: rgb(31, 41, 55);
+  color: rgb(156, 163, 175);
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.labelInputImage:hover {
+  background-color: transparent;
+  border-color: rgb(37 99 235);
+}
+
+/* texte du label */
+.textLabelImage {
+  display: block;
+  pointer-events: none;
+}
+
+.labelInputImage.drag-over {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: rgb(37 99 235);
+}
