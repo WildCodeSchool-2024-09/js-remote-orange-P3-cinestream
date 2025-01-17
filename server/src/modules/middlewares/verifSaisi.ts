@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
+import utilisateurRepository from "../utilisateur/utilisateurRepository";
 
-const verifNom: RequestHandler = async (req, res, next) => {
+const nomCorrect: RequestHandler = async (req, res, next) => {
   try {
     const { nom } = req.body;
     if (!(nom.length >= 4 && nom.length <= 30)) {
@@ -19,7 +20,7 @@ const verifNom: RequestHandler = async (req, res, next) => {
   }
 };
 
-const verifMail: RequestHandler = async (req, res, next) => {
+const mailCorrect: RequestHandler = async (req, res, next) => {
   try {
     const { email } = req.body;
 
@@ -37,7 +38,7 @@ const verifMail: RequestHandler = async (req, res, next) => {
   }
 };
 
-const verifMotDePasse: RequestHandler = async (req, res, next) => {
+const motDePasseCorrect: RequestHandler = async (req, res, next) => {
   try {
     const { motDePasse } = req.body;
 
@@ -57,7 +58,7 @@ const verifMotDePasse: RequestHandler = async (req, res, next) => {
   }
 };
 
-const verifMotDePasse2: RequestHandler = async (req, res, next) => {
+const motDePasse2Correct: RequestHandler = async (req, res, next) => {
   try {
     const { motDePasse, motDePasse2 } = req.body;
 
@@ -73,4 +74,23 @@ const verifMotDePasse2: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { verifNom, verifMail, verifMotDePasse, verifMotDePasse2 };
+const utilisateurIsExist: RequestHandler = async (req, res, next) => {
+  try {
+    //récupér le boy de la requête
+    const { email } = req.body;
+
+    const compte = await utilisateurRepository.findByEmail(email);
+
+    if (compte.length > 0) {
+      res.send({
+        message: "Cet addresse email est déjà utilisée",
+      });
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { nomCorrect, mailCorrect, motDePasseCorrect, motDePasse2Correct, utilisateurIsExist };
