@@ -4,11 +4,11 @@
   gap: 30px;
   padding: 20px;
   color: #fff;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
   width: 100%;
-  margin-left: 30px;
+  
 }
 
 .filmCard {
