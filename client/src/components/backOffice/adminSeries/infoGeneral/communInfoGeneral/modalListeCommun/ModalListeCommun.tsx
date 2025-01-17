@@ -1,4 +1,4 @@
-import BntFermerCommun from "../bntFermerCommun/BntFermerCommun";
+import BntFermerCommun from "../../../../communBackOffice/bntFermerCommun/BntFermerCommun";
 import CheckboxModal from "./checkboxModal/CheckboxModal";
 import style from "./modalListeCommun.module.css";
 
@@ -17,7 +17,7 @@ const ModalListeCommun = ({
     <div className={`${style.shadow}`}>
       <div className={`${style.contour}`}>
         <div className={`${style.conetnerBntFermer}`}>
-          <BntFermerCommun setModal={setModal} />
+          <BntFermerCommun action={() => setModal(false)} />
         </div>
 
         <div className={`${style.allInput}`}>

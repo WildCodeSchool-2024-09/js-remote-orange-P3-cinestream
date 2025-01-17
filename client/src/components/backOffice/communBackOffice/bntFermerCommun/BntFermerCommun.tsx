@@ -1,15 +1,15 @@
 import { IoMdClose } from "react-icons/io";
 import style from "./bntFermerCommun.module.css";
 
-interface BntFermerCommunProps {
-  setModal: (modal: boolean) => void;
+interface Interfac {
+  action: () => void;
 }
 
-const BntFermerCommun = ({ setModal }: BntFermerCommunProps) => {
+const BntFermerCommun = ({ action }: Interfac) => {
   return (
     <button
       className={`${style.bntFermerRecherche}`}
-      onClick={() => setModal(false)}
+      onClick={() => action()}
       type="button"
     >
       <IoMdClose className={`${style.iconCroix}`} />
