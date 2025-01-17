@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
 import type { Request, RequestHandler } from "express";
+import jwt from "jsonwebtoken";
 import type { Utilisateur } from "../../types/express";
 import utilisateurRepository from "../utilisateur/utilisateurRepository";
 
