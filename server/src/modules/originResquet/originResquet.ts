@@ -32,7 +32,7 @@ const serveur: RequestHandler = async (
 };
 
 //pas un midelware juste une fonction
-const setToken = async () => {
+const setTokenServeur = async () => {
   const token = crypto.randomBytes(32).toString("hex");
   try {
     await originResquetSQL.newToken(token);
@@ -41,7 +41,7 @@ const setToken = async () => {
   }
 };
 
-const checkToken: RequestHandler = async (req, res, next) => {
+const checkTokenServeur: RequestHandler = async (req, res, next) => {
   //récupér le boy de la requête
   const { token } = req.body;
   const serveurToken = await originResquetSQL.getToken();
@@ -55,4 +55,4 @@ const checkToken: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { serveur, setToken, checkToken };
+export default { serveur, setTokenServeur, checkTokenServeur };

@@ -30,7 +30,7 @@ if (
 }
 
 //génère un token pour le serveur
-originResquet.setToken();
+originResquet.setTokenServeur();
 
 // Mount the API router under the "/api" endpoint
 app.use(router);

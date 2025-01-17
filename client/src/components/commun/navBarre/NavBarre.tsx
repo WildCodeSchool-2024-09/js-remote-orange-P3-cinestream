@@ -1,4 +1,5 @@
 import type React from "react";
+import { Link } from "react-router-dom";
 import { UseTokenContext } from "../../../context/tokenContext";
 import BntAdmin from "./bntAdmin/BntAdmin";
 import BntCompte from "./bntCompte/BntCompte";
@@ -7,7 +8,6 @@ import BntIncription from "./bntIncription/BntIncription";
 import BntRecherche from "./bntRecherche/BntRecherche";
 import style from "./navBarre.module.css";
 import Routes from "./routes/Routes";
-import { Link } from "react-router-dom";
 
 const NavBarre: React.FC = () => {
   //utiliser le contexte

@@ -1,7 +1,7 @@
 import express from "express";
 import itemActions from "./modules/item/itemActions";
-import connection from "./modules/middlewares/connection";
-import inscriptionIsbon from "./modules/middlewares/inscriptionIsbon";
+import autentification from "./modules/middlewares/autentification";
+import verifSaisi from "./modules/middlewares/verifSaisi";
 import originResquet from "./modules/originResquet/originResquet";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
 
@@ -16,39 +16,39 @@ router.post("/api/items", itemActions.add);
 //inscription
 router.post(
   "/api/inscription",
-  inscriptionIsbon.verifNom,
-  inscriptionIsbon.verifMail,
-  inscriptionIsbon.verifMotDePasse,
-  inscriptionIsbon.verifMotDePasse2,
-  utilisateurActions.utilisateurIsExist,
+  verifSaisi.nomCorrect,
+  verifSaisi.mailCorrect,
+  verifSaisi.motDePasseCorrect,
+  verifSaisi.motDePasse2Correct,
+  verifSaisi.utilisateurIsExist,
   utilisateurActions.inscription,
 );
 //connexion
 router.post(
   "/api/connection",
-  inscriptionIsbon.verifMail,
-  inscriptionIsbon.verifMotDePasse,
-  connection.connexionMail,
-  connection.connexionMotDePasse,
+  verifSaisi.mailCorrect,
+  verifSaisi.motDePasseCorrect,
+  autentification.mail,
+  autentification.motDePasse,
   utilisateurActions.connexion,
 );
 
 //verifie si uttilisateur est admin
 router.post(
   "/api/isAdmin",
-  utilisateurActions.tokenIsCorrect,
-  utilisateurActions.utilisateurIsAdmin,
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
 );
 
 //crée un compte admin (uniquement via le serveur)
 router.post(
   "/api/newAdmin",
   originResquet.serveur,
-  originResquet.checkToken,
-  inscriptionIsbon.verifNom,
-  utilisateurActions.utilisateurIsExist,
-  inscriptionIsbon.verifMail,
-  inscriptionIsbon.verifMotDePasse,
+  originResquet.checkTokenServeur,
+  verifSaisi.nomCorrect,
+  verifSaisi.utilisateurIsExist,
+  verifSaisi.mailCorrect,
+  verifSaisi.motDePasseCorrect,
   utilisateurActions.inscriptionAdmin,
 );
 
