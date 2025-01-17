@@ -1,0 +1,116 @@
+.header {
+  background-image: url("/temporaire/jumanji2.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 280px;
+  position: relative;
+  z-index: 0;
+
+  @media (max-width: 768px) {
+    padding: 140px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 70px;
+  }
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  pointer-events: none;
+  top: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), #0d0c0f);
+  z-index: 1;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  pointer-events: none;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #0d0c0f);
+  z-index: 1;
+}
+
+.navbarre {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    font-size: 0.7em;
+    padding: 8px 16px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.2em;
+    padding: 6px 12px;
+  }
+}
+
+.descriptionPresentation {
+  color: white;
+  font-size: 2em;
+  margin: 0;
+  position: absolute;
+  bottom: 70px;
+  left: 20px;
+  z-index: 3;
+
+  @media (max-width: 768px) {
+    font-size: 1.5em;
+    bottom: 50px;
+    left: 15px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1em;
+    bottom: 30px;
+    left: 10px;
+  }
+}
+
+.bntRegarder {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  z-index: 3;
+
+  @media (max-width: 768px) {
+    bottom: 50px;
+    left: 15px;
+  }
+
+  @media (max-width: 480px) {
+    bottom: 30px;
+    left: 10px;
+  }
+}
+
+.bntContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  z-index: 3;
+}
+
+.paragraphWhite {
+  color: white;
+  font-size: 1em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

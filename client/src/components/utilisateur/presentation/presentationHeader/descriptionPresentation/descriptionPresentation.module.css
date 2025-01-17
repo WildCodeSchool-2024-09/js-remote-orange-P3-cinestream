@@ -1,0 +1,34 @@
+.rectangle {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    width: 30px;
+    height: 15px;
+    margin-bottom: 10px;
+  }
+
+  .rectangle p {
+    font-size: 14px;
+  }
+  
+  .titre {
+    font-size: 24px;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .saison {
+    font-size: 20px;
+    color: white;
+    font-family: 'Times New Roman', serif;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: gray;
+    font-family: Verdana, sans-serif;
+  }
+   
+  

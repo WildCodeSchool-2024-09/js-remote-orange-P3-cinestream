@@ -1,0 +1,32 @@
+.bntFavorie {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+
+.bntFavorie:hover {
+  background-color: darkred;
+}
+
+.icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.icon svg {
+  fill: red;
+  width: 12px;
+  height: 12px;
+}
