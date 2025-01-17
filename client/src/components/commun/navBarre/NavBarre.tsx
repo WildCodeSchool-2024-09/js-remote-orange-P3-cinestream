@@ -7,6 +7,7 @@ import BntIncription from "./bntIncription/BntIncription";
 import BntRecherche from "./bntRecherche/BntRecherche";
 import style from "./navBarre.module.css";
 import Routes from "./routes/Routes";
+import { Link } from "react-router-dom";
 
 const NavBarre: React.FC = () => {
   //utiliser le contexte
@@ -17,7 +18,9 @@ const NavBarre: React.FC = () => {
       <div className={style.navBarre}>
         {/* Logo à gauche */}
         <div className={style.logo}>
-          <img src="/images/logo/Cinestream.png" alt="Cinestream Logo" />
+          <Link to={"/"}>
+            <img src="/images/logo/Cinestream.png" alt="Cinestream Logo" />
+          </Link>
         </div>
 
         <Routes />
