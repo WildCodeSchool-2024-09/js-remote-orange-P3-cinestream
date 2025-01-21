@@ -7,7 +7,10 @@ const BntAjouterEpisode = () => {
     <>
       <button
         className={`${style.bntAjouter}`}
-        onClick={() => navigate("/admin/description")}
+        onClick={() => {
+          navigate("/admin/description");
+          window.scrollTo(0, 0);
+        }}
         type="button"
       >
         Ajouter un episode

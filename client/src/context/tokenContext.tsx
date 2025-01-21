@@ -46,6 +46,14 @@ const TokenProvider = ({ children }: { children: ReactNode }) => {
             },
           },
         );
+
+        if (data.tokenIsIncorrect) {
+          //si le token est opas valide on enlève tout
+          localStorage.removeItem("token");
+          setToken(null);
+          setIsAdmin(false);
+          return false;
+        }
         setIsAdmin(data.isAdmin);
         return data.isAdmin;
       } catch (error) {

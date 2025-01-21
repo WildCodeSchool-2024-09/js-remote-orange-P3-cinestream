@@ -74,7 +74,7 @@ const connexion: RequestHandler = async (req, res, next) => {
     }
     // généré un token
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
-      expiresIn: "1d",
+      expiresIn: "7d",
     });
 
     res.send({
@@ -86,8 +86,19 @@ const connexion: RequestHandler = async (req, res, next) => {
   }
 };
 
+const returnAdmin: RequestHandler = async (req, res, next) => {
+  try {
+    res.send({
+      isAdmin: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   inscription,
   inscriptionAdmin,
   connexion,
+  returnAdmin,
 };

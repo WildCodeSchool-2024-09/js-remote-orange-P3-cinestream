@@ -1,0 +1,18 @@
+.bntAnnuler {
+  background-color: rgb(31, 41, 55);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7em 0.6em;
+  font-size: 1.1em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+    padding: 0.7em 0.6em;
+    border-radius: 8px;
+  }
+}
+
+.bntAnnuler:hover {
+  background-color: rgb(55, 65, 81);
+}

@@ -2,15 +2,25 @@ import BntFermerCommun from "../../../../communBackOffice/bntFermerCommun/BntFer
 import CheckboxModal from "./checkboxModal/CheckboxModal";
 import style from "./modalListeCommun.module.css";
 
+interface ElementType {
+  id: number;
+  nom: string;
+  image: string;
+}
+
 interface ModalListeCommunProps {
-  listeElement: string[];
-  elSelect: string[];
-  setElSelect: (elSelect: string[]) => void;
-  setModal: (modal: boolean) => void;
+  listeElement: ElementType[];
+  elementSelect: ElementType[];
+  setElementSelect: (
+    categorie: { id: number; nom: string; image: string }[],
+  ) => void;
+  setModal: (value: boolean) => void;
 }
 
 const ModalListeCommun = ({
   listeElement,
+  elementSelect,
+  setElementSelect,
   setModal,
 }: ModalListeCommunProps) => {
   return (
@@ -21,9 +31,16 @@ const ModalListeCommun = ({
         </div>
 
         <div className={`${style.allInput}`}>
+          {/* map pour affciher une checkbox pour toute les catégorie */}
           {listeElement.map((element, index) => {
             return (
-              <CheckboxModal key={element} index={index} element={element} />
+              <CheckboxModal
+                key={element.id}
+                index={index}
+                element={element}
+                elementSelect={elementSelect}
+                setElementSelect={setElementSelect}
+              />
             );
           })}
         </div>
