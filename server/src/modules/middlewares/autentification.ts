@@ -72,9 +72,7 @@ const utilisateurIsAdmin: RequestHandler = async (
 
     if (compte.length === 1) {
       if (compte[0].is_admin) {
-        res.send({
-          isAdmin: true,
-        });
+        next();
       } else {
         res.send({
           isAdmin: false,
@@ -108,7 +106,11 @@ const tokenIsCorrect: RequestHandler = async (
     //récupére id utilisateur grace au token
     const TokenClaire = jwt.verify(token, SECRET_KEY);
 
-    if (TokenClaire && typeof TokenClaire !== "string") {
+    if (
+      TokenClaire &&
+      typeof TokenClaire !== "string" &&
+      "userId" in TokenClaire
+    ) {
       //récupér id utilisateur
       const userId = TokenClaire.userId;
       req.userId = userId;
@@ -116,10 +118,19 @@ const tokenIsCorrect: RequestHandler = async (
     } else {
       res.send({
         message: "Token invalide",
+        tokenIsIncorrect: true,
       });
     }
   } catch (err) {
-    next(err);
+    if (err instanceof jwt.TokenExpiredError) {
+      // Token expiré
+      res.send({
+        message: "Token expier",
+        tokenIsIncorrect: true,
+      });
+    } else {
+      next(err); // Gérer d'autres erreurs de token
+    }
   }
 };
 

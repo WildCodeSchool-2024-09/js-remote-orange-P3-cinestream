@@ -50,7 +50,7 @@ const router = createBrowserRouter([
     element: <AdminRecherche />,
   },
   {
-    path: "admin/organisation",
+    path: "admin/organisation/:id",
     element: <AdminSeries />,
   },
   {

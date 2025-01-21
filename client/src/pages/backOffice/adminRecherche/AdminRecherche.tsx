@@ -11,6 +11,9 @@ const AdminRecherche = () => {
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
+  //les state des input et series
+  const [recherche, setRecherche] = useState("");
+
   return (
     <>
       {!isModal && (
@@ -19,8 +22,8 @@ const AdminRecherche = () => {
             <p className={`${style.pTitre}`}>Liste des Séries</p>
             <BntFermerCommun action={() => navigate("/")} />
           </div>
-          <Recherche />
-          <ListeSeries />
+          <Recherche recherche={recherche} setRecherche={setRecherche} />
+          <ListeSeries recherche={recherche} />
           <BntAjouter setIsModal={setIsModal} />
         </div>
       )}

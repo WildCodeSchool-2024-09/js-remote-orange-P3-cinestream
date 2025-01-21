@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UseTokenContext } from "../../../../context/tokenContext";
 import BntFermerModal from "./bntFermerModal/BntFermerModal";
 import style from "./modal.module.css";
 
@@ -8,6 +10,32 @@ interface BntFermerModalProps {
 
 const Modal = ({ setIsModal }: BntFermerModalProps) => {
   const navigate = useNavigate();
+  const { token } = UseTokenContext();
+
+  const handleClick = async (type: string) => {
+    const values = {
+      type: type,
+      token: token,
+    };
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3310/api/backoffice/serie/new",
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (data.sucssces) {
+        navigate(`/admin/organisation/${data.id}`);
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  };
 
   return (
     <div className={`${style.cacheFond}`}>
@@ -16,14 +44,14 @@ const Modal = ({ setIsModal }: BntFermerModalProps) => {
         <div className={`${style.flexBntFilm}`}>
           <button
             className={`${style.bntFilm}`}
-            onClick={() => navigate("/admin/organisation")}
+            onClick={() => handleClick("film")}
             type="button"
           >
             Film
           </button>
           <button
             className={`${style.bntFilm}`}
-            onClick={() => navigate("/admin/organisation")}
+            onClick={() => handleClick("serie")}
             type="button"
           >
             Serie

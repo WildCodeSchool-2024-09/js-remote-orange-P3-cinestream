@@ -1,4 +1,4 @@
-import style from './descriptionPresentation.module.css';
+import style from "./descriptionPresentation.module.css";
 
 interface DescriptionPresentationProps {
   type: string;
@@ -7,7 +7,12 @@ interface DescriptionPresentationProps {
   description: string;
 }
 
-const DescriptionPresentation: React.FC<DescriptionPresentationProps> = ({ type, title, season, description }) => {
+const DescriptionPresentation: React.FC<DescriptionPresentationProps> = ({
+  type,
+  title,
+  season,
+  description,
+}) => {
   return (
     <div>
       <div className={style.rectangle}>

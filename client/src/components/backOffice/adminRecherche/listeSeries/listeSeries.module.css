@@ -1,6 +1,6 @@
 .contenerAllSerie {
   background-color: rgb(17 24 39);
-  height: 90vh;
+  max-height: 90vh;
   width: 100%;
   border-radius: 1.3em;
   padding: 2em;
@@ -14,7 +14,7 @@
   justify-content: center;
 
   @media screen and (max-width: 1024px) {
-    height: 80vh;
+    max-height: 80vh;
     padding: 1em;
     border-radius: 1em;
     gap: 1.5em;

@@ -1,35 +1,52 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ModalListeCommun from "../communInfoGeneral/modalListeCommun/ModalListeCommun";
 import style from "./listeCategorie.module.css";
 
-const ListeCategorie = () => {
-  const [modal, setModal] = useState(false);
-  const [elSelect, setElSelect] = useState([] as string[]);
+interface Categorie {
+  id: number;
+  nom: string;
+  image: string;
+}
 
-  const listeElement = [
-    "ACTION",
-    "FANTASTIQUE",
-    "DROLE",
-    "fiction",
-    "documentaire",
-    "d'animation",
-    "expérimentations",
-    "ACTION",
-    "FANTASTIQUE",
-    "DROLE",
-    "fiction",
-    "documentaire",
-    "d'animation",
-    "expérimentations",
-  ];
+interface ListeCategorieProps {
+  categorie: Categorie[];
+  setCategorie: (
+    categorie: { id: number; nom: string; image: string }[],
+  ) => void;
+}
+
+const ListeCategorie = ({ categorie, setCategorie }: ListeCategorieProps) => {
+  const [modal, setModal] = useState(false);
+  const [listeCategories, setListeCategories] = useState([] as Categorie[]);
+
+  useEffect(() => {
+    const getAllCategories = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/categorie/getAll`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        setListeCategories(data.categorie);
+      } catch (error) {
+        console.error("eurreur l'ore de la récupération des catégories");
+      }
+    };
+
+    getAllCategories();
+  }, []);
 
   return (
     <>
       {modal && (
         <ModalListeCommun
-          listeElement={listeElement}
-          elSelect={elSelect}
-          setElSelect={setElSelect}
+          listeElement={listeCategories}
+          elementSelect={categorie}
+          setElementSelect={setCategorie}
           setModal={setModal}
         />
       )}
@@ -45,12 +62,15 @@ const ListeCategorie = () => {
             }
           }}
         >
-          {elSelect.map((element) => {
-            return (
-              <p key={element} className={`${style.pElement}`}>
-                {element}
-              </p>
-            );
+          {listeCategories.map((element) => {
+            if (categorie.some((el: Categorie) => el.id === element.id)) {
+              return (
+                <p key={element.id} className={`${style.pElement}`}>
+                  {element.nom}
+                </p>
+              );
+            }
+            return null;
           })}
         </div>
       </div>

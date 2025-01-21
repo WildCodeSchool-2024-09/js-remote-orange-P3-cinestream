@@ -26,12 +26,13 @@ CREATE TABLE univers (
 -- article
 CREATE TABLE article (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  nom VARCHAR(255) NOT NULL,
-  DATE DATE DEFAULT NULL,
+  nom VARCHAR(255) DEFAULT "sans nom",
+  date DATE DEFAULT NULL,
   image VARCHAR(255) DEFAULT NULL,
   image_rectangle VARCHAR(255) DEFAULT NULL,
   publier TINYINT(1) DEFAULT 0,
   premium TINYINT(1) DEFAULT 0,
+  type VARCHAR(10) NOT NULL,
   univers_id INT DEFAULT NULL,
   FOREIGN KEY (univers_id) REFERENCES univers(id)
 );
@@ -124,4 +125,38 @@ CREATE TABLE categorie_article (
 CREATE TABLE token_serveur(
     id INT AUTO_INCREMENT PRIMARY KEY,
     token VARCHAR(255) NOT NULL
-)
+);
+
+
+
+-- valeurs par défaut
+INSERT INTO categorie (nom)
+VALUES 
+  ('Action'), 
+  ('Aventure'), 
+  ('Comédie'), 
+  ('Drame'), 
+  ('Fantastique'), 
+  ('Horreur'), 
+  ('Policier'), 
+  ('Science-fiction'), 
+  ('Thriller'), 
+  ('Western'), 
+  ('Animation'), 
+  ('Documentaire'), 
+  ('Biopic'), 
+  ('Historique'), 
+  ('Musical'), 
+  ('Romance'), 
+  ('Guerre'), 
+  ('Sport'), 
+  ('Famille'), 
+  ('Jeunesse'), 
+  ('Adulte'), 
+  ('Manga'), 
+  ('Anime'), 
+  ('Web-série'), 
+  ('Télé-réalité'), 
+  ('Talk-show'), 
+  ('Variété'), 
+  ('Emission');

@@ -1,4 +1,4 @@
-import style from './bntRegarder.module.css';
+import style from "./bntRegarder.module.css";
 
 const BntRegarder = () => {
   return (
