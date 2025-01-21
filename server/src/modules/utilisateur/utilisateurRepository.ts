@@ -25,12 +25,17 @@ class UtilisateurRepository {
             INSERT INTO utilisateur (mail, password, speudo, date_inscription)
             VALUES(?, ?, ?, ?)
         `;
-    await databaseClient.query(query, [
+    const [resultat] = await databaseClient.query<Result>(query, [
       email,
       motDePasseCrypte,
       nom,
       dateFormatter,
     ]);
+
+    await databaseClient.query(
+      "INSERT INTO abonement (actif, utilisateur_id) VALUES (0, ?);",
+      [resultat.insertId],
+    );
   }
 
   //crée un utilisateur admin
@@ -39,17 +44,22 @@ class UtilisateurRepository {
     email,
     motDePasseCrypte,
     dateFormatter,
-  }: CreateUserParams) {
+  }: CreateUserParams): Promise<void> {
     const query = `
             INSERT INTO utilisateur (mail, password, speudo, date_inscription, is_admin)
             VALUES(?, ?, ?, ?, 1)
         `;
-    await databaseClient.query(query, [
+    const [resultat] = await databaseClient.query<Result>(query, [
       email,
       motDePasseCrypte,
       nom,
       dateFormatter,
     ]);
+
+    await databaseClient.query(
+      "INSERT INTO abonement (actif, utilisateur_id) VALUES (0, ?);",
+      [resultat.insertId],
+    );
   }
 
   //récupére un utilisateur avec son mail
@@ -79,6 +89,40 @@ class UtilisateurRepository {
 
     const [rows] = await databaseClient.query(query, [id]);
     return rows;
+  }
+
+  async findAbonnementById(id: number) {
+    const query = "SELECT * FROM abonement WHERE utilisateur_id = ?;";
+
+    const [rows] = await databaseClient.query(query, [id]);
+    return rows;
+  }
+
+  //actualise si abonement est actif
+  async actualiserAbonement(id: number) {
+    const query =
+      "UPDATE abonement SET actif = 0 WHERE date_fin < NOW() AND utilisateur_id = ?;";
+
+    const [rows] = await databaseClient.query(query, [id]);
+    return rows;
+  }
+
+  //mettre a jour le nom
+  async updateNom(id: number, value: string) {
+    const query = "UPDATE utilisateur SET speudo = ? WHERE id = ?;;";
+
+    const [rows] = await databaseClient.query(query, [value, id]);
+    return rows;
+  }
+
+  //achet un abonement
+  async buyAbonnement(id: number, dateFormatter: string) {
+    const query =
+      "UPDATE abonement SET actif = 1, date_fin = ? WHERE utilisateur_id = ?;";
+
+    const [resultat] = await databaseClient.query(query, [dateFormatter, id]);
+
+    return resultat;
   }
 }
 

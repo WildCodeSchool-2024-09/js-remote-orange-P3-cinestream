@@ -2,13 +2,28 @@ import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import style from "./bntSauvgarde.module.css";
 
-const BntSauvgarde = () => {
+interface BntSauvgardeProps {
+  updateCompte: () => Promise<boolean>;
+}
+
+const BntSauvgarde = ({ updateCompte }: BntSauvgardeProps) => {
   //pour changer de routes
   const navigate = useNavigate();
 
-  function handleClick() {
-    navigate("/");
-  }
+  const handleClick = async () => {
+    if (await updateCompte()) {
+      navigate("/");
+      return;
+    }
+    if (
+      window.confirm(
+        "une erreur est survenue, voulez vous quitter sans sauvgarder ?",
+      )
+    ) {
+      navigate("/");
+      return;
+    }
+  };
 
   return (
     <>

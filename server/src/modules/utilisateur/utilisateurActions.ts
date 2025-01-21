@@ -1,7 +1,17 @@
+import { ad } from "@faker-js/faker/dist/airline-C5Qwd7_q";
 import bcrypt from "bcrypt";
 import type { RequestHandler } from "express";
+import type { Request } from "express";
 import jwt from "jsonwebtoken";
+import { Result } from "../../../database/client";
+import type { Utilisateur } from "../../types/express";
 import utilisateurRepository from "./utilisateurRepository";
+
+interface CustomRequest extends Request {
+  userId?: number;
+  compte?: Utilisateur[];
+  abonement?: { actif: boolean; date_fin: string }[];
+}
 
 const inscription: RequestHandler = async (req, res, next) => {
   try {
@@ -96,9 +106,86 @@ const returnAdmin: RequestHandler = async (req, res, next) => {
   }
 };
 
+const getProfile: RequestHandler = async (req: CustomRequest, res, next) => {
+  try {
+    const userId = Number(req.userId);
+    const compte = req.compte as Utilisateur[];
+    const abonement = req.abonement as { actif: boolean; date_fin: string }[];
+
+    res.send({
+      Message: "info récupéré avec succès",
+      success: true,
+      compte: {
+        pseudo: compte[0].speudo,
+        photo_profil: compte[0].photo_profil,
+        abonement: abonement[0].actif,
+        abonementExpire: abonement[0].date_fin,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateProfile: RequestHandler = async (req: CustomRequest, res, next) => {
+  try {
+    const userId = Number(req.userId);
+    const { pseudo } = req.body;
+
+    //verifier si le pseudo est correct pour le mettre a jour
+    if (
+      pseudo.length >= 4 &&
+      pseudo.length <= 30 &&
+      /^[a-zA-Z0-9_-]+$/.test(pseudo)
+    ) {
+      utilisateurRepository.updateNom(userId, pseudo);
+    }
+
+    res.send({
+      success: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const buyAbonement: RequestHandler = async (req: CustomRequest, res, next) => {
+  try {
+    const userId = Number(req.userId);
+    const abonement = req.abonement as { actif: boolean; date_fin: string }[];
+
+    if (abonement[0].actif) {
+      res.send({
+        success: false,
+        message: "Vous avez déjà un abonement actif",
+      });
+      return;
+    }
+
+    const date = new Date();
+    date.setMonth(date.getMonth() + 1);
+    const finDuNouvellAbonement = date.toISOString().split("T")[0];
+
+    const resultat = await utilisateurRepository.buyAbonnement(
+      userId,
+      finDuNouvellAbonement,
+    );
+
+    res.send({
+      success: true,
+      newDate: finDuNouvellAbonement,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   inscription,
   inscriptionAdmin,
   connexion,
   returnAdmin,
+  getProfile,
+  updateProfile,
+  buyAbonement,
 };

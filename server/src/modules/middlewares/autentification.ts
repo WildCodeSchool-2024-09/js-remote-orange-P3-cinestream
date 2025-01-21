@@ -1,12 +1,14 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import type { Request, RequestHandler } from "express";
+import type { Request, RequestHandler, Response } from "express";
 import jwt from "jsonwebtoken";
 import type { Utilisateur } from "../../types/express";
 import utilisateurRepository from "../utilisateur/utilisateurRepository";
 
 interface CustomRequest extends Request {
-  userId?: string;
+  userId?: number;
+  compte?: Utilisateur[];
+  abonement?: { actif: boolean }[];
 }
 
 const mail: RequestHandler = async (req, res, next) => {
@@ -120,6 +122,7 @@ const tokenIsCorrect: RequestHandler = async (
         message: "Token invalide",
         tokenIsIncorrect: true,
       });
+      return;
     }
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {
@@ -134,4 +137,51 @@ const tokenIsCorrect: RequestHandler = async (
   }
 };
 
-export default { mail, motDePasse, utilisateurIsAdmin, tokenIsCorrect };
+interface CustomResponse extends Response {
+  compte?: Utilisateur[];
+  abonement?: { actif: boolean }[];
+}
+
+const abonementActif: RequestHandler = async (
+  req: CustomRequest,
+  res: CustomResponse,
+  next,
+) => {
+  try {
+    const userId = Number(req.userId);
+
+    //verifier que utilisateur existe
+    const compte = (await utilisateurRepository.findAllById(
+      userId,
+    )) as Utilisateur[];
+
+    if (compte.length === 0) {
+      res.status(404).send({
+        message: "Utilisateur non trouvé",
+        success: false,
+      });
+    }
+
+    //actualise abonement
+    await utilisateurRepository.actualiserAbonement(userId);
+
+    //récupére labonement de l'utilisateur
+    const abonement = (await utilisateurRepository.findAbonnementById(
+      userId,
+    )) as { actif: boolean; date_fin: string }[];
+
+    req.compte = compte;
+    req.abonement = abonement;
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default {
+  mail,
+  motDePasse,
+  utilisateurIsAdmin,
+  tokenIsCorrect,
+  abonementActif,
+};

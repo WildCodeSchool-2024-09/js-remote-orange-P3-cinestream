@@ -23,7 +23,7 @@
   margin-top: .5em;
   font-family: "Rubik", sans-serif;
   background-color: transparent;
-  border: 1.5px solid white;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 14px;
   width: 35em;
   color: white;
@@ -35,4 +35,18 @@
     width: 23em;
     border-radius: 11px;
   }
+}
+
+.inputNom:focus {
+  outline: none;
+  border: 2px red solid;
+}
+
+.inputNomCorrect:focus {
+  outline: none;
+  border: 2px green solid;
+}
+
+.inputNomCorrect {
+  border: 2px solid white;
 }

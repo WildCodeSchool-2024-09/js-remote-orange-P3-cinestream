@@ -50,6 +50,29 @@ router.post(
   utilisateurActions.inscriptionAdmin,
 );
 
+//--------Gestion de son profile---------
+//récupère les info de l'utilisateur
+router.post(
+  "/api/compte/profile/get",
+  autentification.tokenIsCorrect,
+  autentification.abonementActif,
+  utilisateurActions.getProfile,
+);
+//actualise les info de l'utilisateur
+router.post(
+  "/api/compte/profile/update",
+  autentification.tokenIsCorrect,
+  utilisateurActions.updateProfile,
+);
+
+//payer un abonement de 1mois
+router.post(
+  "/api/compte/profile/buyAbonement",
+  autentification.tokenIsCorrect,
+  autentification.abonementActif,
+  utilisateurActions.buyAbonement,
+);
+
 //--------BACKOFFICE---------
 //crée une serie
 router.post(
