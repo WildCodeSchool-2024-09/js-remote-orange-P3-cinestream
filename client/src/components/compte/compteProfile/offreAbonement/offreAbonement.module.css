@@ -27,6 +27,10 @@
   }
 }
 
+.carteSelect {
+  border: 2px solid #ffd700;
+}
+
 .flexAbonementTitre {
   display: flex;
   align-items: center;
