@@ -1,5 +1,9 @@
 const EtoileUtilisateur = () => {
-  return <div />;
+  return (
+  <>
+    <p>⭐⭐⭐⭐⭐</p>
+  </>
+  );
 };
 
 export default EtoileUtilisateur;
