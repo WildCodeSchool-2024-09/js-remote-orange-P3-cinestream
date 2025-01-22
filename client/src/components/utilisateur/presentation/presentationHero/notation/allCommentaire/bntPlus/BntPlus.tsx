@@ -1,5 +1,9 @@
 const BntPlus = () => {
-  return <div />;
+  return (
+    <>
+      <button type="button">afficher plus</button>
+    </>
+  );
 };
 
 export default BntPlus;

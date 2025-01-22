@@ -1,5 +1,9 @@
 const BntEnvoyer = () => {
-  return <div />;
+  return (
+    <>
+      <button type="button">Publier</button>
+    </>
+  );
 };
 
 export default BntEnvoyer;
