@@ -4,7 +4,7 @@ import BntSupprimer from "./bntSupprimer/BntSupprimer";
 import style from "./footerAction.module.css";
 
 interface FooterActionProps {
-  updateInfoGeneral: () => void;
+  updateInfoGeneral: () => Promise<boolean>;
 }
 
 const FooterAction = ({ updateInfoGeneral }: FooterActionProps) => {

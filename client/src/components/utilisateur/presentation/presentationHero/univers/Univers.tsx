@@ -18,7 +18,7 @@ const Univers = () => {
   return (
     <>
       <p className={`${style.titreSectionFilme}`}>Films similaires</p>
-      
+
       <div className={`slider-container ${style.sliderContainerFilme}`}>
         <div>
           <Slider {...settings}>

@@ -46,6 +46,36 @@ class ItemRepository {
 
     return articleResult as Rows;
   }
+
+  //mettre a jour les imaeg de la serie
+  async updateImage(
+    id: number,
+    results: {
+      afficheVertical: null | string;
+      afficheHaurisontal: null | string;
+    },
+  ): Promise<void> {
+    //recupère tout l'article
+    let query = "UPDATE article SET";
+    const update = [];
+    const value = [];
+
+    if (results.afficheVertical) {
+      update.push("image = ?");
+      value.push(results.afficheVertical);
+    }
+
+    if (results.afficheHaurisontal) {
+      update.push("image_rectangle = ?");
+      value.push(results.afficheHaurisontal);
+    }
+    //ajouter id
+    query += ` ${update.join(", ")}`;
+    query += " WHERE id = ?;";
+    value.push(id);
+
+    await databaseClient.query(query, value);
+  }
 }
 
 export default new ItemRepository();

@@ -1,5 +1,5 @@
-import CommentaireUtilisateur from "./commentaireUtilisateur/CommentaireUtilisateur";
 import AllCommentaire from "./allCommentaire/AllCommentaire";
+import CommentaireUtilisateur from "./commentaireUtilisateur/CommentaireUtilisateur";
 
 const Notation = () => {
   return (

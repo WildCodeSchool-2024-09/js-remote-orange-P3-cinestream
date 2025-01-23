@@ -1,7 +1,6 @@
-import { ar, da } from "@faker-js/faker/.";
 import type { RequestHandler } from "express";
-import { NextFunction, Request, Response } from "express";
 import categorieRepository from "../categorie/categorieRepository";
+import uploadDynamicImages from "../middlewares/multer";
 import articleRepository from "./articleRepository";
 
 function isValidDate(dateString: string): boolean {
@@ -47,7 +46,6 @@ const getAll: RequestHandler = async (req, res, next) => {
 const update: RequestHandler = async (req, res, next) => {
   try {
     let { id, nom, date, publier, premium, categorie } = req.body;
-
     //verifi que id exite
     if (
       !id ||
@@ -91,7 +89,58 @@ const update: RequestHandler = async (req, res, next) => {
   }
 };
 
+const updateImage: RequestHandler = async (req, res, next) => {
+  const id = Number(req.headers.id);
+  const results: {
+    afficheVertical: string | null;
+    afficheHaurisontal: string | null;
+  } = {
+    afficheVertical: null,
+    afficheHaurisontal: null,
+  };
+
+  // Upload dynamique pour plusieurs fichiers
+  const upload = uploadDynamicImages(
+    ["afficheVertical", "afficheHaurisontal"], // Champs dans formData
+    (fieldName) =>
+      fieldName === "afficheVertical" ? "serieVertical" : "serieHaurisontal", // Dossier dynamique basé sur le champ
+    (req, file) => `${file.fieldname}-${id || "default"}`, // Nom dynamique du fichier
+  );
+
+  upload(req, res, async (err) => {
+    if (err) {
+      console.error("Erreur upload : ", err.message);
+      return res.status(400).send({ error: err.message });
+    }
+
+    if (req.files && typeof req.files === "object") {
+      // req.files est un objet, on peut donc indexer avec "afficheVertical"
+      const files = req.files as { [key: string]: Express.Multer.File[] }; // Assurer que req.files est un objet
+
+      if (files.afficheVertical) {
+        results.afficheVertical = `serieVertical/${files.afficheVertical[0].filename}`;
+      }
+
+      if (files.afficheHaurisontal) {
+        results.afficheHaurisontal = `serieHaurisontal/${files.afficheHaurisontal[0].filename}`;
+      }
+    }
+
+    //verifi qu'il a un truc a mettre a jour
+    if (results.afficheVertical || results.afficheHaurisontal) {
+      await articleRepository.updateImage(id, results);
+    }
+
+    // Réponse avec les chemins des fichiers uploadés
+    res.status(200).json({
+      message: "Traitement terminé",
+      sucssces: true,
+    });
+  });
+};
+
 export default {
   getAll,
   update,
+  updateImage,
 };

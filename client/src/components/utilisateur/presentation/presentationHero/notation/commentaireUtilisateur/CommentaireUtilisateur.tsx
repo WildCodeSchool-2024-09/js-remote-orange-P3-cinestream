@@ -1,6 +1,6 @@
 import BntEnvoyer from "./bntEnvoyer/BntEnvoyer";
-import EtoileUtilisateur from "./etoileUtilisateur/EtoileUtilisateur";
 import style from "./commentaireUtilisateur.module.css";
+import EtoileUtilisateur from "./etoileUtilisateur/EtoileUtilisateur";
 
 const CommentaireUtilisateur = () => {
   return (
