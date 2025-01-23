@@ -1,8 +1,8 @@
 const EtoileUtilisateur = () => {
   return (
-  <>
-    <p>⭐⭐⭐⭐⭐</p>
-  </>
+    <>
+      <p>⭐⭐⭐⭐⭐</p>
+    </>
   );
 };
 

@@ -97,7 +97,7 @@ const tokenIsCorrect: RequestHandler = async (
 ) => {
   try {
     //récupér le boy de la requête
-    const { token } = req.body;
+    const { token } = req.body.token ? req.body : req.headers;
 
     //récupér la clé secrete
     const SECRET_KEY = process.env.APP_SECRET;
@@ -107,7 +107,6 @@ const tokenIsCorrect: RequestHandler = async (
 
     //récupére id utilisateur grace au token
     const TokenClaire = jwt.verify(token, SECRET_KEY);
-
     if (
       TokenClaire &&
       typeof TokenClaire !== "string" &&

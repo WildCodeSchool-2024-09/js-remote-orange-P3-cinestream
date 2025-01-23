@@ -3,3 +3,7 @@ coverage
 .env
 
 bin/admin.json
+public/uploads/episode/
+public/uploads/serieHaurisontal/
+public/uploads/serieVertical/
+public/uploads/utilisateur/

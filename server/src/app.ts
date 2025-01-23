@@ -27,10 +27,16 @@ if (
       ],
     }),
   );
+} else {
+  console.error("Démarrage refusé: variables d'environnement cors manquantes");
+  process.exit(1);
 }
 
 //génère un token pour le serveur
 originResquet.setTokenServeur();
+
+//route pour image public dynamique
+app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
 
 // Mount the API router under the "/api" endpoint
 app.use(router);

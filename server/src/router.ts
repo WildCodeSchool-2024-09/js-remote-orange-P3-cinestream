@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import articleActions from "./modules/article/articleActions";
 import categorieActions from "./modules/categorie/categorieActions";
 import autentification from "./modules/middlewares/autentification";
@@ -104,6 +105,14 @@ router.post(
   autentification.tokenIsCorrect,
   autentification.utilisateurIsAdmin,
   articleActions.update,
+);
+
+//route popur actualiser les image
+router.post(
+  "/api/backoffice/article/infoGeneral/actualiserImage",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  articleActions.updateImage,
 );
 
 //routes pour récupérer tout les categories quie exite
