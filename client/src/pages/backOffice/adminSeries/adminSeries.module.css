@@ -11,20 +11,3 @@
     padding-bottom: 6em;
   }
 }
-
-.flexTitreFermer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2em;
-}
-
-.pTitrePage {
-  color: white;
-  font-size: 2.2em;
-  font-weight: 500;
-
-  @media screen and (max-width: 1024px) {
-    font-size: 1.6em;
-  }
-}
