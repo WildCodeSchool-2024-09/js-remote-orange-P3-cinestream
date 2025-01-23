@@ -1,9 +1,7 @@
+import styles from "./etoileUtilisateur.module.css";
+
 const EtoileUtilisateur = () => {
-  return (
-  <>
-    <p>⭐⭐⭐⭐⭐</p>
-  </>
-  );
+  return <div className={styles.etoileUtilisateur}>{"⭐⭐⭐⭐⭐"}</div>;
 };
 
 export default EtoileUtilisateur;

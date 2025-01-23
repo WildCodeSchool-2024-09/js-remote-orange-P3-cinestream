@@ -1,8 +1,12 @@
+import styles from "./BntPlus.module.css";
+
 const BntPlus = () => {
   return (
-    <>
-      <button type="button">afficher plus</button>
-    </>
+    <div className={styles.container}>
+      <button type="button" className={styles.button}>
+        afficher plus
+      </button>
+    </div>
   );
 };
 
