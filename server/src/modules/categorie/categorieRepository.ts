@@ -20,7 +20,7 @@ class CategorieRepository {
 
   //récupère tout les categories selection de l'article
   async getAllSelect(id: number): Promise<Rows> {
-    // a faire
+    // récupère dans la bd tout les categories selection de l'article
     const query =
       "SELECT c.* FROM categorie c LEFT JOIN categorie_article ca ON c.id = ca.categorie_id WHERE ca.article_id = ?;";
     const [rows] = await databaseClient.query(query, [id]);

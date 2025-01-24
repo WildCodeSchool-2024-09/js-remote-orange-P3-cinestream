@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import InputDescriptionEpisode from "../../../components/backOffice/adminEpisode/inputDescriptionEpisode/InputDescriptionEpisode";
 import InputImageHaurisontal from "../../../components/backOffice/adminEpisode/inputImageHaurisontal/InputImageHaurisontal";
 import InputLienVideo from "../../../components/backOffice/adminEpisode/inputLienVideo/InputLienVideo";
@@ -8,13 +8,16 @@ import style from "./adminEpisode.module.css";
 
 const AdminEpisode = () => {
   const navigate = useNavigate();
+  const { idA } = useParams();
 
   return (
     <>
       <div className={`${style.bodyPage}`}>
         <div className={`${style.flexTitreFermer}`}>
           <p className={`${style.pTitrePage}`}>Modifier l'Épisode</p>
-          <BntFermerCommun action={() => navigate("/admin/organisation")} />
+          <BntFermerCommun
+            action={() => navigate(`/admin/organisation/${idA}`)}
+          />
         </div>
 
         <div className={`${style.contenerSection}`}>

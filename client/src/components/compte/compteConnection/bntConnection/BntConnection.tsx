@@ -43,7 +43,7 @@ const BntConnection: React.FC<BntConnectionProps> = ({
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3310/api/connection",
+        `${import.meta.env.VITE_API_URL}/api/connection`,
         values,
         {
           headers: {
@@ -58,7 +58,7 @@ const BntConnection: React.FC<BntConnectionProps> = ({
         navigate("/");
       }
     } catch (error) {
-      setMessageErreur("Erreur lors de l'inscription");
+      setMessageErreur("Erreur lors de la connection");
     }
   };
   return (

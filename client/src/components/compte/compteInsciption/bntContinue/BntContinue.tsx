@@ -46,7 +46,7 @@ const BntContinue: React.FC<BntContinueProps> = ({
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3310/api/inscription",
+        `${import.meta.env.VITE_API_URL}/api/inscription`,
         values,
         {
           headers: {

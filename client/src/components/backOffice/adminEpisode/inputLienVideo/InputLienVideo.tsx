@@ -13,11 +13,11 @@ const InputLienVideo = () => {
       </div>
       <div className={`${style.divIframVideo}`}>
         <p className={`${style.pAppercuVideo}`}>Aperçu vidéo:</p>
-        <iframe
+        {/* <iframe
           className={`${style.iframVideo}`}
           src="https://www.youtube.com/embed/YBXz0Dg60Uc"
           title="retour video du lien"
-        />
+        /> */}
       </div>
     </div>
   );

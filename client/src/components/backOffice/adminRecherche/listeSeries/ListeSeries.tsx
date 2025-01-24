@@ -27,7 +27,7 @@ const ListeSeries = ({ recherche }: { recherche: string }) => {
 
       try {
         const { data } = await axios.post(
-          "http://localhost:3310/api/backoffice/serie/getAll",
+          `${import.meta.env.VITE_API_URL}/api/backoffice/serie/getAll`,
           values,
           {
             headers: {
@@ -44,13 +44,21 @@ const ListeSeries = ({ recherche }: { recherche: string }) => {
       }
     };
     chercherSerie();
-  }, [recherche]);
+  }, []);
 
   return (
     <div className={`${style.contenerAllSerie}`}>
-      {series.map((serie: Serie) => {
-        return <FilmComposent key={serie.id} data={serie} />;
-      })}
+      {series.length > 0 ? (
+        series.map((serie: Serie) => {
+          return serie.nom
+            .toLocaleLowerCase()
+            .includes(recherche.toLocaleLowerCase()) ? (
+            <FilmComposent key={serie.id} data={serie} />
+          ) : null;
+        })
+      ) : (
+        <p className={`${style.pAucunResultat}`}>Aucun résultat</p>
+      )}
     </div>
   );
 };

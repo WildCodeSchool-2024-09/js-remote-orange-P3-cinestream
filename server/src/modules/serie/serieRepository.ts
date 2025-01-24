@@ -24,6 +24,13 @@ class SerieRepository {
     const [rows] = await databaseClient.query(query, values);
     return rows as Rows;
   }
+
+  //crée une nouvelle serie
+  async delAllById(id: number) {
+    const query = "DELETE FROM article WHERE id = ?;";
+    const [resutat] = await databaseClient.query(query, [id]);
+    return resutat as Result;
+  }
 }
 
 export default new SerieRepository();

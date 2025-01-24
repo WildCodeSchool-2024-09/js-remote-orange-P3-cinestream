@@ -1,6 +1,6 @@
+import styles from "./AllCommentaire.module.css";
 import AllCommentaireComposent from "./allCommentaireComposent/AllCommentaireComposent";
 import BntPlus from "./bntPlus/BntPlus";
-import styles from "./AllCommentaire.module.css";
 
 const AllCommentaire = () => {
   return (

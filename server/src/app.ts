@@ -16,7 +16,8 @@ app.use(express.json());
 if (
   process.env.CLIENT_URL != null &&
   process.env.CLIENT_URL2 != null &&
-  process.env.SERVEUR_URL != null
+  process.env.SERVEUR_URL != null &&
+  process.env.CLIENT_URL_NETWORK != null
 ) {
   app.use(
     cors({
@@ -24,6 +25,7 @@ if (
         process.env.CLIENT_URL,
         process.env.CLIENT_URL2,
         process.env.SERVEUR_URL,
+        process.env.CLIENT_URL_NETWORK,
       ],
     }),
   );

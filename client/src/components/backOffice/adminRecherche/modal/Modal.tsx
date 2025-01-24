@@ -20,7 +20,7 @@ const Modal = ({ setIsModal }: BntFermerModalProps) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3310/api/backoffice/serie/new",
+        `${import.meta.env.VITE_API_URL}/api/backoffice/serie/new`,
         values,
         {
           headers: {

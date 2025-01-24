@@ -32,6 +32,9 @@ const InfoGeneral = () => {
   const [categorie, setCategorie] = useState<
     { id: number; nom: string; image: string }[]
   >([]);
+  const [platforme, setPlatforme] = useState<
+    { id: number; nom: string; image: string }[]
+  >([]);
 
   const { token } = UseTokenContext();
   const { id } = useParams();
@@ -84,6 +87,7 @@ const InfoGeneral = () => {
             : null,
         );
         setCategorie(data.categorieSelect);
+        setPlatforme(data.platformeSelect);
       }
     } catch (error) {
       //si eurreur 404
@@ -108,6 +112,7 @@ const InfoGeneral = () => {
       publier: publier,
       premium: premuim,
       categorie: categorie,
+      platforme: platforme,
     };
 
     let sucssces1 = false;
@@ -193,7 +198,7 @@ const InfoGeneral = () => {
         />
         <div className={`${style.contenerListeCategorieProducteur}`}>
           <ListeCategorie categorie={categorie} setCategorie={setCategorie} />
-          <ListeProducteur />
+          <ListeProducteur platforme={platforme} setPlatforme={setPlatforme} />
         </div>
         <div className={`${style.contenerInmputImage}`}>
           <InputImageVertical
