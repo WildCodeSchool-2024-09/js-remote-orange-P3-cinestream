@@ -1,18 +1,25 @@
 import BntEnvoyer from "./bntEnvoyer/BntEnvoyer";
-import style from "./commentaireUtilisateur.module.css";
+
 import EtoileUtilisateur from "./etoileUtilisateur/EtoileUtilisateur";
+import styles from "./commentaireUtilisateur.module.css";
+
 
 const CommentaireUtilisateur = () => {
   return (
-    <>
-      <p>Laisse nton avis</p>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <span className={styles.star}>⭐</span>
+        <p className={styles.pTitreAvis}>
+          Laisse ton avis<span>(120 commentaire)</span>
+        </p>
+      </div>
       <EtoileUtilisateur />
-      <div className={`${style.leNomQueTuVeux}`}>
-        <img src="" alt="" />
-        <input type="text" />
+      <div className={styles.TextAvatar}>
+        <img src="temporaire/profil/iconCompte.png" alt="" />
+        <input type="text" placeholder="Écris ton commentaire ici..." />
         <BntEnvoyer />
       </div>
-    </>
+    </div>
   );
 };
 

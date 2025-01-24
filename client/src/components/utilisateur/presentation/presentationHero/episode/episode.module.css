@@ -17,6 +17,10 @@
   padding: 0.2em 0.4em;
 }
 
+.dropdownMenu:hover {
+  background-color: #28262d;
+}
+
 .titreSectionFilme {
   color: white;
   font-size: 2em;
@@ -81,3 +85,4 @@
   min-height: calc(1.5em * 2);
   margin-top: 0.2em;
 }
+

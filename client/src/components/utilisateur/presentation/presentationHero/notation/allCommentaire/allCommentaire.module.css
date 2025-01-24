@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin-top: 3em;
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+.commentaire {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.bntPlusContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

@@ -1,8 +1,10 @@
+import styles from "./bntEnvoyer.module.css";
+
 const BntEnvoyer = () => {
   return (
-    <>
-      <button type="button">Publier</button>
-    </>
+    <button type="button" className={styles.bntEnvoyer}>
+      Publier
+    </button>
   );
 };
 

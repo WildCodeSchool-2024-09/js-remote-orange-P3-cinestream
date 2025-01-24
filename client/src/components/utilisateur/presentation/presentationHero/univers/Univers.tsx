@@ -3,16 +3,16 @@ import style from "./Univers.module.css";
 
 const Univers = () => {
   const settings = {
-    dots: false, // Désactive les points de navigation
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    swipe: true, // Active le défilement avec la souris ou le doigt
-    swipeToSlide: true, // Permet de scroller vers n'importe quelle position
-    draggable: true, // Permet de glisser avec la souris
-    focusOnSelect: false, // Empêche la mise au focus des slides
-    arrows: true, // Active les flèches
+    swipe: true,
+    swipeToSlide: true,
+    draggable: true,
+    focusOnSelect: false,
+    arrows: true,
   };
 
   return (
