@@ -14,27 +14,51 @@ import InputTitreSerie from "./inputTitreSerie/InputTitreSerie";
 import ListeCategorie from "./listeCategorie/ListeCategorie";
 import ListeProducteur from "./listeProducteur/ListeProducteur";
 
-const InfoGeneral = () => {
-  const [titre, setTitre] = useState("");
-  const [date, setDate] = useState("");
-  const [publier, setPublier] = useState(false);
-  const [premuim, setPremuim] = useState(false);
-  const [afficheVertical, setAfficheVertical] = useState<File | null>(null);
-  const [afficheVerticalPreview, setAfficheVerticalPreview] = useState<
-    string | null
-  >(null);
-  const [afficheHaurisontal, setAfficheHaurisontal] = useState<File | null>(
-    null,
-  );
+interface InfoGeneralProps {
+  titre: string;
+  setTitre: (titre: string) => void;
+  date: string;
+  setDate: (date: string) => void;
+  publier: boolean;
+  setPublier: (publier: boolean) => void;
+  premuim: boolean;
+  setPremuim: (premuim: boolean) => void;
+  setAfficheVertical: (afficheVertical: File | null) => void;
+  setAfficheHaurisontal: (afficheHaurisontal: File | null) => void;
+  categorie: { id: number; nom: string; image: string }[];
+  setCategorie: (
+    categorie: { id: number; nom: string; image: string }[],
+  ) => void;
+  platforme: { id: number; nom: string; image: string }[];
+  setPlatforme: (
+    platforme: { id: number; nom: string; image: string }[],
+  ) => void;
+  updateInfoGeneral: () => Promise<boolean>;
+}
+
+const InfoGeneral = ({
+  titre,
+  setTitre,
+  date,
+  setDate,
+  publier,
+  setPublier,
+  premuim,
+  setPremuim,
+  setAfficheVertical,
+  setAfficheHaurisontal,
+  categorie,
+  setCategorie,
+  platforme,
+  setPlatforme,
+  updateInfoGeneral,
+}: InfoGeneralProps) => {
   const [afficheHaurisontalPreview, setAfficheHaurisontalPreview] = useState<
     string | null
   >(null);
-  const [categorie, setCategorie] = useState<
-    { id: number; nom: string; image: string }[]
-  >([]);
-  const [platforme, setPlatforme] = useState<
-    { id: number; nom: string; image: string }[]
-  >([]);
+  const [afficheVerticalPreview, setAfficheVerticalPreview] = useState<
+    string | null
+  >(null);
 
   const { token } = UseTokenContext();
   const { id } = useParams();
@@ -101,68 +125,6 @@ const InfoGeneral = () => {
   useEffect(() => {
     getInfoGeneral();
   }, []);
-
-  //function met a jour tout les informations de la série dans la bd
-  const updateInfoGeneral = async () => {
-    const values = {
-      token: token,
-      id: id,
-      nom: titre,
-      date: date,
-      publier: publier,
-      premium: premuim,
-      categorie: categorie,
-      platforme: platforme,
-    };
-
-    let sucssces1 = false;
-    try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/backoffice/article/infoGeneral/actualiser`,
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-
-      sucssces1 = data.sucssces;
-    } catch (error) {
-      console.error("Erreur lors de uplade des informations de la serie");
-      console.error(error);
-    }
-
-    //préparé les images
-    const formData = new FormData();
-    formData.append("afficheVertical", afficheVertical as Blob);
-    formData.append("afficheHaurisontal", afficheHaurisontal as Blob);
-
-    let sucssces2 = false;
-    try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/backoffice/article/infoGeneral/actualiserImage`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            token: token,
-            id: id,
-          },
-        },
-      );
-
-      sucssces2 = data.sucssces;
-    } catch (error) {
-      console.error("Erreur lors de uplade des image");
-      console.error(error);
-    }
-
-    if (sucssces1 && sucssces2) {
-      return true;
-    }
-    return false;
-  };
 
   const sauvgarde = async () => {
     const saugarder = await updateInfoGeneral();

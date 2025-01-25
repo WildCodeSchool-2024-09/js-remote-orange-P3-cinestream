@@ -81,8 +81,8 @@ CREATE TABLE episode (
     id INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL,
     nom VARCHAR(255) DEFAULT "",
-    description TEXT,
-    lien_video VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
+    lien_video VARCHAR(255) DEFAULT "",
     image VARCHAR(255) DEFAULT NULL,
     saison_id INT NOT NULL,
     FOREIGN KEY (saison_id) REFERENCES saison(id) ON DELETE CASCADE

@@ -14,6 +14,7 @@ const InputTitreSerie = ({ titre, setTitre }: InputTitreSerieProps) => {
         type="text"
         value={titre}
         onChange={(e) => setTitre(e.target.value)}
+        maxLength={250}
       />
     </div>
   );

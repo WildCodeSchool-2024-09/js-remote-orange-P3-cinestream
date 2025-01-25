@@ -22,7 +22,11 @@ interface Saison {
   episodes: Episode[];
 }
 
-const CrudEpisode = () => {
+interface CrudEpisodeProps {
+  updateInfoGeneral: () => Promise<boolean>;
+}
+
+const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
   const { token } = UseTokenContext();
   const [allEpisode, setAllEpisode] = useState<Saison[]>([]);
   const [saisonSelect] = useState<number>(1);
@@ -75,6 +79,7 @@ const CrudEpisode = () => {
                 key={element.episode_id}
                 element={element}
                 saison={allEpisode[findIndexSaison()]}
+                updateInfoGeneral={updateInfoGeneral}
               />
             );
           })}

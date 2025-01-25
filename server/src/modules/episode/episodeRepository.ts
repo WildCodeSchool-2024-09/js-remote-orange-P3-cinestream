@@ -48,6 +48,56 @@ ORDER BY s.numero, e.numero;
 
     return rows as Rows;
   }
+
+  //récupère un épisode par son id et l'id de la saison et de l'article
+  async findById(idEpisode: number) {
+    const query = "SELECT * FROM episode WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [idEpisode]);
+
+    return rows as Rows;
+  }
+
+  //mettre a jour le nom
+  async updateNom(idE: number, nom: string) {
+    const query = "UPDATE episode SET nom = ? WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [nom, idE]);
+
+    return rows as Rows;
+  }
+
+  //mettre a jour la decsription
+  async updateDescription(idE: number, description: string) {
+    const query = "UPDATE episode SET description = ? WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [description, idE]);
+
+    return rows as Rows;
+  }
+
+  //mettre a jour le lien vidéo
+  async updateVideo(idE: number, video: string) {
+    const query = "UPDATE episode SET lien_video = ? WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [video, idE]);
+
+    return rows as Rows;
+  }
+
+  //mettre a jour image
+  async updateImage(
+    idE: number,
+    results: {
+      image: null | string;
+    },
+  ) {
+    const query = "UPDATE episode SET image = ? WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [results.image, idE]);
+
+    return rows as Rows;
+  }
 }
 
 export default new EpisodeRepository();

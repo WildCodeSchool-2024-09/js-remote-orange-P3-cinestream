@@ -148,4 +148,28 @@ router.post(
   episodeActions.getAll,
 );
 
+//récupère les info d'un episode
+router.post(
+  "/api/backoffice/episode/getById",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.getById,
+);
+
+//route pour actualiser les info d'un episode
+router.post(
+  "/api/backoffice/description/actualiser",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.update,
+);
+
+//route pouir atualiser l'image d'un episode
+router.post(
+  "/api/backoffice/description/actualiserImage",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.updateImage,
+);
+
 export default router;

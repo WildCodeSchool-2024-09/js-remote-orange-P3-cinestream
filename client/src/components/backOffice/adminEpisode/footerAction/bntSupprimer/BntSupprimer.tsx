@@ -38,7 +38,7 @@ const BntSupprimer = () => {
 
   //fonction au clike du bouton
   const handClicke = async () => {
-    if (window.confirm("⚠️voulez vous vraiment supprimer cette SERIES ?⚠️")) {
+    if (window.confirm("voulez vous vraiment supprimer cette serie ?")) {
       // verifier si la serie a ete supprimer
       const isSuprimer = await suprimerSerie();
       if (isSuprimer) {
