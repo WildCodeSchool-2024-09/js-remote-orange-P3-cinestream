@@ -252,10 +252,19 @@ const updateImage: RequestHandler = async (req, res, next) => {
 
 const del: RequestHandler = async (req, res, next) => {
   try {
-    const { idE } = req.body;
+    const { idE, idS } = req.body;
+
+    //récupére l épisode avant de le suprimmer
+    const episode = await episodeRepository.findById(idE);
 
     //suprimme l'episode de la bd
     const resutat = await episodeRepository.delAllById(idE);
+
+    //retire 1 au numero des episode suivant
+    const resultat2 = await episodeRepository.add1Numero(
+      episode[0].numero,
+      idS,
+    );
 
     //verifi que l'episode a bien été suprimmé dans la bd
     if (resutat.affectedRows === 0) {

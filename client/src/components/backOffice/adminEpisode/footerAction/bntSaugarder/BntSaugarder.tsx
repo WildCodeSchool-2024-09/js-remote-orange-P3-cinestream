@@ -13,7 +13,7 @@ const BntSaugarder = ({ updateEpisode }: BntSaugarderProps) => {
   const handleClick = async () => {
     const saugarder = await updateEpisode();
     if (saugarder) {
-      navigate(`/admin/organisation/${idA}`);
+      navigate(`/admin/organisation/${idA}#crudEpisode`);
       return;
     }
     //si ca a pas sauvgarder demander si il veut quitter sans sauvgarder
@@ -22,7 +22,7 @@ const BntSaugarder = ({ updateEpisode }: BntSaugarderProps) => {
         "une erreur est survenue, voulez vous quitter sans sauvgarder ?",
       )
     ) {
-      navigate(`/admin/organisation/${idA}`);
+      navigate(`/admin/organisation/${idA}#crudEpisode`);
       return;
     }
   };

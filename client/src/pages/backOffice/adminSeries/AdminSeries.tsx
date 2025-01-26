@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import CrudEpisode from "../../../components/backOffice/adminSeries/crudEpisode/CrudEpisode";
 import CrudUnivers from "../../../components/backOffice/adminSeries/crudUnisers/CrudUnivers";
 import InfoGeneral from "../../../components/backOffice/adminSeries/infoGeneral/InfoGeneral";
@@ -25,6 +25,7 @@ const AdminSeries = () => {
 
   const { token } = UseTokenContext();
   const { id } = useParams();
+  const location = useLocation();
 
   //function met a jour tout les informations général de la série dans la bd
   const updateInfoGeneral = async () => {
@@ -85,6 +86,20 @@ const AdminSeries = () => {
     }
     return false;
   };
+
+  useEffect(() => {
+    //use effect de navigation
+    const hash = location.hash;
+    //si il a un # dans url
+    if (hash) {
+      //récupère l'élément
+      const targetElement = document.querySelector(hash);
+      if (targetElement) {
+        //scroll jusqu'à l'élément
+        targetElement.scrollIntoView({ behavior: "instant" });
+      }
+    }
+  }, [location]);
 
   return (
     <>

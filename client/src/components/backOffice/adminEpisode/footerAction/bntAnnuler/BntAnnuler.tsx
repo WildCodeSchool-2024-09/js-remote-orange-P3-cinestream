@@ -11,7 +11,7 @@ const BntAnnuler = () => {
       <button
         className={`${style.bntAnnuler}`}
         type="button"
-        onClick={() => navigate(`/admin/organisation/${idA}`)}
+        onClick={() => navigate(`/admin/organisation/${idA}#crudEpisode`)}
       >
         Annuler
       </button>

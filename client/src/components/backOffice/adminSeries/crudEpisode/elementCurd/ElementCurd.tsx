@@ -19,12 +19,14 @@ interface ElementCurdProps {
     saison_numero: number;
   };
   updateInfoGeneral: () => Promise<boolean>;
+  getAllEpisode: () => void;
 }
 
 const ElementCurd = ({
   element,
   saison,
   updateInfoGeneral,
+  getAllEpisode,
 }: ElementCurdProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -39,11 +41,10 @@ const ElementCurd = ({
       window.scrollTo(0, 0);
       return;
     }
-    if (
-      window.confirm(
-        "une erreur est survenue l'ore de auto sauvgarde, voulez vous quitter sans sauvgarder ?",
-      )
-    ) {
+    //en cas d'erreur l'ore de update on demande a l'utilisateur si il veut quitter sans sauvgarder
+    const message =
+      "une erreur est survenue l'ore de auto sauvgarde, voulez vous quitter sans sauvgarder ?";
+    if (window.confirm(message)) {
       navigate(
         `/admin/description/article/${id}/saison/${saison.saison_id}/episode/${element.episode_id}`,
       );
@@ -86,7 +87,11 @@ const ElementCurd = ({
       <div className={`${style.contenerDroite}`}>
         <FlecheHaut />
         <FlecheBas />
-        <CroixSup />
+        <CroixSup
+          element={element}
+          saison={saison}
+          getAllEpisode={getAllEpisode}
+        />
       </div>
     </div>
   );

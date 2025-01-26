@@ -32,32 +32,34 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
   const [saisonSelect, setSaisonSelect] = useState<number>(1);
   const { id } = useParams();
 
+  const getAllEpisode = async () => {
+    const values = {
+      token: token,
+      idArticle: id,
+    };
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/backoffice/episode/getAll`,
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (data.sucssces) {
+        setAllEpisode(data.allEpisode);
+      }
+    } catch (error) {
+      console.error("eurrore l'ore de la recupération des épisodes");
+    }
+  };
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    const getAllEpisode = async () => {
-      const values = {
-        token: token,
-        idArticle: id,
-      };
-
-      try {
-        const { data } = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/backoffice/episode/getAll`,
-          values,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
-
-        if (data.sucssces) {
-          setAllEpisode(data.allEpisode);
-        }
-      } catch (error) {
-        console.error("eurrore l'ore de la recupération des épisodes");
-      }
-    };
+    //récupère tout les episode en avant le rendu
     getAllEpisode();
   }, []);
 
@@ -66,7 +68,7 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
   };
 
   return (
-    <div className={`${style.contenerSection}`}>
+    <div className={`${style.contenerSection}`} id="crudEpisode">
       <p className={`${style.titreSection}`}>Épisodes</p>
       <div className={`${style.flexAllElement}`}>
         <InputSaison
@@ -84,6 +86,7 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
                 element={element}
                 saison={allEpisode[findIndexSaison()]}
                 updateInfoGeneral={updateInfoGeneral}
+                getAllEpisode={getAllEpisode}
               />
             );
           })}

@@ -106,6 +106,20 @@ ORDER BY s.numero, e.numero;
 
     return resutat as Result;
   }
+
+  //enleve 1 au numero de l'episode a partir d'un certain numero
+  async add1Numero(numero: number, idS: number) {
+    const query = `
+UPDATE episode as e
+INNER JOIN saison as s
+ON e.saison_id = ?
+SET e.numero = e.numero - 1
+WHERE e.numero > ?;
+    `;
+    const [resutat] = await databaseClient.query(query, [idS, numero]);
+
+    return resutat as Result;
+  }
 }
 
 export default new EpisodeRepository();
