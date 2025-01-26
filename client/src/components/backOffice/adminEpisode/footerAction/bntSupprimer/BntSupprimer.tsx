@@ -6,19 +6,19 @@ import style from "./BntSupprimer.module.css";
 
 const BntSupprimer = () => {
   const { token } = UseTokenContext();
-  const { id } = useParams();
+  const { idA, idE } = useParams();
   const navigate = useNavigate();
 
   //supprimer une serie
   const suprimerSerie = async () => {
     const values = {
       token: token,
-      id: id,
+      idE: idE,
     };
 
     try {
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/backoffice/serie/suprimer`,
+        `${import.meta.env.VITE_API_URL}/api/backoffice/description/suprimer`,
         values,
         {
           headers: {
@@ -38,11 +38,11 @@ const BntSupprimer = () => {
 
   //fonction au clike du bouton
   const handClicke = async () => {
-    if (window.confirm("voulez vous vraiment supprimer cette serie ?")) {
+    if (window.confirm("voulez vous vraiment supprimer cette episode ?")) {
       // verifier si la serie a ete supprimer
       const isSuprimer = await suprimerSerie();
       if (isSuprimer) {
-        navigate("/admin/recherche");
+        navigate(`/admin/organisation/${idA}`);
       }
     }
   };

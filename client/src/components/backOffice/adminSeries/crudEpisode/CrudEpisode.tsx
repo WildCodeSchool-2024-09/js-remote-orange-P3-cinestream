@@ -29,7 +29,7 @@ interface CrudEpisodeProps {
 const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
   const { token } = UseTokenContext();
   const [allEpisode, setAllEpisode] = useState<Saison[]>([]);
-  const [saisonSelect] = useState<number>(1);
+  const [saisonSelect, setSaisonSelect] = useState<number>(1);
   const { id } = useParams();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -69,7 +69,11 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
     <div className={`${style.contenerSection}`}>
       <p className={`${style.titreSection}`}>Épisodes</p>
       <div className={`${style.flexAllElement}`}>
-        <InputSaison />
+        <InputSaison
+          allEpisode={allEpisode}
+          saisonSelect={saisonSelect}
+          setSaisonSelect={setSaisonSelect}
+        />
 
         {/* affiche toute les carte */}
         {allEpisode.length > 0 &&

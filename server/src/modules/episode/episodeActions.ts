@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import deleteFilesInFolder from "../../hook/supprimerImage";
 import uploadDynamicImages from "../middlewares/multer";
 import episodeRepository from "./episodeRepository";
 import saisonRepository from "./saisonRepository";
@@ -249,10 +250,39 @@ const updateImage: RequestHandler = async (req, res, next) => {
   }
 };
 
+const del: RequestHandler = async (req, res, next) => {
+  try {
+    const { idE } = req.body;
+
+    //suprimme l'episode de la bd
+    const resutat = await episodeRepository.delAllById(idE);
+
+    //verifi que l'episode a bien été suprimmé dans la bd
+    if (resutat.affectedRows === 0) {
+      res.status(400).send({
+        message: "Serie non trouvé",
+        sucssces: false,
+      });
+      return;
+    }
+
+    //suprimme les images
+    deleteFilesInFolder("episode", `image_episode-${idE}`);
+
+    res.status(201).send({
+      message: "Serie trouvé avec succès",
+      sucssces: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   cree,
   getAll,
   getById,
   update,
   updateImage,
+  del,
 };

@@ -98,6 +98,14 @@ ORDER BY s.numero, e.numero;
 
     return rows as Rows;
   }
+
+  //suprimer un episode
+  async delAllById(idE: number) {
+    const query = "DELETE FROM episode WHERE id = ?;";
+    const [resutat] = await databaseClient.query(query, [idE]);
+
+    return resutat as Result;
+  }
 }
 
 export default new EpisodeRepository();

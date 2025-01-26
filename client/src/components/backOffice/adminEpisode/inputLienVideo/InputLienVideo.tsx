@@ -1,3 +1,4 @@
+import definirUrlVideoIframe from "../../../../hook/definirUrlVideoIframe";
 import style from "./inputLienVideo.module.css";
 
 interface InputLienVideoProps {
@@ -23,7 +24,7 @@ const InputLienVideo = ({ video, setVideo }: InputLienVideoProps) => {
         <p className={`${style.pAppercuVideo}`}>Aperçu vidéo:</p>
         <iframe
           className={`${style.iframVideo}`}
-          src="https://www.youtube.com/embed/_J5bj-sFS4Y"
+          src={definirUrlVideoIframe(video)}
           title="retour video du lien"
         />
       </div>

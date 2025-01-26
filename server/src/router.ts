@@ -172,4 +172,12 @@ router.post(
   episodeActions.updateImage,
 );
 
+//suprimer un episode
+router.post(
+  "/api/backoffice/description/suprimer",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.del,
+);
+
 export default router;
