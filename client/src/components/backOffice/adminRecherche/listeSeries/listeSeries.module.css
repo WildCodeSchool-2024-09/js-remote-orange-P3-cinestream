@@ -20,3 +20,15 @@
     gap: 1.5em;
   }
 }
+
+.pAucunResultat {
+  color: white;
+  font-size: 4em;
+  text-align: center;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2em;
+  }
+}

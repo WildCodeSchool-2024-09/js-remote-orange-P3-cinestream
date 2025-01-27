@@ -38,7 +38,7 @@ const TokenProvider = ({ children }: { children: ReactNode }) => {
       };
       try {
         const { data } = await axios.post(
-          "http://localhost:3310/api/isAdmin",
+          `${import.meta.env.VITE_API_URL}/api/isAdmin`,
           values,
           {
             headers: {

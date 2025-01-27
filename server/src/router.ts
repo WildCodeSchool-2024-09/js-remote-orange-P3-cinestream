@@ -2,9 +2,11 @@ import express from "express";
 import multer from "multer";
 import articleActions from "./modules/article/articleActions";
 import categorieActions from "./modules/categorie/categorieActions";
+import episodeActions from "./modules/episode/episodeActions";
 import autentification from "./modules/middlewares/autentification";
 import verifSaisi from "./modules/middlewares/verifSaisi";
 import originResquet from "./modules/originResquet/originResquet";
+import platformeActions from "./modules/platforme/platformeActions";
 import serieActions from "./modules/serie/serieActions";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
 
@@ -83,6 +85,14 @@ router.post(
   serieActions.cree,
 );
 
+//suprimer une serie
+router.post(
+  "/api/backoffice/serie/suprimer",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  serieActions.del,
+);
+
 //récupère tout les series
 router.post(
   "/api/backoffice/serie/getAll",
@@ -117,5 +127,57 @@ router.post(
 
 //routes pour récupérer tout les categories quie exite
 router.get("/api/categorie/getAll", categorieActions.getAll);
+
+//routes pour récupérer tout les platforme quie exite
+router.get("/api/platforme/getAll", platformeActions.getAll);
+
+//-----------Episode----------------
+//crée un episode
+router.post(
+  "/api/backoffice/episode/new",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.cree,
+);
+
+//récupère tout les episode d'une serie
+router.post(
+  "/api/backoffice/episode/getAll",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.getAll,
+);
+
+//récupère les info d'un episode
+router.post(
+  "/api/backoffice/episode/getById",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.getById,
+);
+
+//route pour actualiser les info d'un episode
+router.post(
+  "/api/backoffice/description/actualiser",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.update,
+);
+
+//route pouir atualiser l'image d'un episode
+router.post(
+  "/api/backoffice/description/actualiserImage",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.updateImage,
+);
+
+//suprimer un episode
+router.post(
+  "/api/backoffice/description/suprimer",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.del,
+);
 
 export default router;

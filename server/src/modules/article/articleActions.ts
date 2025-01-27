@@ -1,12 +1,8 @@
 import type { RequestHandler } from "express";
 import categorieRepository from "../categorie/categorieRepository";
 import uploadDynamicImages from "../middlewares/multer";
+import platformeRepository from "../platforme/platformeRepository";
 import articleRepository from "./articleRepository";
-
-function isValidDate(dateString: string): boolean {
-  const date = new Date(dateString);
-  return !Number.isNaN(date.getTime());
-}
 
 const getAll: RequestHandler = async (req, res, next) => {
   try {
@@ -29,14 +25,18 @@ const getAll: RequestHandler = async (req, res, next) => {
       });
       return;
     }
-    //récupère les categories de l'article et met a jour
+    //récupère les categories de l'article
     const categorieSelect = await categorieRepository.getAllSelect(id);
+
+    //récupère les platforme de l'article
+    const platformeSelect = await platformeRepository.getAllSelect(id);
 
     res.status(201).send({
       message: "Article mis a jour et récupérer",
       sucssces: true,
       serie: resutat[0],
       categorieSelect: categorieSelect,
+      platformeSelect: platformeSelect,
     });
   } catch (err) {
     next(err);
@@ -45,7 +45,7 @@ const getAll: RequestHandler = async (req, res, next) => {
 
 const update: RequestHandler = async (req, res, next) => {
   try {
-    let { id, nom, date, publier, premium, categorie } = req.body;
+    let { id, nom, date, publier, premium, categorie, platforme } = req.body;
     //verifi que id exite
     if (
       !id ||
@@ -79,6 +79,8 @@ const update: RequestHandler = async (req, res, next) => {
 
     //met a jour les categories
     await categorieRepository.updateCategorieArticle(id, categorie);
+    //met a jour les platforme
+    await platformeRepository.updatePlatformeArticle(id, platforme);
 
     res.status(201).send({
       message: "Article mis a jour",

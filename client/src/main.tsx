@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: <AdminSeries />,
   },
   {
-    path: "admin/description",
+    path: "admin/description/article/:idA/saison/:idS/episode/:idE",
     element: <AdminEpisode />,
   },
   {

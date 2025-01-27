@@ -73,20 +73,19 @@ CREATE TABLE saison  (
     id INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL,
     article_id INT NOT NULL,
-    FOREIGN KEY (article_id) REFERENCES article(id)
+    FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE
 );
 
 -- episode
 CREATE TABLE episode (
     id INT AUTO_INCREMENT PRIMARY KEY,
     numero INT NOT NULL,
-    nom VARCHAR(255),
-    description TEXT,
-    lien_video VARCHAR(255),
-    image VARCHAR(255),
-    duree VARCHAR(10),
+    nom VARCHAR(255) DEFAULT "",
+    description TEXT DEFAULT NULL,
+    lien_video VARCHAR(255) DEFAULT "",
+    image VARCHAR(255) DEFAULT NULL,
     saison_id INT NOT NULL,
-    FOREIGN KEY (saison_id) REFERENCES saison(id)
+    FOREIGN KEY (saison_id) REFERENCES saison(id) ON DELETE CASCADE
 );
 
 -- plateforme
@@ -108,8 +107,8 @@ CREATE TABLE plateforme_article (
     article_id INT NOT NULL,
     plateforme_id INT NOT NULL,
     PRIMARY KEY (article_id, plateforme_id),
-    FOREIGN KEY (article_id) REFERENCES article(id),
-    FOREIGN KEY (plateforme_id) REFERENCES plateforme(id)
+    FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
+    FOREIGN KEY (plateforme_id) REFERENCES plateforme(id) ON DELETE CASCADE
 );
 
 -- categorie_article
@@ -117,8 +116,8 @@ CREATE TABLE categorie_article (
     article_id INT NOT NULL,
     categorie_id INT NOT NULL,
     PRIMARY KEY (article_id, categorie_id),
-    FOREIGN KEY (article_id) REFERENCES article(id),
-    FOREIGN KEY (categorie_id) REFERENCES categorie(id)
+    FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
+    FOREIGN KEY (categorie_id) REFERENCES categorie(id) ON DELETE CASCADE
 );
 
 
@@ -160,3 +159,16 @@ VALUES
   ('Talk-show'), 
   ('Variété'), 
   ('Emission');
+
+INSERT INTO plateforme (nom)
+VALUES 
+  ("netflix"),
+  ("disney+"),
+  ("amazon prime"),
+  ("mycanal"),
+  ("apple tv"),
+  ("hulu"),
+  ("youtube"),
+  ("twitch"),
+  ("site externe"),
+  ("autre");
