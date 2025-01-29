@@ -12,7 +12,7 @@ import style from "./adminEpisode.module.css";
 
 const AdminEpisode = () => {
   const navigate = useNavigate();
-  const { idA, idE } = useParams();
+  const { idA, idE, numS } = useParams();
   const { token } = UseTokenContext();
 
   const [titre, setTitre] = useState("");
@@ -127,7 +127,7 @@ const AdminEpisode = () => {
   const handleFermer = async () => {
     const saugarder = await updateEpisode();
     if (saugarder) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       window.scrollTo(0, 0);
       return;
     }
@@ -135,7 +135,7 @@ const AdminEpisode = () => {
     const messageEuereur =
       "une erreur est survenue pendant l'auto sauvgarde, voulez vous quitter sans sauvgarder ?";
     if (window.confirm(messageEuereur)) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       window.scrollTo(0, 0);
       return;
     }

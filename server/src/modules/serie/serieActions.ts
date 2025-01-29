@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { RequestHandler } from "express";
+import deleteFilesInFolder from "../../hook/supprimerImage";
 import episodeRepository from "../episode/episodeRepository";
 import saisonRepository from "../episode/saisonRepository";
 import serieRepository from "./serieRepository";
@@ -58,6 +59,10 @@ const del: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.body;
 
+    //récupère tout les images de la serie a sup avant de sup la serie
+    const allEpisode = await episodeRepository.getAllByIdArticle(id);
+
+    //suprimme la serie
     const resutat = await serieRepository.delAllById(id);
 
     if (resutat.affectedRows === 0) {
@@ -68,37 +73,17 @@ const del: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    //fonction pour supprimer les fichiers
-    function deleteFilesInFolder(nomFicher: string, nom: string) {
-      const racine = path.join(
-        __dirname,
-        `../../../public/uploads/${nomFicher}`,
+    //suprimme les images de article
+    await deleteFilesInFolder("serieHaurisontal", `afficheHaurisontal-${id}`);
+    await deleteFilesInFolder("serieVertical", `afficheVertical-${id}`);
+
+    //suprimme les images de episode
+    for (const episode of allEpisode) {
+      await deleteFilesInFolder(
+        "episode",
+        `image_episode-${episode.episode_id}`,
       );
-      // Vérifier que le dossier existe
-      if (!fs.existsSync(racine)) {
-        //si exite pas return null
-        return;
-      }
-      // récupère tout les ficher du dossier
-      const allFicher = fs.readdirSync(racine);
-
-      // trouve les ficher qui on le nom a sup
-      for (const ficher of allFicher) {
-        // récupère le nom du ficher sans l'extension
-        const ficherName = path.parse(ficher).name;
-
-        // Si le nom correspond, supprimer le fichier
-        if (ficherName === nom) {
-          const chemainFicher = path.join(racine, ficher);
-          // Supprimer le fichier
-          fs.unlinkSync(chemainFicher);
-        }
-      }
     }
-
-    //suprimme les images
-    deleteFilesInFolder("serieHaurisontal", `afficheHaurisontal-${id}`);
-    deleteFilesInFolder("serieVertical", `afficheVertical-${id}`);
 
     res.status(201).send({
       message: "Serie trouvé avec succès",

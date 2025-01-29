@@ -140,6 +140,14 @@ router.post(
   episodeActions.cree,
 );
 
+//route pour déplacer un episode
+router.post(
+  "/api/backoffice/episode/mouve",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.mouve,
+);
+
 //récupère tout les episode d'une serie
 router.post(
   "/api/backoffice/episode/getAll",

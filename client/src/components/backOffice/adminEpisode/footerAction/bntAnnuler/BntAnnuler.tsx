@@ -4,14 +4,16 @@ import style from "./bntAnnuler.module.css";
 
 const BntAnnuler = () => {
   const navigate = useNavigate();
-  const { idA } = useParams();
+  const { idA, numS } = useParams();
 
   return (
     <div>
       <button
         className={`${style.bntAnnuler}`}
         type="button"
-        onClick={() => navigate(`/admin/organisation/${idA}#crudEpisode`)}
+        onClick={() =>
+          navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`)
+        }
       >
         Annuler
       </button>

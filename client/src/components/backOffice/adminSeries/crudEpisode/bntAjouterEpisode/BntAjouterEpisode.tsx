@@ -4,7 +4,15 @@ import { useParams } from "react-router-dom";
 import { UseTokenContext } from "../../../../../context/tokenContext";
 import style from "./bntAjouterEpisode.module.css";
 
-const BntAjouterEpisode = () => {
+interface BntAjouterEpisodeProps {
+  updateInfoGeneral: () => Promise<boolean>;
+  saisonSelect: number;
+}
+
+const BntAjouterEpisode = ({
+  updateInfoGeneral,
+  saisonSelect,
+}: BntAjouterEpisodeProps) => {
   const navigate = useNavigate();
   const { token } = UseTokenContext();
   const { id } = useParams();
@@ -14,7 +22,7 @@ const BntAjouterEpisode = () => {
     const values = {
       token: token,
       idArticle: id,
-      saison: 1,
+      saison: saisonSelect,
     };
 
     try {
@@ -28,11 +36,28 @@ const BntAjouterEpisode = () => {
         },
       );
 
+      //si la serie a été rajouter
       if (data.sucssces) {
-        navigate(
-          `/admin/description/article/${data.idArticle}/saison/${data.idSaison}/episode/${data.idEpisode}`,
-        );
-        window.scrollTo(0, 0);
+        //met a jour les information general
+        const saugarder = await updateInfoGeneral();
+        //si les information on été sauvgarder
+        if (saugarder) {
+          navigate(
+            `/admin/description/article/${data.idArticle}/saison/${saisonSelect}/${data.idSaison}/episode/${data.idEpisode}`,
+          );
+          window.scrollTo(0, 0);
+          return;
+        }
+        //en cas d'erreur l'ore de update on demande a l'utilisateur si il veut quitter sans sauvgarder
+        const message =
+          "une erreur est survenue l'ore de auto sauvgarde, voulez allez a l'episode sans sauvgarder ?";
+        if (window.confirm(message)) {
+          navigate(
+            `/admin/description/article/${data.idArticle}/saison/${data.idSaison}/episode/${data.idEpisode}`,
+          );
+          window.scrollTo(0, 0);
+          return;
+        }
       }
     } catch (error) {
       console.error("eurreur l'ors de l'ajout de l'episode", error);

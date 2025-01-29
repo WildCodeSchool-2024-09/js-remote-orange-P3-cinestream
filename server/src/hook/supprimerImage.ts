@@ -3,7 +3,7 @@ import path from "node:path";
 
 //fonction pour supprimer les fichiers
 function deleteFilesInFolder(nomFicher: string, nom: string) {
-  const racine = path.join(__dirname, `../../../public/uploads/${nomFicher}`);
+  const racine = path.join(__dirname, `../../public/uploads/${nomFicher}`);
   // Vérifier que le dossier existe
   if (!fs.existsSync(racine)) {
     //si exite pas return null

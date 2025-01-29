@@ -1,5 +1,6 @@
 import axios from "axios";
 import { MdClose } from "react-icons/md";
+import { useParams } from "react-router-dom";
 import { UseTokenContext } from "../../../../../../context/tokenContext";
 import style from "./croixSup.module.css";
 
@@ -21,12 +22,14 @@ interface CroixSupProps {
 
 const CroixSup = ({ element, saison, getAllEpisode }: CroixSupProps) => {
   const { token } = UseTokenContext();
+  const { id } = useParams();
 
   const suprimerEepisode = async () => {
     const values = {
       token: token,
       idE: element.episode_id,
       idS: saison.saison_id,
+      idA: id,
     };
 
     try {
@@ -41,6 +44,10 @@ const CroixSup = ({ element, saison, getAllEpisode }: CroixSupProps) => {
       );
 
       if (data.sucssces) {
+        if (data.nbNotCorrect) {
+          alert("une serie doit avoir au moins 2 episode");
+          return false;
+        }
         return true;
       }
       return false;
@@ -56,8 +63,6 @@ const CroixSup = ({ element, saison, getAllEpisode }: CroixSupProps) => {
     if (isSuprimer) {
       //re récupère les épisodes mis a jour
       await getAllEpisode();
-    } else {
-      alert("une erreur est survenue lors de la suppression de l'épisode");
     }
   };
 

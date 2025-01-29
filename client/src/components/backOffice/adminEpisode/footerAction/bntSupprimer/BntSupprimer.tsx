@@ -6,7 +6,7 @@ import style from "./BntSupprimer.module.css";
 
 const BntSupprimer = () => {
   const { token } = UseTokenContext();
-  const { idA, idS, idE } = useParams();
+  const { idA, idS, idE, numS } = useParams();
   const navigate = useNavigate();
 
   //supprimer une serie
@@ -15,6 +15,7 @@ const BntSupprimer = () => {
       token: token,
       idE: idE,
       idS: idS,
+      idA: idA,
     };
 
     try {
@@ -29,6 +30,10 @@ const BntSupprimer = () => {
       );
 
       if (data.sucssces) {
+        if (data.nbNotCorrect) {
+          alert("une serie doit avoir au moins 2 episode");
+          return false;
+        }
         return true;
       }
       return false;
@@ -43,7 +48,7 @@ const BntSupprimer = () => {
       // verifier si la serie a ete supprimer
       const isSuprimer = await suprimerSerie();
       if (isSuprimer) {
-        navigate(`/admin/organisation/${idA}#crudEpisode`);
+        navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       }
     }
   };
