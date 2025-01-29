@@ -6,7 +6,7 @@ import style from "./BntSupprimer.module.css";
 
 const BntSupprimer = () => {
   const { token } = UseTokenContext();
-  const { idA, idS, idE } = useParams();
+  const { idA, idS, idE, numS } = useParams();
   const navigate = useNavigate();
 
   //supprimer une serie
@@ -48,7 +48,7 @@ const BntSupprimer = () => {
       // verifier si la serie a ete supprimer
       const isSuprimer = await suprimerSerie();
       if (isSuprimer) {
-        navigate(`/admin/organisation/${idA}#crudEpisode`);
+        navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       }
     }
   };

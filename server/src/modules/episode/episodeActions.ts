@@ -144,7 +144,8 @@ const getById: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    const episode = await episodeRepository.findById(idE);
+    //récupére l'episode
+    const episode = await episodeRepository.getById(idE);
 
     if (episode.length === 0) {
       res.status(404).send({
@@ -268,10 +269,10 @@ const del: RequestHandler = async (req, res, next) => {
     }
 
     //récupére l épisode avant de le suprimmer
-    const episode = await episodeRepository.findById(idE);
+    const episode = await episodeRepository.getById(idE);
 
     //suprimme l'episode de la bd
-    const resutat = await episodeRepository.delAllById(idE);
+    const resutat = await episodeRepository.delById(idE);
 
     //retire 1 au numero des episode suivant
     const resultat2 = await episodeRepository.remouve1Numero(
@@ -287,10 +288,10 @@ const del: RequestHandler = async (req, res, next) => {
       //récuper la saison avant de la sup
       const saison = await saisonRepository.getById(idS);
       //suprimme la saison
-      await episodeRepository.delSaisonById(idS);
+      await saisonRepository.delById(idS);
 
       //on réduit de 1 le numero des saison suivante
-      await episodeRepository.remouve1Numero(saison[0].numero, idA);
+      await saisonRepository.remouve1Numero(saison[0].numero, idA);
     }
 
     //verifi que l'episode a bien été suprimmé dans la bd
@@ -319,7 +320,7 @@ const mouve: RequestHandler = async (req, res, next) => {
     const { idA, idS, idE, action } = req.body;
 
     //récupére l épisode
-    const episode = await episodeRepository.findById(idE);
+    const episode = await episodeRepository.getById(idE);
 
     //récupére tout les episode de la saison
     const allEpisodeSaison = await episodeRepository.getAllByIdSaison(idS);
@@ -347,13 +348,19 @@ const mouve: RequestHandler = async (req, res, next) => {
           allEpisodeSaisonUp[allEpisodeSaisonUp.length - 1].episode_numero + 1,
           allEpisodeSaisonUp[0].saison_id,
         );
+        //retirer 1 au numero des episode suivant de son acienne saison
+        //met a jour le numero a 1 et la saison
+        await episodeRepository.remouve1Numero(
+          0,
+          allEpisodeSaison[0].saison_id,
+        );
         //si caitai le seul episode de la saison suprimme la saison
         if (allEpisodeSaison.length === 1) {
           //suprimme la saison
-          await episodeRepository.delSaisonById(idS);
+          await saisonRepository.delById(idS);
           //on réduit de 1 le numero des saison suivante
-          await episodeRepository.remouve1Numero(
-            allEpisodeSaisonUp[0].saison_numero,
+          await saisonRepository.remouve1Numero(
+            allEpisodeSaison[0].saison_numero,
             idA,
           );
         }
@@ -401,25 +408,27 @@ const mouve: RequestHandler = async (req, res, next) => {
           });
           return;
         }
+        //redessend le numero des episode suivant
+        await episodeRepository.add1Numero(
+          0,
+          allEpisodeSaisonDown[0].saison_id,
+        );
         //met a jour le numero a 1 et la saison
         await episodeRepository.updateSetNumeroAndSaison(
           idE,
           1,
           allEpisodeSaisonDown[0].saison_id,
         );
-        //redessend le numero des episode suivant
-        await episodeRepository.add1Numero(
-          0,
-          allEpisodeSaisonDown[0].saison_id,
-        );
-
-        // //si caitai le seul episode de la saison suprimme la saison
-        // if (allEpisodeSaison.length === 1) {
-        //   //suprimme la saison
-        //   await episodeRepository.delSaisonById(idS);
-        //   //on réduit de 1 le numero des saison suivante
-        //   await episodeRepository.add1NumeroSaison(episode[0].numero, idA);
-        // }
+        //si caitai le seul episode de la saison suprimme la saison
+        if (allEpisodeSaison.length === 1) {
+          //suprimme la saison
+          await saisonRepository.delById(idS);
+          //on réduit de 1 le numero des saison suivante
+          await saisonRepository.remouve1Numero(
+            allEpisodeSaison[0].saison_numero,
+            idA,
+          );
+        }
       } else {
         //met a jour le numero de l'episode
         await episodeRepository.updateSetNumero(

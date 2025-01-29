@@ -29,8 +29,10 @@ interface CrudEpisodeProps {
 const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
   const { token } = UseTokenContext();
   const [allEpisode, setAllEpisode] = useState<Saison[]>([]);
-  const [saisonSelect, setSaisonSelect] = useState<number>(1);
-  const { id } = useParams();
+  const { id, numS } = useParams();
+  const [saisonSelect, setSaisonSelect] = useState<number>(
+    numS ? Number(numS) : 1,
+  );
 
   const getAllEpisode = async () => {
     const values = {

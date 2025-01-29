@@ -36,7 +36,7 @@ const ElementCurd = ({
     const saugarder = await updateInfoGeneral();
     if (saugarder) {
       navigate(
-        `/admin/description/article/${id}/saison/${saison.saison_id}/episode/${element.episode_id}`,
+        `/admin/description/article/${id}/saison/${saison.saison_numero}/${saison.saison_id}/episode/${element.episode_id}`,
       );
       window.scrollTo(0, 0);
       return;
@@ -46,7 +46,7 @@ const ElementCurd = ({
       "une erreur est survenue l'ore de auto sauvgarde, voulez vous quitter sans sauvgarder ?";
     if (window.confirm(message)) {
       navigate(
-        `/admin/description/article/${id}/saison/${saison.saison_id}/episode/${element.episode_id}`,
+        `/admin/description/article/${id}/saison/${saison.saison_numero}/${saison.saison_id}/episode/${element.episode_id}`,
       );
       window.scrollTo(0, 0);
       return;

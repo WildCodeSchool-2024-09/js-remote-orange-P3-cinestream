@@ -8,12 +8,12 @@ interface BntSaugarderProps {
 
 const BntSaugarder = ({ updateEpisode }: BntSaugarderProps) => {
   const navigate = useNavigate();
-  const { idA } = useParams();
+  const { idA, numS } = useParams();
 
   const handleClick = async () => {
     const saugarder = await updateEpisode();
     if (saugarder) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       return;
     }
     //si ca a pas sauvgarder demander si il veut quitter sans sauvgarder
@@ -22,7 +22,7 @@ const BntSaugarder = ({ updateEpisode }: BntSaugarderProps) => {
         "une erreur est survenue, voulez vous quitter sans sauvgarder ?",
       )
     ) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       return;
     }
   };

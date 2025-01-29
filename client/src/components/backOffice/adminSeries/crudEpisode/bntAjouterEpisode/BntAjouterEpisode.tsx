@@ -43,7 +43,7 @@ const BntAjouterEpisode = ({
         //si les information on été sauvgarder
         if (saugarder) {
           navigate(
-            `/admin/description/article/${data.idArticle}/saison/${data.idSaison}/episode/${data.idEpisode}`,
+            `/admin/description/article/${data.idArticle}/saison/${saisonSelect}/${data.idSaison}/episode/${data.idEpisode}`,
           );
           window.scrollTo(0, 0);
           return;
