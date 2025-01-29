@@ -2,11 +2,20 @@ import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 
 class SaisonRepository {
-  //crée une nouvelle serie
+  //réécupére tout les saison de l'article
   async getByArticleId(idArticle: number) {
     const query = "SELECT * FROM saison WHERE article_id = ?;";
 
     const [rows] = await databaseClient.query(query, [idArticle]);
+
+    return rows as Rows;
+  }
+
+  //réécupére une saison via son id
+  async getById(idS: number) {
+    const query = "SELECT * FROM saison WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [idS]);
 
     return rows as Rows;
   }

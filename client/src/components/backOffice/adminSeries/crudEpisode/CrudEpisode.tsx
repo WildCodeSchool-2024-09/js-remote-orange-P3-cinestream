@@ -50,6 +50,15 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
       );
 
       if (data.sucssces) {
+        //si la saison selectionner n'existe pas dans la bd change la saison selectionner a la derniere
+        if (
+          data.allEpisode[data.allEpisode.length - 1].saison_numero <
+          saisonSelect
+        ) {
+          setSaisonSelect(
+            data.allEpisode[data.allEpisode.length - 1].saison_numero,
+          );
+        }
         setAllEpisode(data.allEpisode);
       }
     } catch (error) {
@@ -75,6 +84,7 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
           allEpisode={allEpisode}
           saisonSelect={saisonSelect}
           setSaisonSelect={setSaisonSelect}
+          getAllEpisode={getAllEpisode}
         />
 
         {/* affiche toute les carte */}
@@ -91,7 +101,10 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
             );
           })}
 
-        <BntAjouterEpisode />
+        <BntAjouterEpisode
+          updateInfoGeneral={updateInfoGeneral}
+          saisonSelect={saisonSelect}
+        />
       </div>
     </div>
   );

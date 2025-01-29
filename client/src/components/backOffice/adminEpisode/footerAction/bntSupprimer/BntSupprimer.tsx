@@ -15,6 +15,7 @@ const BntSupprimer = () => {
       token: token,
       idE: idE,
       idS: idS,
+      idA: idA,
     };
 
     try {
@@ -29,6 +30,10 @@ const BntSupprimer = () => {
       );
 
       if (data.sucssces) {
+        if (data.nbNotCorrect) {
+          alert("une serie doit avoir au moins 2 episode");
+          return false;
+        }
         return true;
       }
       return false;

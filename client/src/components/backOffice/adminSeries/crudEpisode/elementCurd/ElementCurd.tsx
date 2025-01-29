@@ -85,8 +85,16 @@ const ElementCurd = ({
         <p className={`${style.titreEpisode}`}>{element.episode_nom}</p>
       </div>
       <div className={`${style.contenerDroite}`}>
-        <FlecheHaut />
-        <FlecheBas />
+        <FlecheHaut
+          element={element}
+          saison={saison}
+          getAllEpisode={getAllEpisode}
+        />
+        <FlecheBas
+          element={element}
+          saison={saison}
+          getAllEpisode={getAllEpisode}
+        />
         <CroixSup
           element={element}
           saison={saison}
