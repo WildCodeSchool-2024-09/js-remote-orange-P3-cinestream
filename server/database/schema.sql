@@ -160,15 +160,15 @@ VALUES
   ('Variété'), 
   ('Emission');
 
-INSERT INTO plateforme (nom)
+INSERT INTO plateforme (nom, image)
 VALUES 
-  ("netflix"),
-  ("disney+"),
-  ("amazon prime"),
-  ("mycanal"),
-  ("apple tv"),
-  ("hulu"),
-  ("youtube"),
-  ("twitch"),
-  ("site externe"),
-  ("autre");
+  ("netflix", "logo_producteur/logo_Netflix.png"),
+  ("disney+", "logo_producteur/logo_disney+.png"),
+  ("amazon prime", "logo_producteur/logo_primeVideo.png"),
+  ("mycanal", "logo_producteur/logo_myCanal.png"),
+  ("apple tv", "logo_producteur/logo_appelTv.png"),
+  ("hulu", "logo_producteur/logo_hulu.png"),
+  ("youtube", "logo_producteur/logo_youTube.png"),
+  ("twitch", "logo_producteur/logo_twitch.png"),
+  ("site externe", "logo_producteur/logo_siteInernette.png"),
+  ("autre", "logo_producteur/logo_autre.png");

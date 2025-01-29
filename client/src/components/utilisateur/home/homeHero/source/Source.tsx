@@ -2,9 +2,42 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./source.module.css";
 
+interface Platforme {
+  id: number;
+  nom: string;
+  image: string;
+}
+
 const Source = () => {
+  const [listePlatforme, setListePlatforme] = useState([] as Platforme[]);
+
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/platforme/getAll`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        setListePlatforme(data.platforme);
+      } catch (error) {
+        console.error(
+          "eurreur l'ore de la récupération de tout les producteur",
+        );
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -27,6 +60,11 @@ const Source = () => {
     ],
   };
 
+  const handClikePlatforme = () => {};
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikePlatforme);
+
   return (
     <div className={`slider-container ${style.sliderContainerSource}`}>
       <Slider {...settings}>
@@ -35,61 +73,23 @@ const Source = () => {
             <img src="/temporaire/logo_canal+.png" alt="" />
           </div>
         </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
+
+        {listePlatforme.map((platforme) => (
+          <div
+            key={platforme.id}
+            className={`${style.containerElement}`}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+            <div className={`${style.containerImage}`}>
+              <img
+                src={`${import.meta.env.VITE_API_URL}/api/image/${platforme.image}`}
+                alt={`platforme ${platforme.nom}`}
+              />
+            </div>
           </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_disney+.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_Netflix.png" alt="" />
-          </div>
-        </div>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_primeVideo.png" alt="" />
-          </div>
-        </div>
+        ))}
       </Slider>
     </div>
   );
