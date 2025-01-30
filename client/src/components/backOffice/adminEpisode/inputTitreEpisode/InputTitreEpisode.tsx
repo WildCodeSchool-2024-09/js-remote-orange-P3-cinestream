@@ -3,12 +3,19 @@ import style from "./inputTitreEpisode.module.css";
 interface InputTitreEpisodeProps {
   titre: string;
   setTitre: (titre: string) => void;
+  type: string;
 }
 
-const InputTitreEpisode = ({ titre, setTitre }: InputTitreEpisodeProps) => {
+const InputTitreEpisode = ({
+  titre,
+  setTitre,
+  type,
+}: InputTitreEpisodeProps) => {
   return (
     <div className={`${style.contenerInputNomSerie}`}>
-      <p className={`${style.PTitreSerie}`}>Nom de l'épisode</p>
+      <p className={`${style.PTitreSerie}`}>
+        Nom {type === "film" ? "du film" : "de l'épisode"}
+      </p>
       <input
         maxLength={250}
         className={`${style.InputTitreSerie}`}

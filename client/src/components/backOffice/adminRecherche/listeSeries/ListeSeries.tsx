@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
 import FilmComposent from "./filmComposent/FilmComposent";
 import style from "./listeSeries.module.css";
@@ -16,6 +17,8 @@ interface Serie {
 const ListeSeries = ({ recherche }: { recherche: string }) => {
   const [series, setSeries] = useState([]);
   const { token } = UseTokenContext();
+  const [searchParams] = useSearchParams();
+  const paramsUniversIdA = searchParams.get("universIdA");
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -53,7 +56,10 @@ const ListeSeries = ({ recherche }: { recherche: string }) => {
           return serie.nom
             .toLocaleLowerCase()
             .includes(recherche.toLocaleLowerCase()) ? (
-            <FilmComposent key={serie.id} data={serie} />
+            // verrifie que en mdode addUnivers qu'il sauto affcihe pas lui meme
+            serie.id !== Number(paramsUniversIdA) ? (
+              <FilmComposent key={serie.id} data={serie} />
+            ) : null
           ) : null;
         })
       ) : (

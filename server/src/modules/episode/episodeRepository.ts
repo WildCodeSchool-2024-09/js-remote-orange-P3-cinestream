@@ -104,6 +104,21 @@ ORDER BY s.numero, e.numero;
     return rows as Rows;
   }
 
+  //récupère article par id d'un episode
+  async getArticleByIdEpisode(idE: number) {
+    const query = `
+SELECT a.* 
+FROM article a
+JOIN saison s ON s.article_id = a.id
+JOIN episode e ON e.saison_id = s.id
+WHERE e.id = ?;
+      `;
+
+    const [rows] = await databaseClient.query(query, [idE]);
+
+    return rows as Rows;
+  }
+
   //mettre a jour le nom
   async updateNom(idE: number, nom: string) {
     const query = "UPDATE episode SET nom = ? WHERE id = ?;";

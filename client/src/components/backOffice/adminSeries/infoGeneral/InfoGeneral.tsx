@@ -34,6 +34,8 @@ interface InfoGeneralProps {
     platforme: { id: number; nom: string; image: string }[],
   ) => void;
   updateInfoGeneral: () => Promise<boolean>;
+  type: string;
+  setType: (type: string) => void;
 }
 
 const InfoGeneral = ({
@@ -52,6 +54,8 @@ const InfoGeneral = ({
   platforme,
   setPlatforme,
   updateInfoGeneral,
+  type,
+  setType,
 }: InfoGeneralProps) => {
   const [afficheHaurisontalPreview, setAfficheHaurisontalPreview] = useState<
     string | null
@@ -112,6 +116,7 @@ const InfoGeneral = ({
         );
         setCategorie(data.categorieSelect);
         setPlatforme(data.platformeSelect);
+        setType(data.serie.type);
       }
     } catch (error) {
       //si eurreur 404
@@ -145,12 +150,14 @@ const InfoGeneral = ({
   return (
     <>
       <div className={`${style.flexTitreFermer}`}>
-        <p className={`${style.pTitrePage}`}>Modifier la Série</p>
+        <p className={`${style.pTitrePage}`}>
+          Modifier {type === "film" ? "le Film" : "la Série"}
+        </p>
         <BntFermerCommun action={sauvgarde} />
       </div>
       <div className={`${style.contenerSection}`}>
         <p className={`${style.titreSection}`}>Informations Générales</p>
-        <InputTitreSerie titre={titre} setTitre={setTitre} />
+        <InputTitreSerie titre={titre} setTitre={setTitre} type={type} />
         <InputDateSerie date={date} setDate={setDate} />
         <InputCheck
           publier={publier}

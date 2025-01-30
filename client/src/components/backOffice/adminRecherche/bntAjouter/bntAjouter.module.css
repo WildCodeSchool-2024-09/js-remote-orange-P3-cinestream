@@ -21,3 +21,8 @@
   background-color: rgb(29 78 216);
   outline: 2px solid rgb(59, 130, 246);
 }
+
+.espaceBas {
+  width: 100%;
+  height: 1em;
+}
