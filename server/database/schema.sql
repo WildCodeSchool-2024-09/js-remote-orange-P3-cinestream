@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- utilisateur
 CREATE TABLE utilisateur (
   id INT AUTO_INCREMENT PRIMARY KEY,

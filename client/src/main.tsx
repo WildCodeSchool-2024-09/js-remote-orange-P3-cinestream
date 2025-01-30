@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     element: <CompteProfile />,
   },
   {
-    path: "detail",
+    path: "detail/:idA",
     element: <Presentation />,
   },
   {
