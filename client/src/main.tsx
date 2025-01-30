@@ -50,11 +50,11 @@ const router = createBrowserRouter([
     element: <AdminRecherche />,
   },
   {
-    path: "admin/organisation/:id",
+    path: "admin/organisation/:id/:numS?",
     element: <AdminSeries />,
   },
   {
-    path: "admin/description/article/:idA/saison/:idS/episode/:idE",
+    path: "admin/description/article/:idA/saison/:numS/:idS/episode/:idE",
     element: <AdminEpisode />,
   },
   {

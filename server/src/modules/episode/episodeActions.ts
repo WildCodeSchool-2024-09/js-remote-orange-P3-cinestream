@@ -144,7 +144,11 @@ const getById: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    const episode = await episodeRepository.findById(idE);
+    //récupére l'episode
+    const episode = await episodeRepository.getById(idE);
+
+    //récuper larticle de episode
+    const articleEpisode = await episodeRepository.getArticleByIdEpisode(idE);
 
     if (episode.length === 0) {
       res.status(404).send({
@@ -158,6 +162,7 @@ const getById: RequestHandler = async (req, res, next) => {
       message: "info de l'episode bien récupéré",
       sucssces: true,
       episode: episode[0],
+      article: articleEpisode[0],
     });
   } catch (err) {
     next(err);
@@ -252,19 +257,46 @@ const updateImage: RequestHandler = async (req, res, next) => {
 
 const del: RequestHandler = async (req, res, next) => {
   try {
-    const { idE, idS } = req.body;
+    const { idE, idS, idA } = req.body;
+
+    // récupére tout les episode de larticle pour verifier qu'il au moins 2 episode
+    const allEpisode = await episodeRepository.getAllByIdArticle(idA);
+
+    if (allEpisode.length < 2) {
+      //renvoie une réussie mais avec un message d'erreur
+      res.status(200).send({
+        message: "il faut au moins 2 episode",
+        sucssces: true,
+        nbNotCorrect: true,
+      });
+      return;
+    }
 
     //récupére l épisode avant de le suprimmer
-    const episode = await episodeRepository.findById(idE);
+    const episode = await episodeRepository.getById(idE);
 
     //suprimme l'episode de la bd
-    const resutat = await episodeRepository.delAllById(idE);
+    const resutat = await episodeRepository.delById(idE);
 
     //retire 1 au numero des episode suivant
-    const resultat2 = await episodeRepository.add1Numero(
+    const resultat2 = await episodeRepository.remouve1Numero(
       episode[0].numero,
       idS,
     );
+
+    //regadre si la saison contient toujour des episode
+    const allEpisodeSaisonRestant =
+      await episodeRepository.getAllByIdSaison(idS);
+    //si il a plus d'episode dans la saison
+    if (allEpisodeSaisonRestant.length === 0) {
+      //récuper la saison avant de la sup
+      const saison = await saisonRepository.getById(idS);
+      //suprimme la saison
+      await saisonRepository.delById(idS);
+
+      //on réduit de 1 le numero des saison suivante
+      await saisonRepository.remouve1Numero(saison[0].numero, idA);
+    }
 
     //verifi que l'episode a bien été suprimmé dans la bd
     if (resutat.affectedRows === 0) {
@@ -276,10 +308,166 @@ const del: RequestHandler = async (req, res, next) => {
     }
 
     //suprimme les images
-    deleteFilesInFolder("episode", `image_episode-${idE}`);
+    await deleteFilesInFolder("episode", `image_episode-${idE}`);
 
     res.status(201).send({
       message: "Serie trouvé avec succès",
+      sucssces: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const mouve: RequestHandler = async (req, res, next) => {
+  try {
+    const { idA, idS, idE, action } = req.body;
+
+    //récupére l épisode
+    const episode = await episodeRepository.getById(idE);
+
+    //récupére tout les episode de la saison
+    const allEpisodeSaison = await episodeRepository.getAllByIdSaison(idS);
+
+    //verifi action
+    if (action === "up") {
+      //verifi que l'episode n'est pas le premier
+      if (episode[0].numero === 1) {
+        //récupére tout les episode de la saison d'avant
+        const allEpisodeSaisonUp = await episodeRepository.getAllByNumeroSaison(
+          allEpisodeSaison[0].saison_numero - 1,
+          idA,
+        );
+        //verifi que la saison n'est pas la première
+        if (allEpisodeSaisonUp.length === 0) {
+          res.status(202).send({
+            message: "vous pouvez pas monter l'épisode plus haut",
+            sucssces: true,
+          });
+          return;
+        }
+        //met a jour le numero de l'episode et ca saison
+        await episodeRepository.updateSetNumeroAndSaison(
+          idE,
+          allEpisodeSaisonUp[allEpisodeSaisonUp.length - 1].episode_numero + 1,
+          allEpisodeSaisonUp[0].saison_id,
+        );
+        //retirer 1 au numero des episode suivant de son acienne saison
+        //met a jour le numero a 1 et la saison
+        await episodeRepository.remouve1Numero(
+          0,
+          allEpisodeSaison[0].saison_id,
+        );
+        //si caitai le seul episode de la saison suprimme la saison
+        if (allEpisodeSaison.length === 1) {
+          //suprimme la saison
+          await saisonRepository.delById(idS);
+          //on réduit de 1 le numero des saison suivante
+          await saisonRepository.remouve1Numero(
+            allEpisodeSaison[0].saison_numero,
+            idA,
+          );
+        }
+      } else {
+        //met a jour le numero de l'episode
+        await episodeRepository.updateSetNumero(
+          episode[0].id,
+          episode[0].numero - 1,
+        );
+
+        //trouve episode qui va être remplacer
+        const episodeRemplacer = allEpisodeSaison.find(
+          (e) => e.episode_numero === episode[0].numero - 1,
+        );
+        if (!episodeRemplacer) {
+          res.status(400).send({
+            message: "une eureur interne est survenue",
+            sucssces: false,
+          });
+          return;
+        }
+        //met a jour le numero de l'episode que le up va remplacer
+        await episodeRepository.updateSetNumero(
+          episodeRemplacer.episode_id,
+          episode[0].numero,
+        );
+      }
+    } else if (action === "down") {
+      //verifi que l'episode n'est pas le dernier
+      if (
+        episode[0].numero ===
+        allEpisodeSaison[allEpisodeSaison.length - 1].episode_numero
+      ) {
+        //récupére tout les episode de la saison d'aprest
+        const allEpisodeSaisonDown =
+          await episodeRepository.getAllByNumeroSaison(
+            allEpisodeSaison[0].saison_numero + 1,
+            idA,
+          );
+        //verifi que la saison n'est pas la dernière
+        if (allEpisodeSaisonDown.length === 0) {
+          res.status(202).send({
+            message: "vous pouvez pas monter l'épisode plus bas",
+            sucssces: true,
+          });
+          return;
+        }
+        //redessend le numero des episode suivant
+        await episodeRepository.add1Numero(
+          0,
+          allEpisodeSaisonDown[0].saison_id,
+        );
+        //met a jour le numero a 1 et la saison
+        await episodeRepository.updateSetNumeroAndSaison(
+          idE,
+          1,
+          allEpisodeSaisonDown[0].saison_id,
+        );
+        //si caitai le seul episode de la saison suprimme la saison
+        if (allEpisodeSaison.length === 1) {
+          //suprimme la saison
+          await saisonRepository.delById(idS);
+          //on réduit de 1 le numero des saison suivante
+          await saisonRepository.remouve1Numero(
+            allEpisodeSaison[0].saison_numero,
+            idA,
+          );
+        }
+      } else {
+        //met a jour le numero de l'episode
+        await episodeRepository.updateSetNumero(
+          episode[0].id,
+          episode[0].numero + 1,
+        );
+
+        //trouve episode qui va être remplacer
+        const episodeRemplacer = allEpisodeSaison.find(
+          (e) => e.episode_numero === episode[0].numero + 1,
+        );
+        if (!episodeRemplacer) {
+          res.status(400).send({
+            message: "une eureur interne est survenue",
+            sucssces: false,
+          });
+          return;
+        }
+        //met a jour le numero de l'episode que le up va remplacer
+        await episodeRepository.updateSetNumero(
+          episodeRemplacer.episode_id,
+          episode[0].numero,
+        );
+      }
+    } else {
+      //si action non reconnu renvoie une erreur
+      res.status(400).send({
+        message: "action non reconnu",
+        sucssces: false,
+      });
+      return;
+    }
+
+    res.status(201).send({
+      message: "episode déplacé avec succès",
       sucssces: true,
     });
   } catch (err) {
@@ -294,4 +482,5 @@ export default {
   update,
   updateImage,
   del,
+  mouve,
 };

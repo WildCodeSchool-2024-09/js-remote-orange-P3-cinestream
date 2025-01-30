@@ -20,6 +20,7 @@ interface ElementCurdProps {
   };
   updateInfoGeneral: () => Promise<boolean>;
   getAllEpisode: () => void;
+  type: string;
 }
 
 const ElementCurd = ({
@@ -27,6 +28,7 @@ const ElementCurd = ({
   saison,
   updateInfoGeneral,
   getAllEpisode,
+  type,
 }: ElementCurdProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -36,7 +38,7 @@ const ElementCurd = ({
     const saugarder = await updateInfoGeneral();
     if (saugarder) {
       navigate(
-        `/admin/description/article/${id}/saison/${saison.saison_id}/episode/${element.episode_id}`,
+        `/admin/description/article/${id}/saison/${saison.saison_numero}/${saison.saison_id}/episode/${element.episode_id}`,
       );
       window.scrollTo(0, 0);
       return;
@@ -46,7 +48,7 @@ const ElementCurd = ({
       "une erreur est survenue l'ore de auto sauvgarde, voulez vous quitter sans sauvgarder ?";
     if (window.confirm(message)) {
       navigate(
-        `/admin/description/article/${id}/saison/${saison.saison_id}/episode/${element.episode_id}`,
+        `/admin/description/article/${id}/saison/${saison.saison_numero}/${saison.saison_id}/episode/${element.episode_id}`,
       );
       window.scrollTo(0, 0);
       return;
@@ -75,23 +77,39 @@ const ElementCurd = ({
           />
         </div>
         <div className={`${style.contenerInfoEpisode}`}>
-          <p className={`${style.nEpisode}`}>
-            Épisode {element.episode_numero}
-          </p>
-          <p
-            className={`${style.allInfo}`}
-          >{`S${String(saison.saison_numero).padStart(2, "0")}E${String(element.episode_numero).padStart(2, "0")}`}</p>
+          {type !== "film" && (
+            <>
+              <p className={`${style.nEpisode}`}>
+                Épisode {element.episode_numero}
+              </p>
+              <p
+                className={`${style.allInfo}`}
+              >{`S${String(saison.saison_numero).padStart(2, "0")}E${String(element.episode_numero).padStart(2, "0")}`}</p>
+            </>
+          )}
         </div>
         <p className={`${style.titreEpisode}`}>{element.episode_nom}</p>
       </div>
       <div className={`${style.contenerDroite}`}>
-        <FlecheHaut />
-        <FlecheBas />
-        <CroixSup
-          element={element}
-          saison={saison}
-          getAllEpisode={getAllEpisode}
-        />
+        {type !== "film" && (
+          <>
+            <FlecheHaut
+              element={element}
+              saison={saison}
+              getAllEpisode={getAllEpisode}
+            />
+            <FlecheBas
+              element={element}
+              saison={saison}
+              getAllEpisode={getAllEpisode}
+            />
+            <CroixSup
+              element={element}
+              saison={saison}
+              getAllEpisode={getAllEpisode}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -33,8 +33,9 @@ CREATE TABLE article (
   publier TINYINT(1) DEFAULT 0,
   premium TINYINT(1) DEFAULT 0,
   type VARCHAR(10) NOT NULL,
+  univers_numero INT DEFAULT NULL,
   univers_id INT DEFAULT NULL,
-  FOREIGN KEY (univers_id) REFERENCES univers(id)
+  FOREIGN KEY (univers_id) REFERENCES univers(id) ON DELETE SET NULL
 );
 
 -- favorie
@@ -160,15 +161,15 @@ VALUES
   ('Variété'), 
   ('Emission');
 
-INSERT INTO plateforme (nom)
+INSERT INTO plateforme (nom, image)
 VALUES 
-  ("netflix"),
-  ("disney+"),
-  ("amazon prime"),
-  ("mycanal"),
-  ("apple tv"),
-  ("hulu"),
-  ("youtube"),
-  ("twitch"),
-  ("site externe"),
-  ("autre");
+  ("netflix", "logo_producteur/logo_Netflix.png"),
+  ("disney+", "logo_producteur/logo_disney+.png"),
+  ("amazon prime", "logo_producteur/logo_primeVideo.png"),
+  ("mycanal", "logo_producteur/logo_myCanal.png"),
+  ("apple tv", "logo_producteur/logo_appelTv.png"),
+  ("hulu", "logo_producteur/logo_hulu.png"),
+  ("youtube", "logo_producteur/logo_youTube.png"),
+  ("twitch", "logo_producteur/logo_twitch.png"),
+  ("site externe", "logo_producteur/logo_siteInernette.png"),
+  ("autre", "logo_producteur/logo_autre.png");

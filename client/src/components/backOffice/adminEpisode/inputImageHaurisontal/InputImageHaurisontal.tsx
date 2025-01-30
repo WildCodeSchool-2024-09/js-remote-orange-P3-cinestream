@@ -4,12 +4,14 @@ interface InputImageHaurisontalProps {
   setImage: (image: File | null) => void;
   imagePreview: string | null;
   setImagePreview: (imagePreview: string | null) => void;
+  type: string;
 }
 
 const InputImageHaurisontal = ({
   setImage,
   imagePreview,
   setImagePreview,
+  type,
 }: InputImageHaurisontalProps) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -34,7 +36,10 @@ const InputImageHaurisontal = ({
 
   return (
     <div className={`${style.contenerTitreAndImage}`}>
-      <p className={`${style.pTitreInputImage}`}> Miniature de l'episode </p>
+      <p className={`${style.pTitreInputImage}`}>
+        {" "}
+        Miniature {type === "film" ? "du film" : "de l'episode"}{" "}
+      </p>
       <div
         className={`${style.contenerInput}`}
         onDrop={handleDrop}

@@ -24,13 +24,16 @@ interface Saison {
 
 interface CrudEpisodeProps {
   updateInfoGeneral: () => Promise<boolean>;
+  type: string;
 }
 
-const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
+const CrudEpisode = ({ updateInfoGeneral, type }: CrudEpisodeProps) => {
   const { token } = UseTokenContext();
   const [allEpisode, setAllEpisode] = useState<Saison[]>([]);
-  const [saisonSelect, setSaisonSelect] = useState<number>(1);
-  const { id } = useParams();
+  const { id, numS } = useParams();
+  const [saisonSelect, setSaisonSelect] = useState<number>(
+    numS ? Number(numS) : 1,
+  );
 
   const getAllEpisode = async () => {
     const values = {
@@ -50,6 +53,15 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
       );
 
       if (data.sucssces) {
+        //si la saison selectionner n'existe pas dans la bd change la saison selectionner a la derniere
+        if (
+          data.allEpisode[data.allEpisode.length - 1].saison_numero <
+          saisonSelect
+        ) {
+          setSaisonSelect(
+            data.allEpisode[data.allEpisode.length - 1].saison_numero,
+          );
+        }
         setAllEpisode(data.allEpisode);
       }
     } catch (error) {
@@ -69,13 +81,18 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
 
   return (
     <div className={`${style.contenerSection}`} id="crudEpisode">
-      <p className={`${style.titreSection}`}>Épisodes</p>
+      <p className={`${style.titreSection}`}>
+        {type === "film" ? "Film" : "Épisodes"}
+      </p>
       <div className={`${style.flexAllElement}`}>
-        <InputSaison
-          allEpisode={allEpisode}
-          saisonSelect={saisonSelect}
-          setSaisonSelect={setSaisonSelect}
-        />
+        {type !== "film" && (
+          <InputSaison
+            allEpisode={allEpisode}
+            saisonSelect={saisonSelect}
+            setSaisonSelect={setSaisonSelect}
+            getAllEpisode={getAllEpisode}
+          />
+        )}
 
         {/* affiche toute les carte */}
         {allEpisode.length > 0 &&
@@ -87,11 +104,17 @@ const CrudEpisode = ({ updateInfoGeneral }: CrudEpisodeProps) => {
                 saison={allEpisode[findIndexSaison()]}
                 updateInfoGeneral={updateInfoGeneral}
                 getAllEpisode={getAllEpisode}
+                type={type}
               />
             );
           })}
 
-        <BntAjouterEpisode />
+        {type !== "film" && (
+          <BntAjouterEpisode
+            updateInfoGeneral={updateInfoGeneral}
+            saisonSelect={saisonSelect}
+          />
+        )}
       </div>
     </div>
   );

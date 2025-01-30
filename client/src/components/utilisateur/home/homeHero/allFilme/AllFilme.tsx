@@ -2,9 +2,49 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import articleAleatoir from "../../../../../hook/articleRandom";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./allFilme.module.css";
 
+interface Article {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: boolean;
+  premium: boolean;
+  type: string;
+  univers_id: number | null;
+}
+
 const AllFilme = () => {
+  const [listeFilms, setListeFilms] = useState<Article[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/films`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        setListeFilms(articleAleatoir(data.article, 7));
+      } catch (error) {
+        console.error("eurreur l'ore de la récupération des filme récent");
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -18,320 +58,47 @@ const AllFilme = () => {
     arrows: true, // Active les flèches
   };
 
+  const handClikeFilms = (id: string | null) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikeFilms);
+
   return (
     <>
       <p className={`${style.titreSectionFilme}`}>Films</p>
       <div className={`slider-container ${style.sliderContainerFilme}`}>
         <div>
           <Slider {...settings}>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/spederMan.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>
-                    spider-man 3 retour de l'arenier
-                  </p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Libero saepe possimus quo labore delectus? Ad accusamus
-                    reprehenderit velit non quidem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/indinaJonnes.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Indinia Jonnes</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consectetur adipisci libero officiis pariatur harum
-                    perspiciatis repellat velit quas laborum explicabo.
-                  </p>
+            {listeFilms.map((film) => (
+              <div
+                key={film.id}
+                data-id={film.id}
+                className={`${style.elementCourselle}`}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+              >
+                <div className={`${style.containerElement}`}>
+                  <div className={`${style.containerImage}`}>
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`}
+                      alt={film.nom}
+                    />
+                  </div>
+                  <div className={`${style.containerInfo}`}>
+                    <p className={`${style.titreFilme}`}>{film.nom}</p>
+                    <p className={`${style.desciptionFilme}`}>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Libero saepe possimus quo labore delectus? Ad accusamus
+                      reprehenderit velit non quidem.
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/predator.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Predator</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Praesentium nostrum perferendis voluptatem ipsa numquam
-                    aperiam quos, dolorem, accusamus voluptas, porro nihil.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/ironMan.avif" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Iron Man 2</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Accusantium voluptatibus esse neque veniam illum repudiandae
-                    doloribus eligendi quos distinctio?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/jhonyEnglish.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Johnny English</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatibus enim consequuntur a, distinctio sapiente esse
-                    similique culpa rem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/spederMan.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>
-                    spider-man 3 retour de l'arenier
-                  </p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Libero saepe possimus quo labore delectus? Ad accusamus
-                    reprehenderit velit non quidem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/indinaJonnes.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Indinia Jonnes</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consectetur adipisci libero officiis pariatur harum
-                    perspiciatis repellat velit quas laborum explicabo.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/predator.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Predator</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Praesentium nostrum perferendis voluptatem ipsa numquam
-                    aperiam quos, dolorem, accusamus voluptas, porro nihil.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/ironMan.avif" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Iron Man 2</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Accusantium voluptatibus esse neque veniam illum repudiandae
-                    doloribus eligendi quos distinctio?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/jhonyEnglish.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Johnny English</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatibus enim consequuntur a, distinctio sapiente esse
-                    similique culpa rem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/spederMan.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>
-                    spider-man 3 retour de l'arenier
-                  </p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Libero saepe possimus quo labore delectus? Ad accusamus
-                    reprehenderit velit non quidem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/indinaJonnes.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Indinia Jonnes</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consectetur adipisci libero officiis pariatur harum
-                    perspiciatis repellat velit quas laborum explicabo.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/predator.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Predator</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Praesentium nostrum perferendis voluptatem ipsa numquam
-                    aperiam quos, dolorem, accusamus voluptas, porro nihil.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/ironMan.avif" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Iron Man 2</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Accusantium voluptatibus esse neque veniam illum repudiandae
-                    doloribus eligendi quos distinctio?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/jhonyEnglish.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Johnny English</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatibus enim consequuntur a, distinctio sapiente esse
-                    similique culpa rem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/spederMan.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>
-                    spider-man 3 retour de l'arenier
-                  </p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Libero saepe possimus quo labore delectus? Ad accusamus
-                    reprehenderit velit non quidem.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/indinaJonnes.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Indinia Jonnes</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consectetur adipisci libero officiis pariatur harum
-                    perspiciatis repellat velit quas laborum explicabo.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/predator.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Predator</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Praesentium nostrum perferendis voluptatem ipsa numquam
-                    aperiam quos, dolorem, accusamus voluptas, porro nihil.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/ironMan.avif" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Iron Man 2</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Accusantium voluptatibus esse neque veniam illum repudiandae
-                    doloribus eligendi quos distinctio?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/film/jhonyEnglish.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Johnny English</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatibus enim consequuntur a, distinctio sapiente esse
-                    similique culpa rem.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </Slider>
         </div>
       </div>

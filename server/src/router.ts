@@ -1,7 +1,8 @@
 import express from "express";
-import multer from "multer";
 import articleActions from "./modules/article/articleActions";
+import carousselActions from "./modules/caroussel/carousselActions";
 import categorieActions from "./modules/categorie/categorieActions";
+import crudUniversAction from "./modules/crudUnivers/crudUniversAction";
 import episodeActions from "./modules/episode/episodeActions";
 import autentification from "./modules/middlewares/autentification";
 import verifSaisi from "./modules/middlewares/verifSaisi";
@@ -132,6 +133,39 @@ router.get("/api/categorie/getAll", categorieActions.getAll);
 //routes pour récupérer tout les platforme quie exite
 router.get("/api/platforme/getAll", platformeActions.getAll);
 
+//---CRUD univers---
+//récupère les univers d'une serie
+router.post(
+  "/api/backoffice/article/crudUnivers/get",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.getAll,
+);
+
+//add un article a un univers
+router.post(
+  "/api/backoffice/article/crudUnivers/add",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.add,
+);
+
+//monte ou dessend un article
+router.post(
+  "/api/backoffice/article/crudUnivers/update",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.update,
+);
+
+//suprime un article d'un univers
+router.post(
+  "/api/backoffice/article/crudUnivers/del",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.del,
+);
+
 //-----------Episode----------------
 //crée un episode
 router.post(
@@ -139,6 +173,14 @@ router.post(
   autentification.tokenIsCorrect,
   autentification.utilisateurIsAdmin,
   episodeActions.cree,
+);
+
+//route pour déplacer un episode
+router.post(
+  "/api/backoffice/episode/mouve",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  episodeActions.mouve,
 );
 
 //récupère tout les episode d'une serie
@@ -182,6 +224,7 @@ router.post(
 );
 
 //-----------------utilisateur------------------------------
+//-------page details-------
 //route pour récupéré les étoiles d'un utilisateur
 router.post(
   "/api/utilisateur/details/getNotesUtilisateur",
@@ -189,5 +232,14 @@ router.post(
   notesActions.get,
 );
 
+//-------homePage------
+//filme récent
+router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
+
+//que les filme
+router.get("/api/utilisateur/caroussel/films", carousselActions.getFilms);
+
+//que les series
+router.get("/api/utilisateur/caroussel/series", carousselActions.getSeries);
 
 export default router;

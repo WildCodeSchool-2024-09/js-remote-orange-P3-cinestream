@@ -12,7 +12,7 @@ import style from "./adminEpisode.module.css";
 
 const AdminEpisode = () => {
   const navigate = useNavigate();
-  const { idA, idE } = useParams();
+  const { idA, idE, numS } = useParams();
   const { token } = UseTokenContext();
 
   const [titre, setTitre] = useState("");
@@ -21,6 +21,7 @@ const AdminEpisode = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [video, setVideo] = useState<string>("");
   const [numeroEpisode, setNumeroEpisode] = useState<number>(0);
+  const [type, setType] = useState("serie");
 
   //function met a jour tout les informations de l'episde
   const updateEpisode = async () => {
@@ -112,6 +113,7 @@ const AdminEpisode = () => {
               : null,
           );
           setNumeroEpisode(data.episode.numero);
+          setType(data.article.type);
         }
       } catch (error) {
         //si eurreur 404
@@ -127,7 +129,7 @@ const AdminEpisode = () => {
   const handleFermer = async () => {
     const saugarder = await updateEpisode();
     if (saugarder) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       window.scrollTo(0, 0);
       return;
     }
@@ -135,7 +137,7 @@ const AdminEpisode = () => {
     const messageEuereur =
       "une erreur est survenue pendant l'auto sauvgarde, voulez vous quitter sans sauvgarder ?";
     if (window.confirm(messageEuereur)) {
-      navigate(`/admin/organisation/${idA}#crudEpisode`);
+      navigate(`/admin/organisation/${idA}/${numS}#crudEpisode`);
       window.scrollTo(0, 0);
       return;
     }
@@ -146,7 +148,8 @@ const AdminEpisode = () => {
       <div className={`${style.bodyPage}`}>
         <div className={`${style.flexTitreFermer}`}>
           <p className={`${style.pTitrePage}`}>
-            Modifier l'Épisode {numeroEpisode}
+            Modifier{" "}
+            {type === "film" ? "le Film" : `l'Épisode ${numeroEpisode}`}
           </p>
           <BntFermerCommun
             action={() => {
@@ -160,11 +163,13 @@ const AdminEpisode = () => {
             setImage={setImage}
             imagePreview={imagePreview}
             setImagePreview={setImagePreview}
+            type={type}
           />
-          <InputTitreEpisode titre={titre} setTitre={setTitre} />
+          <InputTitreEpisode titre={titre} setTitre={setTitre} type={type} />
           <InputDescriptionEpisode
             description={description}
             setDescription={setDescription}
+            type={type}
           />
           <InputLienVideo video={video} setVideo={setVideo} />
         </div>

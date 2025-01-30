@@ -1,21 +1,28 @@
+import { useSearchParams } from "react-router-dom";
 import style from "./bntAjouter.module.css";
-
-import type React from "react";
 
 interface BntAjouterProps {
   setIsModal: (value: boolean) => void;
 }
 
-const BntAjouter: React.FC<BntAjouterProps> = ({ setIsModal }) => {
+const BntAjouter = ({ setIsModal }: BntAjouterProps) => {
+  const [searchParams] = useSearchParams();
+  const paramsMode = searchParams.get("mode");
+
+  // paramsMode !== "addUnivers" &&
   return (
     <>
-      <button
-        className={`${style.bntAjouter}`}
-        onClick={() => setIsModal(true)}
-        type="button"
-      >
-        Ajouter une série
-      </button>
+      {paramsMode !== "addUnivers" ? (
+        <button
+          className={`${style.bntAjouter}`}
+          onClick={() => setIsModal(true)}
+          type="button"
+        >
+          Ajouter une série
+        </button>
+      ) : (
+        <div className={`${style.espaceBas}`} />
+      )}
     </>
   );
 };
