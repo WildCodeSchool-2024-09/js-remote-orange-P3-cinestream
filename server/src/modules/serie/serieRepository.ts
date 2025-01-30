@@ -25,6 +25,24 @@ class SerieRepository {
     return rows as Rows;
   }
 
+  //récupèré toute les series publier
+  async getAllSeriePublier() {
+    const query = `
+SELECT 
+a.*, 
+e.description AS description
+FROM article a
+LEFT JOIN saison s ON a.id = s.article_id AND s.numero = 1
+LEFT JOIN episode e ON s.id = e.saison_id AND e.numero = 1
+WHERE a.publier = 1
+ORDER BY (a.nom = 'sans nom') ASC, a.nom ASC;
+    `;
+
+    const [rows] = await databaseClient.query(query, []);
+
+    return rows as Rows;
+  }
+
   //crée une nouvelle serie
   async delAllById(id: number) {
     const query = "DELETE FROM article WHERE id = ?;";

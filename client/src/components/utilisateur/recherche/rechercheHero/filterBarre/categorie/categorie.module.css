@@ -1,43 +1,16 @@
-.categorie {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
-  position: relative;
-  height: 25px;
-}
-
-.categorie .icon {
-  margin-left: 10px;
-  color: #fff;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #000;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  z-index: 1;
-}
-
-.categorie:hover .dropdown {
-  display: block;
-}
-
-.dropdown-item {
-  padding: 10px;
-  color: #fff;
+.categorieInput {
+  font-size: 1.5em;
+  color: white;
+  border: 3px #28262d solid;
+  background-color: transparent;
+  padding: 0.2em .5em;
+  border-radius: 7px;
+  max-width: 8em;
   cursor: pointer;
 }
 
-.dropdown-item:hover {
-  background-color: #333;
+.categorieInput option {
+  color: white;
+  background-color: black;
+  border: 3px #28262d solid;
 }

@@ -1,42 +1,30 @@
-.filterDate {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
+.contenerInputDate {
   position: relative;
-  height: 25px;
+  max-width: 14em;
 }
 
-.filterDate .icon {
-  margin-left: 10px;
-  color: #fff;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #000;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  z-index: 1;
-}
-
-.filterDate:hover .dropdown {
-  display: block;
-}
-
-.dropdown-item {
-  padding: 10px;
-  color: #fff;
+.filterDate {
+  position: relative;
+  font-size: 1.5em;
+  color: white;
+  border: 3px #28262d solid;
+  background-color: transparent;
+  padding: 0.2em .5em;
+  box-sizing: border-box;
+  border-radius: 7px;
   cursor: pointer;
+  width: 100%;
+  z-index: 20;
 }
 
-.dropdown-item:hover {
-  background-color: #333;
+.fondCalendillier {
+  position: absolute;
+  top: 50%;
+  right: .75em;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 2.1em;
+  height: 2.1em;
+  background-color: #757575;
+  z-index: 1;
 }

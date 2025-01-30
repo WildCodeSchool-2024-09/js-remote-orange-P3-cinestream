@@ -55,6 +55,20 @@ const getAll: RequestHandler = async (req, res, next) => {
   }
 };
 
+const getAllPublier: RequestHandler = async (req, res, next) => {
+  try {
+    const resutat = await serieRepository.getAllSeriePublier();
+
+    res.status(201).send({
+      message: "Serie trouvé avec succès",
+      sucssces: true,
+      allArticle: resutat,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const del: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.body;
@@ -98,4 +112,5 @@ export default {
   cree,
   getAll,
   del,
+  getAllPublier,
 };

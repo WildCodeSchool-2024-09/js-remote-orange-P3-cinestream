@@ -19,6 +19,7 @@
   box-sizing: border-box;
   text-align: center;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .filmCard img {
