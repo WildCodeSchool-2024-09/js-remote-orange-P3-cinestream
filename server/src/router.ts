@@ -1,8 +1,8 @@
 import express from "express";
-import multer from "multer";
 import articleActions from "./modules/article/articleActions";
 import carousselActions from "./modules/caroussel/carousselActions";
 import categorieActions from "./modules/categorie/categorieActions";
+import crudUniversAction from "./modules/crudUnivers/crudUniversAction";
 import episodeActions from "./modules/episode/episodeActions";
 import autentification from "./modules/middlewares/autentification";
 import verifSaisi from "./modules/middlewares/verifSaisi";
@@ -131,6 +131,39 @@ router.get("/api/categorie/getAll", categorieActions.getAll);
 
 //routes pour récupérer tout les platforme quie exite
 router.get("/api/platforme/getAll", platformeActions.getAll);
+
+//---CRUD univers---
+//récupère les univers d'une serie
+router.post(
+  "/api/backoffice/article/crudUnivers/get",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.getAll,
+);
+
+//add un article a un univers
+router.post(
+  "/api/backoffice/article/crudUnivers/add",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.add,
+);
+
+//monte ou dessend un article
+router.post(
+  "/api/backoffice/article/crudUnivers/update",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.update,
+);
+
+//suprime un article d'un univers
+router.post(
+  "/api/backoffice/article/crudUnivers/del",
+  autentification.tokenIsCorrect,
+  autentification.utilisateurIsAdmin,
+  crudUniversAction.del,
+);
 
 //-----------Episode----------------
 //crée un episode

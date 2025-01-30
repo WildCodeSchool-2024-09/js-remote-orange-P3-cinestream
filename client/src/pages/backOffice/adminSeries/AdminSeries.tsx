@@ -22,6 +22,7 @@ const AdminSeries = () => {
   const [platforme, setPlatforme] = useState<
     { id: number; nom: string; image: string }[]
   >([]);
+  const [type, setType] = useState("serie");
 
   const { token } = UseTokenContext();
   const { id } = useParams();
@@ -121,9 +122,11 @@ const AdminSeries = () => {
           platforme={platforme}
           setPlatforme={setPlatforme}
           updateInfoGeneral={updateInfoGeneral}
+          type={type}
+          setType={setType}
         />
-        <CrudEpisode updateInfoGeneral={updateInfoGeneral} />
-        <CrudUnivers />
+        <CrudEpisode updateInfoGeneral={updateInfoGeneral} type={type} />
+        <CrudUnivers updateInfoGeneral={updateInfoGeneral} />
       </div>
     </>
   );

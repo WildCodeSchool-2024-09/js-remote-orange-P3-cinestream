@@ -147,6 +147,9 @@ const getById: RequestHandler = async (req, res, next) => {
     //récupére l'episode
     const episode = await episodeRepository.getById(idE);
 
+    //récuper larticle de episode
+    const articleEpisode = await episodeRepository.getArticleByIdEpisode(idE);
+
     if (episode.length === 0) {
       res.status(404).send({
         message: "episode non trouvé",
@@ -159,6 +162,7 @@ const getById: RequestHandler = async (req, res, next) => {
       message: "info de l'episode bien récupéré",
       sucssces: true,
       episode: episode[0],
+      article: articleEpisode[0],
     });
   } catch (err) {
     next(err);

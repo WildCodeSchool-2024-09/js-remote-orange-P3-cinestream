@@ -33,8 +33,9 @@ CREATE TABLE article (
   publier TINYINT(1) DEFAULT 0,
   premium TINYINT(1) DEFAULT 0,
   type VARCHAR(10) NOT NULL,
+  univers_numero INT DEFAULT NULL,
   univers_id INT DEFAULT NULL,
-  FOREIGN KEY (univers_id) REFERENCES univers(id)
+  FOREIGN KEY (univers_id) REFERENCES univers(id) ON DELETE SET NULL
 );
 
 -- favorie
