@@ -29,6 +29,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 30px;
+  cursor: pointer;
 }
 
 /* image */

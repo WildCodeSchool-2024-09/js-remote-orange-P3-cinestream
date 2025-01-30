@@ -2,9 +2,48 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./recent.module.css";
 
+interface Article {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: boolean;
+  premium: boolean;
+  type: string;
+  univers_id: number | null;
+}
+
 const Recent = () => {
+  const [listeRecent, setListeRecent] = useState<Article[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/recent`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        setListeRecent(data.article);
+      } catch (error) {
+        console.error("eurreur l'ore de la récupération des filme récent");
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -27,131 +66,42 @@ const Recent = () => {
     ],
   };
 
+  const handClikeRecent = (id: string | null) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikeRecent);
+
   return (
     <>
       <p className={`${style.titreRecent}`}>Sorties récentes</p>
       <div className={`slider-container ${style.sliderContainerCategorie}`}>
         <Slider {...settings}>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheTerminator.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>terminator genisys</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.8 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSuideGame.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>squid game</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.7 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSonic.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>sonic</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.5 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheStarWars.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>star wars</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.0 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheTerminator.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>terminator genisys</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.8 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSuideGame.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>squid game</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.7 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSonic.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>sonic</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.5 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheStarWars.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>star wars</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.0 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheTerminator.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>terminator genisys</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.8 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSuideGame.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>squid game</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.7 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSonic.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>sonic</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.5 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheStarWars.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>star wars</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.0 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
+          {listeRecent.length > 0 &&
+            listeRecent.map((element) => (
+              <div
+                key={element.id}
+                data-id={element.id}
+                className={`${style.containerElement}`}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+              >
+                <div className={`${style.containerImage}`}>
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                    alt=""
+                  />
+                  <p className={`${style.pTitreFilme}`}>{element.nom}</p>
+                  <p className={`${style.pNotesType}`}>
+                    ⭐4.8 <span>| Action ∘ Movie</span>
+                  </p>
+                  <div className={`${style.shadowBottum}`} />
+                </div>
+              </div>
+            ))}
         </Slider>
       </div>
     </>

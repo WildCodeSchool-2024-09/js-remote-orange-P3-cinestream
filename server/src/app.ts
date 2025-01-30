@@ -39,6 +39,7 @@ originResquet.setTokenServeur();
 
 //route pour image public dynamique
 app.use("/uploads", express.static(path.join(__dirname, "../public/uploads")));
+app.use("/api/image", express.static(path.join(__dirname, "../public/images")));
 
 // Mount the API router under the "/api" endpoint
 app.use(router);

@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import articleActions from "./modules/article/articleActions";
+import carousselActions from "./modules/caroussel/carousselActions";
 import categorieActions from "./modules/categorie/categorieActions";
 import episodeActions from "./modules/episode/episodeActions";
 import autentification from "./modules/middlewares/autentification";
@@ -187,5 +188,16 @@ router.post(
   autentification.utilisateurIsAdmin,
   episodeActions.del,
 );
+
+//-----------------utilisateur----------------
+//----homePage----
+//filme récent
+router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
+
+//que les filme
+router.get("/api/utilisateur/caroussel/films", carousselActions.getFilms);
+
+//que les series
+router.get("/api/utilisateur/caroussel/series", carousselActions.getSeries);
 
 export default router;

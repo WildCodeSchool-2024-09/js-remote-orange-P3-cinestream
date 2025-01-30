@@ -2,9 +2,49 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import articleAleatoir from "../../../../../hook/articleRandom";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./allSerie.module.css";
 
+interface Article {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: boolean;
+  premium: boolean;
+  type: string;
+  univers_id: number | null;
+}
+
 const AllSerie = () => {
+  const [listeSeries, setListeSeries] = useState<Article[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/series`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        setListeSeries(articleAleatoir(data.article, 50));
+      } catch (error) {
+        console.error("eurreur l'ore de la récupération des filme récent");
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -18,356 +58,48 @@ const AllSerie = () => {
     arrows: true, // Active les flèches
   };
 
+  const handClikeSeries = (id: string | null) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikeSeries);
+
   return (
     <>
       <p className={`${style.titreSectionSerise}`}>Series</p>
       <div className={`slider-container ${style.sliderContainerSerie}`}>
         <div>
           <Slider {...settings}>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/goodDocteur.jpg" alt="" />
+            {listeSeries.length > 0 &&
+              listeSeries.map((serie) => (
+                <div
+                  key={serie.id}
+                  data-id={serie.id}
+                  className={`${style.elementCourselle}`}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
+                  <div className={`${style.containerElement}`}>
+                    <div className={`${style.containerImage}`}>
+                      <img
+                        src={`${import.meta.env.VITE_API_URL}/uploads/${serie.image_rectangle}`}
+                        alt={serie.nom}
+                      />
+                    </div>
+                    <div className={`${style.containerInfo}`}>
+                      <p className={`${style.titreFilme}`}>{serie.nom}</p>
+                      <p className={`${style.desciptionFilme}`}>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Voluptatum beatae impedit possimus natus tenetur
+                        dolor repellendus provident obcaecati cum corporis.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Good Doctor</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatum beatae impedit possimus natus tenetur dolor
-                    repellendus provident obcaecati cum corporis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/mercdi.png" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Mercredi</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, odio.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/the100.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>the 100</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur veniam corporis molestiae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/flash.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Flash</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-                    et hic in, dolor pariatur quas fugit dignissimos tempora
-                    itaque aperiam.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/suideGame.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>SquidGame</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rerum?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/jujukaiSen.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Jujutsu Kaisen</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Minus voluptate optio nisi vero ipsa vitae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/goodDocteur.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Good Doctor</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatum beatae impedit possimus natus tenetur dolor
-                    repellendus provident obcaecati cum corporis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/mercdi.png" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Mercredi</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, odio.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/the100.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>the 100</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur veniam corporis molestiae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/flash.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Flash</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-                    et hic in, dolor pariatur quas fugit dignissimos tempora
-                    itaque aperiam.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/suideGame.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>SquidGame</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rerum?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/jujukaiSen.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Jujutsu Kaisen</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Minus voluptate optio nisi vero ipsa vitae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/goodDocteur.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Good Doctor</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatum beatae impedit possimus natus tenetur dolor
-                    repellendus provident obcaecati cum corporis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/mercdi.png" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Mercredi</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, odio.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/the100.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>the 100</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur veniam corporis molestiae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/flash.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Flash</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-                    et hic in, dolor pariatur quas fugit dignissimos tempora
-                    itaque aperiam.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/suideGame.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>SquidGame</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rerum?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/jujukaiSen.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Jujutsu Kaisen</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Minus voluptate optio nisi vero ipsa vitae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/goodDocteur.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Good Doctor</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatum beatae impedit possimus natus tenetur dolor
-                    repellendus provident obcaecati cum corporis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/mercdi.png" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Mercredi</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nostrum, odio.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/the100.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>the 100</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur veniam corporis molestiae.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/flash.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Flash</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-                    et hic in, dolor pariatur quas fugit dignissimos tempora
-                    itaque aperiam.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/suideGame.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>SquidGame</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Rerum?
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerElement}`}>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/serie/jujukaiSen.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.titreFilme}`}>Jujutsu Kaisen</p>
-                  <p className={`${style.desciptionFilme}`}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Minus voluptate optio nisi vero ipsa vitae.
-                  </p>
-                </div>
-              </div>
-            </div>
+              ))}
           </Slider>
         </div>
       </div>
