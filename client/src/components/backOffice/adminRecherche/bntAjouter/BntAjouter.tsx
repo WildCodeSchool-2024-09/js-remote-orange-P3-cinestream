@@ -1,4 +1,3 @@
-import type React from "react";
 import { useSearchParams } from "react-router-dom";
 import style from "./bntAjouter.module.css";
 
@@ -6,7 +5,7 @@ interface BntAjouterProps {
   setIsModal: (value: boolean) => void;
 }
 
-const BntAjouter: React.FC<BntAjouterProps> = ({ setIsModal }) => {
+const BntAjouter = ({ setIsModal }: BntAjouterProps) => {
   const [searchParams] = useSearchParams();
   const paramsMode = searchParams.get("mode");
 
