@@ -1,10 +1,33 @@
-import { FaChevronDown } from "react-icons/fa";
+import { useState } from "react";
 import styles from "./filterdate.module.css";
-const FilterDate = () => {
+
+interface FilterDateProps {
+  setDate: (date: string) => void;
+}
+
+const FilterDate = ({ setDate }: FilterDateProps) => {
+  const [dateRender, setDateRender] = useState("");
+
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value;
+
+    if (newDate && !Number.isNaN(new Date(newDate).getTime())) {
+      setDate(newDate);
+    } else {
+      setDate("");
+    }
+  };
+
   return (
-    <div className={styles.filterDate}>
-      <span>Date</span>
-      <FaChevronDown className={styles.icon} />
+    <div className={styles.contenerInputDate}>
+      <input
+        type="date"
+        className={styles.filterDate}
+        value={dateRender}
+        onChange={(e) => setDateRender(e.target.value)}
+        onBlur={handleBlur}
+      />
+      <div className={`${styles.fondCalendillier}`} />
     </div>
   );
 };

@@ -242,4 +242,11 @@ router.get("/api/utilisateur/caroussel/films", carousselActions.getFilms);
 //que les series
 router.get("/api/utilisateur/caroussel/series", carousselActions.getSeries);
 
+//----recherche----
+//récupère tout les series/films
+router.get(
+  "/api/utilisateur/recherche/filmSerie/getAll",
+  serieActions.getAllPublier,
+);
+
 export default router;
