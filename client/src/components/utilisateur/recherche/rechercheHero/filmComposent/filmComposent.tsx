@@ -62,8 +62,15 @@ const FilmComposent = ({
       return false;
     }
     if (recherche !== "") {
+      //si le nom du film ne contient pas la recherche
       if (!film.nom.toLowerCase().includes(recherche.toLowerCase())) {
-        return false;
+        //si la description du film est null ou que la description ne contient pas la recherche
+        if (
+          film.description === null ||
+          !film.description.toLowerCase().includes(recherche.toLowerCase())
+        ) {
+          return false;
+        }
       }
     }
     if (categorie !== "all") {
