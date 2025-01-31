@@ -10,6 +10,7 @@ import originResquet from "./modules/originResquet/originResquet";
 import platformeActions from "./modules/platforme/platformeActions";
 import serieActions from "./modules/serie/serieActions";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
+import notesActions from "./modules/notes/notesActions";
 
 const router = express.Router();
 
@@ -222,8 +223,16 @@ router.post(
   episodeActions.del,
 );
 
-//-----------------utilisateur----------------
-//----homePage----
+//-----------------utilisateur------------------------------
+//-------page details-------
+//route pour récupéré les étoiles d'un utilisateur
+router.post(
+  "/api/utilisateur/details/getNotesUtilisateur",
+  autentification.tokenIsCorrect,
+  notesActions.get,
+);
+
+//-------homePage------
 //filme récent
 router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
 

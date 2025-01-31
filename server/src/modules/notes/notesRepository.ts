@@ -12,10 +12,10 @@ class NotesRepository {
   }
 
   //récupère la notes d'un utilisateur sur un article
-  async getById() {
-    const query = "";
+  async getById(userId:number, idA:number) {
+    const query = "SELECT * FROM notes WHERE article_id = ? AND utilisateur_id = ?;";
 
-    const [rows] = await databaseClient.query(query, []);
+    const [rows] = await databaseClient.query(query, [idA, userId]);
 
     return rows as Rows;
   }

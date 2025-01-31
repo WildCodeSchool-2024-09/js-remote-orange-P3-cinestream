@@ -15,6 +15,8 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^6.26.2",
     "react-slick": "^0.30.3",
+    "react-star-rating-input": "^8.0.1",
+    "react-star-ratings": "^2.3.0",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
