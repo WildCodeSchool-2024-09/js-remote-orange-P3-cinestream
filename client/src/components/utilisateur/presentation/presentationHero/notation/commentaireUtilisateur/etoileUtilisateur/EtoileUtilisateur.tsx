@@ -104,7 +104,6 @@ const EtoileUtilisateur = ({ note, setNote }: EtoileUtilisateurProps) => {
       onMouseLeave={() => setNoteHover(0)}
       onFocus={() => setNoteHover(note)}
       onBlur={() => setNoteHover(0)}
-      tabIndex={0}
     >
       <ReactStars
         className={styles.contenerEtoile}
