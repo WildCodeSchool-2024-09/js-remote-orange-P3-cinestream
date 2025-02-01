@@ -1,31 +1,30 @@
+import type { Episodes } from "../../../../../types/vite-env";
 import style from "./descriptionPresentation.module.css";
 
 interface DescriptionPresentationProps {
-  type: string;
-  title: string;
-  season: string;
-  description: string;
+  article_type: string;
+  episode: Episodes;
+  numSaison: number;
 }
 
-const DescriptionPresentation: React.FC<DescriptionPresentationProps> = ({
-  type,
-  title,
-  season,
-  description,
-}) => {
+const DescriptionPresentation = ({
+  article_type,
+  episode,
+  numSaison,
+}: DescriptionPresentationProps) => {
   return (
     <div>
       <div className={style.rectangle}>
-        <p>{type}</p>
+        <p>{article_type}</p>
       </div>
       <div className={style.titre}>
-        <p>{title}</p>
+        <p>{episode.episode_nom}</p>
       </div>
       <div className={style.saison}>
-        <p>{season}</p>
+        <p>saison {numSaison}</p>
       </div>
       <div className={style.description}>
-        <p>{description}</p>
+        <p>9 Episode•2022•Action•sience fiction</p>
       </div>
     </div>
   );

@@ -17,12 +17,14 @@
     "react-slick": "^0.30.3",
     "react-star-rating-input": "^8.0.1",
     "react-star-ratings": "^2.3.0",
+    "react-stars": "^2.2.5",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@types/react-slick": "^0.23.13",
+    "@types/react-stars": "^2.2.4",
     "@vitejs/plugin-react": "^4.3.1",
     "typescript": "^5.6.2",
     "vite": "^5.4.8"

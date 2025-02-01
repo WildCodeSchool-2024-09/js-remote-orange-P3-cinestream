@@ -1,0 +1,14 @@
+.dropdownMenu {
+  border: 1px solid white;
+  margin-right: 70px;
+  border: #28262d 2px solid;
+  background-color: #0d0c0f;
+  color: white;
+  font-size: 1.2em;
+  border-radius: 8px;
+  padding: 0.2em 0.4em;
+}
+
+.dropdownMenu:hover {
+  background-color: #28262d;
+}

@@ -1,5 +1,5 @@
-import BntEnvoyer from "./bntEnvoyer/BntEnvoyer";
 import { useState } from "react";
+import BntEnvoyer from "./bntEnvoyer/BntEnvoyer";
 import styles from "./commentaireUtilisateur.module.css";
 import EtoileUtilisateur from "./etoileUtilisateur/EtoileUtilisateur";
 

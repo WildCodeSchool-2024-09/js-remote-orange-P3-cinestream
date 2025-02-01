@@ -8,7 +8,6 @@
   align-items: center;
   cursor: pointer;
   border-radius: 15px;
-  margin-right: 10px;
 }
 
 .bntFavorie:hover {
@@ -25,6 +24,7 @@
   justify-content: center;
   margin-right: 10px;
 }
+
 .icon svg {
   fill: red;
   width: 12px;

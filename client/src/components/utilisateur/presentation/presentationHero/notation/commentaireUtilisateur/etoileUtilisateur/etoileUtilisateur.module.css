@@ -15,16 +15,3 @@
   -webkit-user-select: none;
   -moz-user-select: none;
 }
-
-.contenerEtoile label {
-  display: flex;
-  align-items: center;
-}
-
-.contenerEtoile label span {
-  text-align: center;
-  line-height: 1;
-  font-size: 2em;
-  display: inline-block;
-  vertical-align: middle;
-}
