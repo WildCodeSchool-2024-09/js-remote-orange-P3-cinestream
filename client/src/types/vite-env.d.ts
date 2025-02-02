@@ -16,4 +16,6 @@ export interface Saison {
   saison_numero: number;
   episodes: Episodes[];
   article_type: string;
+  article_date: string;
+  article_premium: number;
 }

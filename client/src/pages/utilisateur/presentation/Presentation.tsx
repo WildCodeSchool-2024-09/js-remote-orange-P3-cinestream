@@ -4,27 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../../../components/commun/footer/Footer";
 import PresentationHeader from "../../../components/utilisateur/presentation/presentationHeader/PresentationHeader";
 import PresentationHero from "../../../components/utilisateur/presentation/presentationHero/PresentationHero";
+import type { Saison } from "../../../types/vite-env";
 import style from "./presentation.module.css";
 
-interface Episode {
-  episode_description: string | null;
-  episode_id: number;
-  episode_image: string | null;
-  episode_lien_video: string | null;
-  episode_nom: string;
-  episode_numero: number;
-}
-
-interface Saison {
-  saison_id: number;
-  saison_numero: number;
-  episodes: Episode[];
-  article_type: string;
-}
-
 const Presentation = () => {
-  const [episodeSelect, setEpisodeSelect] = useState(1);
-  const [saisonSelect, setSaisonSelect] = useState(1);
+  const [episodeSelect, setEpisodeSelect] = useState<number>(1);
+  const [saisonSelect, setSaisonSelect] = useState<number>(1);
   const [allEpisodes, setAllEpisodes] = useState<Saison[]>([]);
 
   const { idA } = useParams();

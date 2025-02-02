@@ -57,10 +57,7 @@ const FilmComposent = ({
     getAllArticle();
   }, []);
 
-  function filterFilm(film: Article, index: number) {
-    if (index >= compteur) {
-      return false;
-    }
+  function filterFilm(film: Article) {
     if (recherche !== "") {
       //si le nom du film ne contient pas la recherche
       if (!film.nom.toLowerCase().includes(recherche.toLowerCase())) {
@@ -105,13 +102,20 @@ const FilmComposent = ({
     navigate(`/detail/${id}`);
   };
 
+  const allFilmFilter = allFilm.filter((film) => filterFilm(film));
+
   return (
     <div>
       <div className={styles.filmComposent}>
-        {allFilm.length > 0 &&
-          allFilm.map(
+        {/* géré le chargement */}
+        {allFilm.length === 0 ? (
+          <div className={styles.messageAucunFilm}> Chargement ...</div>
+        ) : allFilmFilter.length === 0 ? (
+          <div className={styles.messageAucunFilm}> Aucun film trouver</div>
+        ) : (
+          allFilmFilter.map(
             (film, index) =>
-              filterFilm(film, index) && (
+              index < compteur && (
                 <div
                   key={film.id}
                   className={styles.filmCard}
@@ -140,9 +144,11 @@ const FilmComposent = ({
                   <div className={styles.type}>{film.type}</div>
                 </div>
               ),
-          )}
+          )
+        )}
       </div>
-      {compteur < allFilm.length && (
+      {/* bouton ajouter plus */}
+      {compteur < allFilmFilter.length && (
         <BntPlus compteur={compteur} setCompteur={setCompteur} />
       )}
     </div>
@@ -150,3 +156,57 @@ const FilmComposent = ({
 };
 
 export default FilmComposent;
+
+// return (
+//   <div>
+//     <div className={styles.filmComposent}>
+//       {allFilm.length > 0 ?
+//         (
+//           allFilm.filter((film) => filterFilm(film)).map((film, index) =>
+//             index < compteur && (
+//               <div
+//                 key={film.id}
+//                 className={styles.filmCard}
+//                 onClick={() => {
+//                   onFilmClick(film.id);
+//                 }}
+//                 onKeyDown={(e) => {
+//                   if (e.key === "Enter" || e.key === " ") {
+//                     onFilmClick(film.id);
+//                   }
+//                 }}
+//                 aria-label={`Voir le film ${film.nom}`}
+//               >
+//                 <img
+//                   src={
+//                     film.image
+//                       ? `${import.meta.env.VITE_API_URL}/uploads/${film.image}`
+//                       : "/public/images/404/image404.jpg"
+//                   }
+//                   alt={film.nom}
+//                 />
+//                 <div className={styles.title}>{film.nom}</div>
+//                 <div className={styles.description}>
+//                   {film.description ? film.description : ""}
+//                 </div>
+//                 <div className={styles.type}>{film.type}</div>
+//               </div>
+//             ),
+//           ),
+//           // si aucun film n'est trouver
+//           allFilm.filter((film) => filterFilm(film)).length === 0 &&
+//           <div className={styles.messageAucunFilm}> Aucun film trouver</div>
+//         ) :
+//         // le chargement
+//         allFilm.filter((film) => filterFilm(film)).length === 0 &&
+//         <div className={styles.messageAucunFilm}> Chargement ...</div>
+//       }
+//     </div>
+//     {/* bouton ajouter plus */}
+//     {
+//       compteur < allFilm.filter((film) => filterFilm(film)).length && (
+//         <BntPlus compteur={compteur} setCompteur={setCompteur} />
+//       )
+//     }
+//   </div >
+// );

@@ -14,7 +14,9 @@ class DetailUtilisateurRepository {
         e.description as episode_description,
         e.lien_video as episode_lien_video,
         e.image as episode_image,
-        a.type as article_type
+        a.type as article_type,
+        a.date as article_date,
+        a.premium as article_premium
     FROM saison as s
     LEFT JOIN episode as e ON e.saison_id = s.id
     LEFT JOIN article as a ON a.id = s.article_id
@@ -40,7 +42,8 @@ WHERE
 a.univers_id = ? AND
 a.publier = 1 AND 
 s.numero = 1 AND
-e.numero = 1;
+e.numero = 1
+ORDER BY a.univers_numero ASC;
         `;
 
     const [rows] = await databaseClient.query(query, [idUnivers]);

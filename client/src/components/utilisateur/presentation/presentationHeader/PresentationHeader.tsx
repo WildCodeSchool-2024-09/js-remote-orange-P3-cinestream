@@ -31,6 +31,10 @@ const PresentationHeader = ({
     );
   };
 
+  const findNbEpisode = () => {
+    return allEpisodes[findIdSaion()].episodes.length;
+  };
+
   return (
     <>
       <div
@@ -39,7 +43,7 @@ const PresentationHeader = ({
           backgroundImage:
             allEpisodes.length > 0
               ? `url(${import.meta.env.VITE_API_URL}/uploads/${allEpisodes[findIdSaion()].episodes[findIdEpisode()].episode_image})`
-              : "",
+              : "url(#)",
         }}
       >
         <div className={style.contenerNavBarre}>
@@ -48,9 +52,12 @@ const PresentationHeader = ({
         <div className={style.descriptionPresentation}>
           {allEpisodes.length > 0 && (
             <DescriptionPresentation
+              article_date={allEpisodes[findIdSaion()].article_date}
               article_type={allEpisodes[findIdSaion()].article_type}
               episode={allEpisodes[findIdSaion()].episodes[findIdEpisode()]}
               numSaison={allEpisodes[findIdSaion()].saison_numero}
+              nbEpisode={findNbEpisode()}
+              allEpisodes={allEpisodes}
             />
           )}
         </div>

@@ -2,9 +2,55 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./topNotes.module.css";
 
+interface ArticleSlider {
+  id: 27;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: number;
+  premium: number;
+  type: string;
+  univers_numero: null | number;
+  univers_id: null | number;
+  categorie: string[];
+  moyenne_note: number;
+}
+
 const TopNotes = () => {
+  const [listeTopNotes, setListeTopNotes] = useState<ArticleSlider[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/topNotes`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        if (data.sucssces) {
+          setListeTopNotes(data.topNotes);
+        }
+      } catch (error) {
+        console.error(
+          "eurreur l'ore de la récupération des filme en top notes",
+        );
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -18,278 +64,73 @@ const TopNotes = () => {
     arrows: true, // Active les flèches
   };
 
+  const definirNotes = (note: number) => {
+    if (note === 0) return "⭐0";
+    return `⭐${Number(note.toFixed(1))}`;
+  };
+
+  const definirCategorie = (categorie: string[]) => {
+    if (categorie.length === 0) return "";
+    let categorieString = "";
+
+    for (const element of categorie) {
+      categorieString += ` ${element} ∘`;
+    }
+    // Retire le dernier caractère
+    return `🎞️${categorieString.slice(0, -1)}`;
+  };
+
+  //pour le clique controller
+  const handClikeTopNotes = (id: string | null) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikeTopNotes);
+
   return (
     <>
       <p className={`${style.titreTopNotes}`}>Les plus populaires</p>
       <div className={`slider-container ${style.sliderContainerTopNotes}`}>
         <div>
           <Slider {...settings}>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>1</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheAquoiman.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️horror ∘ fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>2</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheDedpool.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime} ${style.pGratuit}`}>👑</p>
-                  <p className={`${style.pTitre}`}>dedpool</p>
-                  <p className={`${style.pType}`}>🎞️horror ∘ fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>3</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheHarryPotter.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>
-                    harry potter a l'école des sorcier
-                  </p>
-                  <p className={`${style.pType}`}>🎞️horror ∘ fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
+            {listeTopNotes.map((element, index) => (
+              <div key={element.id} className={`${style.elementCourselle}`}>
+                <div
+                  className={`${style.containerFlex}`}
+                  data-id={element.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
+                  <div className={`${style.containerPlaceFilme}`}>
+                    <p className={`${style.PlaceFilme}`}>{index + 1}</p>
+                  </div>
+                  <div className={`${style.containerImage}`}>
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                      alt={`affiche ${element.nom}`}
+                    />
+                  </div>
+                  <div className={`${style.containerInfo}`}>
+                    {element.premium === 1 ? (
+                      <p className={`${style.pPrenuime}`}>👑</p>
+                    ) : (
+                      <p className={`${style.pPrenuimeVide}`}>#</p>
+                    )}
+                    <p className={`${style.pTitre}`}>{element.nom}</p>
+                    <p className={`${style.pType}`}>
+                      {definirCategorie(element.categorie)}
+                    </p>
+                    <p className={`${style.pNotes}`}>
+                      {definirNotes(Number(element.moyenne_note))}{" "}
+                      <span>| {element.type}</span>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>4</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheMatris.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>matrix</p>
-                  <p className={`${style.pType}`}>🎞️horror ∘ fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>5</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/affichePokemon.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>6</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheAquoiman.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>
-                    ⭐4.3 <span>| filme</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>7</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheDedpool.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>8</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheHarryPotter.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>9</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheMatris.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>10</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/affichePokemon.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>11</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheAquoiman.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>12</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheDedpool.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>13</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheHarryPotter.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>14</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/afficheMatris.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${style.elementCourselle}`}>
-              <div className={`${style.containerFlex}`}>
-                <div className={`${style.containerPlaceFilme}`}>
-                  <p className={`${style.PlaceFilme}`}>15</p>
-                </div>
-                <div className={`${style.containerImage}`}>
-                  <img src="/temporaire/affichePokemon.jpg" alt="" />
-                </div>
-                <div className={`${style.containerInfo}`}>
-                  <p className={`${style.pPrenuime}`}>👑</p>
-                  <p className={`${style.pTitre}`}>aquoiman</p>
-                  <p className={`${style.pType}`}>🎞️Horror ∘ Fiction</p>
-                  <p className={`${style.pNotes}`}>⭐4.3 | Filme</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </Slider>
         </div>
       </div>

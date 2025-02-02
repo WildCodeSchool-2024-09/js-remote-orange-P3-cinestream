@@ -1,32 +1,46 @@
-.rectangle {
-  background-color: black;
-  color: white;
-  border-radius: 100px;
-  text-align: center;
-  margin-bottom: 10px;
+.contenerDescitpion {
   display: flex;
-  width: min-content;
+  flex-direction: column;
+  gap: .2em;
 }
 
-.rectangle p {
-  font-size: 1rem;
-  padding: .15em .5em .25em .5em;
+.contenerbule {
+  display: flex;
+  align-items: center;
+  gap: .6em;
 }
 
-.titre {
-  font-size: 24px;
+.typeSerie {
   color: white;
-  font-family: Arial, sans-serif;
+  font-size: .7em;
+  background-color: #0d0c0f;
+  border-radius: 100px;
+  padding: .3em .5em .35em .5em;
+}
+
+.preume {
+  color: white;
+  font-size: .7em;
+  background-color: #0d0c0f;
+  border-radius: 100px;
+  padding: 0 .5em .35em .5em;
+}
+
+.pTitre {
+  color: white;
+  font-size: 1.4em;
+  font-weight: 600;
+  width: 16em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .saison {
-  font-size: 20px;
   color: white;
-  font-family: "Times New Roman", serif;
+  font-size: 0.8em;
 }
 
-.description {
-  font-size: 16px;
-  color: gray;
-  font-family: Verdana, sans-serif;
+.infoDivert {
+  color: #9ca4ab;
+  font-size: 0.5em;
 }

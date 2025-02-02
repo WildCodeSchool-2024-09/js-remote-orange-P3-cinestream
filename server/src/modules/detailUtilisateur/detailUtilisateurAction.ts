@@ -17,6 +17,8 @@ interface Saison {
   saison_numero: number;
   episodes: Episode[];
   article_type: string;
+  article_date: string;
+  article_premium: number;
 }
 
 //réccupère univers par id de article
@@ -51,6 +53,8 @@ const getAllEpisode: RequestHandler = async (req, res, next) => {
           saison_numero: ligne.saison_numero,
           episodes: [],
           article_type: ligne.article_type,
+          article_date: ligne.article_date,
+          article_premium: ligne.article_premium,
         });
       }
 

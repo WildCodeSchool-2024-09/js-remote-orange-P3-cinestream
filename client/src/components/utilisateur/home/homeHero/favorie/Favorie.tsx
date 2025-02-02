@@ -1,10 +1,58 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UseTokenContext } from "../../../../../context/tokenContext";
+import { sliderClike } from "../../../../commun/slider/sliderClike";
 import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
 import style from "./favorie.module.css";
 
+interface EpisodeSlider {
+  id: 27;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: number;
+  premium: number;
+  type: string;
+  univers_numero: null | number;
+  univers_id: null | number;
+  categorie: string[];
+  moyenne_note: number;
+}
+
 const Favorie = () => {
+  const [listeFavorie, setListeFavorie] = useState<EpisodeSlider[]>([]);
+  const { token } = UseTokenContext();
+  const navigate = useNavigate();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    const getAllPlatforme = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/favorie`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              token: token,
+            },
+          },
+        );
+        if (data.sucssces) {
+          setListeFavorie(data.allFavorie);
+        }
+      } catch (error) {
+        console.error("eurreur l'ore de la récupération des filme en favorie");
+      }
+    };
+
+    getAllPlatforme();
+  }, []);
+
   const settings = {
     dots: false, // Désactive les points de navigation
     infinite: false,
@@ -27,116 +75,64 @@ const Favorie = () => {
     ],
   };
 
+  const definirNotes = (note: number) => {
+    if (note === 0) return "⭐0";
+    return `⭐${Number(note.toFixed(1))}`;
+  };
+
+  const definirCategorie = (categorie: string[]) => {
+    if (categorie.length === 0) return "";
+    let categorieString = "";
+
+    for (const element of categorie) {
+      categorieString += ` ${element} ∘`;
+    }
+    // Retire le dernier caractère
+    return `|${categorieString.slice(0, -1)}`;
+  };
+
+  //pour le clique controller
+  const handClikeFavoris = (id: string | null) => {
+    navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp } =
+    sliderClike(handClikeFavoris);
+
   return (
     <>
-      <p className={`${style.titreRecent}`}>Favoris</p>
-      <div className={`slider-container ${style.sliderContainerCategorie}`}>
-        <Slider {...settings}>
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheDedpool.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Deadpool</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.8 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
+      {listeFavorie.length !== 0 && (
+        <>
+          <p className={`${style.titreRecent}`}>Favoris</p>
+          <div className={`slider-container ${style.sliderContainerCategorie}`}>
+            <Slider {...settings}>
+              {listeFavorie.map((element) => (
+                <div key={element.id} className={`${style.containerElement}`}>
+                  <div
+                    className={`${style.containerImage}`}
+                    data-id={element.id}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                  >
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                      alt={`affiche ${element.nom}`}
+                    />
+                    <p className={`${style.pTitreFilme}`}>{element.nom}</p>
+                    <p className={`${style.pNotesType}`}>
+                      {definirNotes(Number(element.moyenne_note))}{" "}
+                      <span>{definirCategorie(element.categorie)}</span>
+                    </p>
+                    <div className={`${style.shadowBottum}`} />
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheTerminator.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Terminator Genisys</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.3 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheMatris.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Matrix</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐3.7 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheStarWars.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>
-                Star Wars : le réveil de la force
-              </p>
-              <p className={`${style.pNotesType}`}>
-                ⭐2.5 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSuideGame.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Squid Game</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐3.9 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheHarryPotter.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Harry Potter 1</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐1.8 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheSonic.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Sonic 2</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐4.0 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/affichePokemon.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>
-                Pokemon Detective Pikachu
-              </p>
-              <p className={`${style.pNotesType}`}>
-                ⭐2.3 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-              <div className={`${style.containerElement}`} />
-            </div>
-          </div>
-
-          <div className={`${style.containerElement}`}>
-            <div className={`${style.containerImage}`}>
-              <img src="/temporaire/afficheAquoiman.jpg" alt="" />
-              <p className={`${style.pTitreFilme}`}>Aquaman : le royom perdu</p>
-              <p className={`${style.pNotesType}`}>
-                ⭐3.4 <span>| Action ∘ Movie</span>
-              </p>
-              <div className={`${style.shadowBottum}`} />
-            </div>
-          </div>
-        </Slider>
-      </div>
+        </>
+      )}
     </>
   );
 };

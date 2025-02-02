@@ -98,6 +98,13 @@ const tokenIsCorrect: RequestHandler = async (
   try {
     //récupér le boy de la requête
     const { token } = req.body.token ? req.body : req.headers;
+    if (!token) {
+      res.status(400).send({
+        message: "Token invalide",
+        tokenIsIncorrect: true,
+      });
+      return;
+    }
 
     //récupér la clé secrete
     const SECRET_KEY = process.env.APP_SECRET;
@@ -117,7 +124,7 @@ const tokenIsCorrect: RequestHandler = async (
       req.userId = userId;
       next();
     } else {
-      res.send({
+      res.status(400).send({
         message: "Token invalide",
         tokenIsIncorrect: true,
       });
@@ -130,9 +137,9 @@ const tokenIsCorrect: RequestHandler = async (
         message: "Token expier",
         tokenIsIncorrect: true,
       });
-    } else {
-      next(err); // Gérer d'autres erreurs de token
+      return;
     }
+    next(err); // Gérer d'autres erreurs de token
   }
 };
 
