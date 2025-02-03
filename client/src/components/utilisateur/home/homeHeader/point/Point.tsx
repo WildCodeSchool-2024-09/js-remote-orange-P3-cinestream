@@ -41,6 +41,11 @@ const Point = ({ indexSelect, changerImage, film5 }: PointProps) => {
           className={defSelevtioner(index)}
           key={`${index} ${point.id}`}
           onClick={() => onClickPoint(index)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              onClickPoint(index);
+            }
+          }}
         />
       ))}
     </div>

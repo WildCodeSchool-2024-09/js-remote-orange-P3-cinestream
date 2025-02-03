@@ -81,11 +81,6 @@ const BntFavorie = ({ film5, setFilm5, indexSelect }: BntFavorieProps) => {
         className={definirClass()}
         type="button"
         onClick={() => handleClickLike()}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            handleClickLike();
-          }
-        }}
       >
         {film5[indexSelect].isFavorie === 0
           ? "🤍 Ajouter aux"
