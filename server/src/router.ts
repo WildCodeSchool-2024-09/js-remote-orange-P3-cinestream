@@ -268,6 +268,18 @@ router.post(
 );
 
 //-------homePage------
+//Les 5 film
+router.get(
+  "/api/utilisateur/caroussel/presentation5",
+  carousselActions.getPrentation5,
+);
+//Les 5 film avec un compte copnnecter
+router.get(
+  "/api/utilisateur/caroussel/presentation5Connecter",
+  autentification.tokenIsCorrect,
+  carousselActions.getPrentation5,
+);
+
 //filme récent
 router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
 

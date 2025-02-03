@@ -14,6 +14,7 @@
   border-radius: 50px;
   font-size: 1.2rem;
   font-family: "Rubik", sans-serif;
+  text-transform: capitalize;
 
   @media screen and (max-width: 1024px) {
     padding: 6px 12px;
@@ -51,6 +52,11 @@
   max-width: 40%;
   font-family: "Rubik", sans-serif;
   font-weight: 300;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @media screen and (max-width: 1300px) {
     max-width: 50%;

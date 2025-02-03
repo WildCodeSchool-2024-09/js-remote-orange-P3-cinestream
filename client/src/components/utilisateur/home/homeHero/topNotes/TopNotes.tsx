@@ -9,7 +9,7 @@ import { sliderClike } from "../../../../commun/slider/sliderClike";
 import style from "./topNotes.module.css";
 
 interface ArticleSlider {
-  id: 27;
+  id: number;
   nom: string;
   date: string | null;
   image: string | null;
