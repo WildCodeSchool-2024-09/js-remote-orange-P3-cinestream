@@ -22,6 +22,7 @@
   margin: 0em 2em;
   border-radius: 30px;
   padding: 1em;
+  cursor: pointer;
 }
 
 /* place du filme */
@@ -78,6 +79,13 @@
   width: fit-content;
   padding: 0 0.2em 0.3em 0.2em;
   border-radius: 10px;
+}
+
+.pPrenuimeVide {
+  font-size: 1.3em;
+  color: transparent;
+  padding: 0 0.2em 0.3em 0.2em;
+  border: transparent 2px solid;
 }
 
 .pGratuit {

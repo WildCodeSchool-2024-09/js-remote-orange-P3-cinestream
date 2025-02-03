@@ -19,6 +19,7 @@ interface Article {
   premium: boolean;
   type: string;
   univers_id: number | null;
+  description: string | null;
 }
 
 const AllFilme = () => {
@@ -73,15 +74,14 @@ const AllFilme = () => {
         <div>
           <Slider {...settings}>
             {listeFilms.map((film) => (
-              <div
-                key={film.id}
-                data-id={film.id}
-                className={`${style.elementCourselle}`}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <div className={`${style.containerElement}`}>
+              <div className={`${style.elementCourselle}`} key={film.id}>
+                <div
+                  className={`${style.containerElement}`}
+                  data-id={film.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
                   <div className={`${style.containerImage}`}>
                     <img
                       src={`${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`}
@@ -91,9 +91,7 @@ const AllFilme = () => {
                   <div className={`${style.containerInfo}`}>
                     <p className={`${style.titreFilme}`}>{film.nom}</p>
                     <p className={`${style.desciptionFilme}`}>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Libero saepe possimus quo labore delectus? Ad accusamus
-                      reprehenderit velit non quidem.
+                      {film.description !== null && film.description}
                     </p>
                   </div>
                 </div>

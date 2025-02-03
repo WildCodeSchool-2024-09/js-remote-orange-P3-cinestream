@@ -1,31 +1,43 @@
-import type { Episodes } from "../../../../../types/vite-env";
+import type { Episodes, Saison } from "../../../../../types/vite-env";
 import style from "./descriptionPresentation.module.css";
 
 interface DescriptionPresentationProps {
   article_type: string;
+  article_date: string;
   episode: Episodes;
   numSaison: number;
+  nbEpisode: number;
+  allEpisodes: Saison[];
 }
 
 const DescriptionPresentation = ({
   article_type,
+  article_date,
   episode,
   numSaison,
+  nbEpisode,
+  allEpisodes,
 }: DescriptionPresentationProps) => {
+  const traduireDate = (date: string) => {
+    return new Date(date).getFullYear();
+  };
+
   return (
-    <div>
-      <div className={style.rectangle}>
-        <p>{article_type}</p>
+    <div className={style.contenerDescitpion}>
+      <div className={style.contenerbule}>
+        <p className={style.typeSerie}>{article_type}</p>
+        {allEpisodes[0].article_premium ? (
+          <p className={style.preume}>👑</p>
+        ) : null}
       </div>
-      <div className={style.titre}>
-        <p>{episode.episode_nom}</p>
-      </div>
-      <div className={style.saison}>
-        <p>saison {numSaison}</p>
-      </div>
-      <div className={style.description}>
-        <p>9 Episode•2022•Action•sience fiction</p>
-      </div>
+      <p className={style.pTitre}>{episode.episode_nom}</p>
+      {allEpisodes[0].article_type !== "film" && (
+        <p className={style.saison}>saison {numSaison}</p>
+      )}
+      <p className={style.infoDivert}>
+        {nbEpisode} Episode {article_date && `• ${traduireDate(article_date)}`}{" "}
+        • Action • sience fiction
+      </p>
     </div>
   );
 };

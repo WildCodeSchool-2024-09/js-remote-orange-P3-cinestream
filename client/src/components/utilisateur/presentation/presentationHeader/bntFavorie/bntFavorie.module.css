@@ -10,6 +10,10 @@
   border-radius: 15px;
 }
 
+.bntFavorieActive {
+  background-color: rgb(52, 5, 5);
+}
+
 .bntFavorie:hover {
   background-color: darkred;
 }
@@ -29,4 +33,9 @@
   fill: red;
   width: 12px;
   height: 12px;
+}
+
+.coeurNoir svg {
+  fill: black;
+  color: black;
 }

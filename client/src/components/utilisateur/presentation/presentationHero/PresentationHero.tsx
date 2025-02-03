@@ -1,22 +1,7 @@
+import type { Saison } from "../../../../types/vite-env";
 import Episode from "./episode/Episode";
 import Notation from "./notation/Notation";
 import Univers from "./univers/Univers";
-
-interface Episodes {
-  episode_description: string | null;
-  episode_id: number;
-  episode_image: string | null;
-  episode_lien_video: string | null;
-  episode_nom: string;
-  episode_numero: number;
-}
-
-interface Saison {
-  saison_id: number;
-  saison_numero: number;
-  episodes: Episodes[];
-  article_type: string;
-}
 
 interface PresentationHeroProps {
   allEpisodes: Saison[];

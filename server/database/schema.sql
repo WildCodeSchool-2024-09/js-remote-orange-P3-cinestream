@@ -42,9 +42,10 @@ CREATE TABLE article (
 CREATE TABLE favorie (
   article_id INT,
   utilisateur_id INT,
+  date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (article_id, utilisateur_id),
-  FOREIGN KEY (article_id) REFERENCES article(id),
-  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+  FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
+  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
 );
 
 -- commentaire
@@ -54,8 +55,8 @@ CREATE TABLE commentaire (
   contenu TEXT NOT NULL,
   DATE DATE NOT NULL,
   PRIMARY KEY (article_id, utilisateur_id),
-  FOREIGN KEY (article_id) REFERENCES article(id),
-  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+  FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
+  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
 );
 
 -- notes

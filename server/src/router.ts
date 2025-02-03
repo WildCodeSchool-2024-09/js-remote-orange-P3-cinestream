@@ -5,6 +5,7 @@ import categorieActions from "./modules/categorie/categorieActions";
 import crudUniversAction from "./modules/crudUnivers/crudUniversAction";
 import detailUtilisateurAction from "./modules/detailUtilisateur/detailUtilisateurAction";
 import episodeActions from "./modules/episode/episodeActions";
+import favorieAction from "./modules/favorie/favorieAction";
 import autentification from "./modules/middlewares/autentification";
 import verifSaisi from "./modules/middlewares/verifSaisi";
 import notesActions from "./modules/notes/notesActions";
@@ -252,15 +253,39 @@ router.post(
   notesActions.upadte,
 );
 
+//route pour récupéré état du favorie
+router.post(
+  "/api/utilisateur/details/getFavorie",
+  autentification.tokenIsCorrect,
+  favorieAction.getByIdUserArticle,
+);
+
+//route pour ajouté un article au favorie
+router.post(
+  "/api/utilisateur/details/updateFavorie",
+  autentification.tokenIsCorrect,
+  favorieAction.upadteUser,
+);
+
 //-------homePage------
 //filme récent
 router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
+
+//filme populaire
+router.get("/api/utilisateur/caroussel/topNotes", carousselActions.getTopNotes);
 
 //que les filme
 router.get("/api/utilisateur/caroussel/films", carousselActions.getFilms);
 
 //que les series
 router.get("/api/utilisateur/caroussel/series", carousselActions.getSeries);
+
+//que les favorie
+router.get(
+  "/api/utilisateur/caroussel/favorie",
+  autentification.tokenIsCorrect,
+  favorieAction.getAllFavorieUtilisateur,
+);
 
 //----recherche----
 //récupère tout les series/films

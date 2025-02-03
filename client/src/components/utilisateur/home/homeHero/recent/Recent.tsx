@@ -18,6 +18,8 @@ interface Article {
   premium: boolean;
   type: string;
   univers_id: number | null;
+  categorie: string[];
+  moyenne_note: number;
 }
 
 const Recent = () => {
@@ -66,6 +68,22 @@ const Recent = () => {
     ],
   };
 
+  const definirNotes = (note: number) => {
+    if (note === 0) return "⭐0";
+    return `⭐${Number(note.toFixed(1))}`;
+  };
+
+  const definirCategorie = (categorie: string[]) => {
+    if (categorie.length === 0) return "";
+    let categorieString = "";
+
+    for (const element of categorie) {
+      categorieString += ` ${element} ∘`;
+    }
+    // Retire le dernier caractère
+    return `|${categorieString.slice(0, -1)}`;
+  };
+
   const handClikeRecent = (id: string | null) => {
     navigate(`/detail/${id}`);
     window.scrollTo(0, 0);
@@ -81,22 +99,22 @@ const Recent = () => {
         <Slider {...settings}>
           {listeRecent.length > 0 &&
             listeRecent.map((element) => (
-              <div
-                key={element.id}
-                data-id={element.id}
-                className={`${style.containerElement}`}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <div className={`${style.containerImage}`}>
+              <div className={`${style.containerElement}`} key={element.id}>
+                <div
+                  className={`${style.containerImage}`}
+                  data-id={element.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
                   <img
                     src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
                     alt=""
                   />
                   <p className={`${style.pTitreFilme}`}>{element.nom}</p>
                   <p className={`${style.pNotesType}`}>
-                    ⭐4.8 <span>| Action ∘ Movie</span>
+                    {definirNotes(Number(element.moyenne_note))}{" "}
+                    <span>{definirCategorie(element.categorie)}</span>
                   </p>
                   <div className={`${style.shadowBottum}`} />
                 </div>

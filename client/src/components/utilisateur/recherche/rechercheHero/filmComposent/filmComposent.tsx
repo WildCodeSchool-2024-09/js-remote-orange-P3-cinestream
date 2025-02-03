@@ -57,10 +57,7 @@ const FilmComposent = ({
     getAllArticle();
   }, []);
 
-  function filterFilm(film: Article, index: number) {
-    if (index >= compteur) {
-      return false;
-    }
+  function filterFilm(film: Article) {
     if (recherche !== "") {
       //si le nom du film ne contient pas la recherche
       if (!film.nom.toLowerCase().includes(recherche.toLowerCase())) {
@@ -105,13 +102,20 @@ const FilmComposent = ({
     navigate(`/detail/${id}`);
   };
 
+  const allFilmFilter = allFilm.filter((film) => filterFilm(film));
+
   return (
     <div>
       <div className={styles.filmComposent}>
-        {allFilm.length > 0 &&
-          allFilm.map(
+        {/* géré le chargement */}
+        {allFilm.length === 0 ? (
+          <div className={styles.messageAucunFilm}> Chargement ...</div>
+        ) : allFilmFilter.length === 0 ? (
+          <div className={styles.messageAucunFilm}> Aucun film trouver</div>
+        ) : (
+          allFilmFilter.map(
             (film, index) =>
-              filterFilm(film, index) && (
+              index < compteur && (
                 <div
                   key={film.id}
                   className={styles.filmCard}
@@ -140,9 +144,11 @@ const FilmComposent = ({
                   <div className={styles.type}>{film.type}</div>
                 </div>
               ),
-          )}
+          )
+        )}
       </div>
-      {compteur < allFilm.length && (
+      {/* bouton ajouter plus */}
+      {compteur < allFilmFilter.length && (
         <BntPlus compteur={compteur} setCompteur={setCompteur} />
       )}
     </div>

@@ -60,6 +60,13 @@
   text-transform: capitalize;
 }
 
+.messageAucunFilm {
+  color: white;
+  font-size: 4.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 /* Media queries pour rendre le design responsive */
 @media (max-width: 768px) {
   .filmComposent {
