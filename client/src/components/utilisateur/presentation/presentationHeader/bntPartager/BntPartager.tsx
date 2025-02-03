@@ -1,7 +1,22 @@
+import { useParams } from "react-router-dom";
 import style from "./bntPartager.module.css";
+
 const BntPartager = () => {
+  const { idA } = useParams();
+
+  const onclickPartager = async () => {
+    await navigator.clipboard.writeText(
+      `${window.location.origin}/detail/${idA}`,
+    );
+    alert("Lien copié");
+  };
+
   return (
-    <button type="button" className={style.bntPartager}>
+    <button
+      type="button"
+      className={style.bntPartager}
+      onClick={onclickPartager}
+    >
       <div className={style.icon}>
         <svg viewBox="0 0 24 24">
           <title>Share Icon</title>

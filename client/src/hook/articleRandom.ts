@@ -21,7 +21,7 @@ function randomSeed(seed: number): () => number {
 // Fonction pour mélanger un tableau en utilisant une seed
 function articleAleatoir<T>(array: T[], seedUnique: number): T[] {
   const seed = generateSeedFromDate(new Date());
-  const random = randomSeed(seed * seedUnique);
+  const random = randomSeed(seed + seedUnique);
   const newArray = [...array]; // Créer une copie du tableau pour ne pas modifier l'original
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(random() * (i + 1)); // Générer un indice aléatoire

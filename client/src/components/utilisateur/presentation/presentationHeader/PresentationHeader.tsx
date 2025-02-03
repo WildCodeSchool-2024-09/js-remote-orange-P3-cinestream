@@ -1,3 +1,4 @@
+import type { Saison } from "../../../../types/vite-env";
 import NavBarre from "../../../commun/navBarre/NavBarre";
 import BntEdite from "./bntEdite/BntEdite";
 import BntFavorie from "./bntFavorie/BntFavorie";
@@ -6,20 +7,52 @@ import BntRegarder from "./bntRegarder/BntRegarder";
 import DescriptionPresentation from "./descriptionPresentation/DescriptionPresentation";
 import style from "./presentationHeader.module.css";
 
-const PresentationHeader = () => {
+interface presentationHeaderProps {
+  allEpisodes: Saison[];
+  episodeSelect: number;
+  saisonSelect: number;
+}
+
+const PresentationHeader = ({
+  allEpisodes,
+  episodeSelect,
+  saisonSelect,
+}: presentationHeaderProps) => {
+  const findIdSaion = () => {
+    return allEpisodes.findIndex(
+      (saison) => saison.saison_numero === saisonSelect,
+    );
+  };
+
+  const findIdEpisode = () => {
+    //trouve l'index de l'épisode
+    return allEpisodes[findIdSaion()].episodes.findIndex(
+      (episode) => episode.episode_numero === episodeSelect,
+    );
+  };
+
   return (
     <>
-      <header className={style.header}>
-        <div className={style.navbarre}>
+      <div
+        className={style.header}
+        style={{
+          backgroundImage:
+            allEpisodes.length > 0
+              ? `url(${import.meta.env.VITE_API_URL}/uploads/${allEpisodes[findIdSaion()].episodes[findIdEpisode()].episode_image})`
+              : "",
+        }}
+      >
+        <div className={style.contenerNavBarre}>
           <NavBarre />
         </div>
         <div className={style.descriptionPresentation}>
-          <DescriptionPresentation
-            type="film"
-            title="JUMANJI"
-            season="Saison 1"
-            description="2017 - action, aventure, comédie"
-          />
+          {allEpisodes.length > 0 && (
+            <DescriptionPresentation
+              article_type={allEpisodes[findIdSaion()].article_type}
+              episode={allEpisodes[findIdSaion()].episodes[findIdEpisode()]}
+              numSaison={allEpisodes[findIdSaion()].saison_numero}
+            />
+          )}
         </div>
         <div className={style.bntRegarder}>
           <BntRegarder />
@@ -29,14 +62,12 @@ const PresentationHeader = () => {
           <BntPartager />
           <BntFavorie />
         </div>
-      </header>
+      </div>
       <div>
         <p className={style.paragraphWhite}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-          sapiente impedit esse reiciendis, officia eius? Ad magni illo dolorem
-          repellendus recusandae ut quae iure exercitationem dignissimos quia
-          repudiandae officia amet voluptate minima assumenda, quo consectetur!
-          Blanditiis culpa at ex numquam?
+          {allEpisodes.length > 0 &&
+            allEpisodes[findIdSaion()].episodes[findIdEpisode()]
+              .episode_description}
         </p>
       </div>
     </>

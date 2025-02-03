@@ -1,7 +1,20 @@
+import { useNavigate, useParams } from "react-router-dom";
+import { UseTokenContext } from "../../../../../context/tokenContext";
 import style from "./bntEdite.module.css";
 const BntEdite = () => {
+  const { isAdmin } = UseTokenContext();
+
+  const navigate = useNavigate();
+  const { idA } = useParams();
+
+  if (!isAdmin) return null;
+
   return (
-    <button type="button" className={style.bntEdite}>
+    <button
+      type="button"
+      className={style.bntEdite}
+      onClick={() => navigate(`/admin/organisation/${idA}`)}
+    >
       <div className={style.icon}>
         <svg viewBox="0 0 24 24">
           <title>Edit Icon</title>

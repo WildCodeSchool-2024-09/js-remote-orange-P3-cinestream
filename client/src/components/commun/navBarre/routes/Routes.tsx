@@ -11,7 +11,10 @@ const Routes = () => {
 
   //function qui défini quelle route est actuel
   function defClasse(pageRequired: string) {
-    if (pageName === pageRequired) {
+    if (
+      pageName === pageRequired ||
+      (pageName?.includes("detail") && pageRequired === "/detail")
+    ) {
       return `${style.pRoutes} ${style.active}`;
     }
     return `${style.pRoutes}`;
@@ -30,10 +33,8 @@ const Routes = () => {
           <a href="/compte">compte</a>
         </p>
       )}
-      {pageName === "/detail" && (
-        <p className={defClasse("/detail")}>
-          <a href="/detail">film</a>
-        </p>
+      {pageName?.includes("/detail") && (
+        <p className={defClasse("/detail")}>film</p>
       )}
       {isAdmin && (
         <p className={defClasse("")}>

@@ -1,14 +1,14 @@
 .bntRegarder {
-  background-color: green;
+  background-color: #00925d;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: .7em 1.2em;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 10px;
   width: 90px;
   height: 20px;
   text-align: center;
@@ -32,6 +32,6 @@
 
 .icon svg {
   fill: green;
-  width: 12px;
+  width: 20px;
   height: 12px;
 }

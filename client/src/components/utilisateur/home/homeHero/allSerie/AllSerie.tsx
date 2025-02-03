@@ -36,7 +36,7 @@ const AllSerie = () => {
             },
           },
         );
-        setListeSeries(articleAleatoir(data.article, 50));
+        setListeSeries(articleAleatoir(data.article, 13));
       } catch (error) {
         console.error("eurreur l'ore de la récupération des filme récent");
       }

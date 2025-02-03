@@ -62,10 +62,11 @@ CREATE TABLE commentaire (
 CREATE TABLE notes (
   article_id INT,
   utilisateur_id INT,
-  valeur INT NOT NULL,
+  valeur DECIMAL(3, 1) NOT NULL,
   PRIMARY KEY (article_id, utilisateur_id),
-  FOREIGN KEY (article_id) REFERENCES article(id),
-  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+  FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
+  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE,
+  CHECK (valeur >= 0.5 AND valeur <= 5 AND valeur = ROUND(valeur, 1))
 );
 
 

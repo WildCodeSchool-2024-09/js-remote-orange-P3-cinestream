@@ -1,16 +1,16 @@
 .rectangle {
   background-color: black;
   color: white;
-  padding: 5px;
-  border-radius: 10px;
+  border-radius: 100px;
   text-align: center;
-  width: 30px;
-  height: 15px;
   margin-bottom: 10px;
+  display: flex;
+  width: min-content;
 }
 
 .rectangle p {
-  font-size: 14px;
+  font-size: 1rem;
+  padding: .15em .5em .25em .5em;
 }
 
 .titre {

@@ -3,14 +3,15 @@ import articleActions from "./modules/article/articleActions";
 import carousselActions from "./modules/caroussel/carousselActions";
 import categorieActions from "./modules/categorie/categorieActions";
 import crudUniversAction from "./modules/crudUnivers/crudUniversAction";
+import detailUtilisateurAction from "./modules/detailUtilisateur/detailUtilisateurAction";
 import episodeActions from "./modules/episode/episodeActions";
 import autentification from "./modules/middlewares/autentification";
 import verifSaisi from "./modules/middlewares/verifSaisi";
+import notesActions from "./modules/notes/notesActions";
 import originResquet from "./modules/originResquet/originResquet";
 import platformeActions from "./modules/platforme/platformeActions";
 import serieActions from "./modules/serie/serieActions";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
-import notesActions from "./modules/notes/notesActions";
 
 const router = express.Router();
 
@@ -225,11 +226,30 @@ router.post(
 
 //-----------------utilisateur------------------------------
 //-------page details-------
+//récupère tout les episode d'une serie
+router.post(
+  "/api/utilisateur/details/getAllEpisode",
+  detailUtilisateurAction.getAllEpisode,
+);
+
+//récupère tout les serie du meme univers
+router.post(
+  "/api/utilisateur/details/getAllUnivers",
+  detailUtilisateurAction.getAllUnivers,
+);
+
 //route pour récupéré les étoiles d'un utilisateur
 router.post(
   "/api/utilisateur/details/getNotesUtilisateur",
   autentification.tokenIsCorrect,
   notesActions.get,
+);
+
+//route pour mettre a jour les étoiles d'un utilisateur sur un article
+router.post(
+  "/api/utilisateur/details/updateNotesUtilisateur",
+  autentification.tokenIsCorrect,
+  notesActions.upadte,
 );
 
 //-------homePage------
