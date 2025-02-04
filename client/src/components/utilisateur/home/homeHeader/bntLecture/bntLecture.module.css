@@ -7,6 +7,7 @@
   font-size: 1.4rem;
   transition: all 0.3s;
   box-sizing: content-box;
+  cursor: pointer;
 
   @media screen and (max-width: 1024px) {
     font-size: .8rem;

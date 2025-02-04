@@ -84,6 +84,51 @@ LIMIT 100;
 
     return articleTopNotes as Rows;
   }
+
+  //récupère 5 article aléatoire
+  async getPresentationAleatoire(userId: number): Promise<Rows> {
+    const param = [];
+    let query = `
+SELECT 
+  A.*,
+  C.nom AS categorie,
+  COALESCE(AVG(N.valeur), 0) AS moyenne_note,
+  E.description AS description
+`;
+    if (!Number.isNaN(userId)) {
+      query += `
+,
+  IFNULL(F.article_id, 0) > 0 AS isFavorie
+`;
+    }
+    query += `
+FROM article AS A
+LEFT JOIN notes AS N ON N.article_id = A.id
+LEFT JOIN categorie_article AS CA ON CA.article_id = A.id
+LEFT JOIN categorie AS C ON C.id = CA.categorie_id
+`;
+    if (!Number.isNaN(userId)) {
+      query += `
+LEFT JOIN favorie AS F ON F.article_id = A.id AND F.utilisateur_id = ?
+`;
+      param.push(userId);
+    }
+    query += `
+      LEFT JOIN saison as S ON S.article_id = A.id
+LEFT JOIN episode as E ON E.saison_id = S.id
+
+WHERE publier = 1 AND
+    (A.date < CURRENT_DATE + INTERVAL 1 DAY OR A.date IS NULL) AND
+    S.numero = 1 AND
+    E.numero = 1
+
+GROUP BY A.id, E.description, C.nom
+ORDER BY RAND()
+    `;
+    const [articleTopNotes] = await databaseClient.query(query, param);
+
+    return articleTopNotes as Rows;
+  }
 }
 
 export default new CarrousselRepository();
