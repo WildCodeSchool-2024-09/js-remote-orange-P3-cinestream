@@ -80,6 +80,13 @@ router.post(
   utilisateurActions.buyAbonement,
 );
 
+//actualise la photo de profile
+router.post(
+  "/api/compte/profile/updatePhotoProfile",
+  autentification.tokenIsCorrect,
+  utilisateurActions.updatePhotoProfile,
+);
+
 //--------BACKOFFICE---------
 //crée une serie
 router.post(

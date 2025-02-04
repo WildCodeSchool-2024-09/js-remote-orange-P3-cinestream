@@ -11,9 +11,15 @@ import style from "./CompteProfile.module.css";
 
 const CompteProfile = () => {
   const [spedo, setSpedo] = useState<string>("");
-  // const [photoProfile, SetPhotoProfile] = useState<string>("");
   const [abonement, setAbonement] = useState<boolean>(false);
   const [dateAbonement, setDateAbonement] = useState<string>("");
+
+  const [photoProfile, setPhotoProfile] = useState<File | null>(null);
+  const [photoProfilePreview, setPhotoProfilePreview] = useState<string | null>(
+    "",
+  );
+  //pour gain de performance regarder si la photo de profile a ete modifié pour pas faire de requete inutile
+  const [isPpModif, setIsPpModif] = useState<boolean>(false);
 
   const { token } = UseTokenContext();
 
@@ -31,6 +37,37 @@ const CompteProfile = () => {
         {
           headers: {
             "Content-Type": "application/json",
+          },
+        },
+      );
+      //renvoie true ou false si ca a marche ou non
+      if (data.success) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error(
+        "eurror l'ore de la récupération des info de l'utilisateur",
+        error,
+      );
+      return false;
+    }
+  };
+
+  //function pour mettre a jour la photo de profile
+  const updateCPhotoProfil = async () => {
+    //préparé les images
+    const formData = new FormData();
+    formData.append("newPhotoProfil", photoProfile as Blob);
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/compte/profile/updatePhotoProfile`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            token: token,
           },
         },
       );
@@ -71,6 +108,11 @@ const CompteProfile = () => {
           // SetPhotoProfile(data.compte.photo_profil);
           setAbonement(!!data.compte.abonement);
           setDateAbonement(data.compte.abonementExpire);
+          setPhotoProfilePreview(
+            data.compte.photoProfile
+              ? `${import.meta.env.VITE_API_URL}/uploads/${data.compte.photoProfile}`
+              : null,
+          );
         }
       } catch (error) {
         console.error(
@@ -88,12 +130,21 @@ const CompteProfile = () => {
       <div className={`${style.contenerHeder}`}>
         <p className={`${style.pTitrePage}`}>Votre profil</p>
         <div className={`${style.flexBnt}`}>
-          <BntSauvgarde updateCompte={updateCompte} />
+          <BntSauvgarde
+            updateCompte={updateCompte}
+            updateCPhotoProfil={updateCPhotoProfil}
+            isPpModif={isPpModif}
+          />
           <BntDeconection />
         </div>
       </div>
       <div className={`${style.contenerBody}`}>
-        <BntAvatar />
+        <BntAvatar
+          setPhotoProfile={setPhotoProfile}
+          photoProfilePreview={photoProfilePreview}
+          setPhotoProfilePreview={setPhotoProfilePreview}
+          setIsPpModif={setIsPpModif}
+        />
         <InputNom spedo={spedo} setSpedo={setSpedo} />
         <OffreAbonement
           abonement={abonement}

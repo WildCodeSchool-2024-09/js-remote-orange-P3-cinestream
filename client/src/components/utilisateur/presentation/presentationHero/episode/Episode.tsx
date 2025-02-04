@@ -80,7 +80,11 @@ const Episode = ({
                   <div className={`${style.containerElement}`}>
                     <div className={`${style.containerImage}`}>
                       <img
-                        src={`${import.meta.env.VITE_API_URL}/uploads/${episode.episode_image}`}
+                        src={
+                          episode.episode_image !== null
+                            ? `${import.meta.env.VITE_API_URL}/uploads/${episode.episode_image}`
+                            : "/public/images/404/image404.jpg"
+                        }
                         alt=""
                       />
                     </div>

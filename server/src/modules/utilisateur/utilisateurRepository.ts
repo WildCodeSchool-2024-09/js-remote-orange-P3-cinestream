@@ -115,6 +115,19 @@ class UtilisateurRepository {
     return rows;
   }
 
+  //mettre a jour image de profile
+  async updatePhotoProfil(
+    id: number,
+    results: {
+      image: null | string;
+    },
+  ) {
+    const query = "UPDATE utilisateur SET photo_profil = ? WHERE id = ?;;";
+
+    const [rows] = await databaseClient.query(query, [results.image, id]);
+    return rows;
+  }
+
   //achet un abonement
   async buyAbonnement(id: number, dateFormatter: string) {
     const query =
