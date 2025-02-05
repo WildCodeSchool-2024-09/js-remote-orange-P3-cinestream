@@ -49,13 +49,37 @@ const ListeSeries = ({ recherche }: { recherche: string }) => {
     chercherSerie();
   }, []);
 
+  const filtreRecherche = (serie: Serie) => {
+    //reture true si commence par !
+    const isNotPublier = recherche.charAt(0) === "!";
+    //cré une variable recherche
+    let rechercheClaire = recherche;
+    //si ca commence par ! on le suprime
+    if (isNotPublier) {
+      rechercheClaire = recherche.slice(1);
+    }
+
+    //si il doit affciher que les non puiblier
+    if (isNotPublier && Boolean(serie.publier)) {
+      return false;
+    }
+
+    //filtre de nom
+    if (
+      serie.nom
+        .toLocaleLowerCase()
+        .includes(rechercheClaire.toLocaleLowerCase())
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className={`${style.contenerAllSerie}`}>
       {series.length > 0 ? (
         series.map((serie: Serie) => {
-          return serie.nom
-            .toLocaleLowerCase()
-            .includes(recherche.toLocaleLowerCase()) ? (
+          return filtreRecherche(serie) ? (
             // verrifie que en mdode addUnivers qu'il sauto affcihe pas lui meme
             serie.id !== Number(paramsUniversIdA) ? (
               <FilmComposent key={serie.id} data={serie} />

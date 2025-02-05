@@ -73,6 +73,7 @@ const CrudUnivers = ({ updateInfoGeneral }: CrudUniversProps) => {
               key={article.id}
               article={article}
               updateAllUnivers={getAllUnivers}
+              updateInfoGeneral={updateInfoGeneral}
             />
           ))}
         <BntAjouterSerie updateInfoGeneral={updateInfoGeneral} />
