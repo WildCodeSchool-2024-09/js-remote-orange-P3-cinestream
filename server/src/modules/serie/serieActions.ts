@@ -1,10 +1,38 @@
-import fs from "node:fs";
-import path from "node:path";
 import type { RequestHandler } from "express";
 import deleteFilesInFolder from "../../hook/supprimerImage";
 import episodeRepository from "../episode/episodeRepository";
 import saisonRepository from "../episode/saisonRepository";
 import serieRepository from "./serieRepository";
+
+interface EpisodeSliderBrut {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: number;
+  premium: number;
+  type: string;
+  univers_numero: null | number;
+  univers_id: null | number;
+  categorie: string | null;
+  description: string | null;
+}
+
+interface EpisodeSlider {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: number;
+  premium: number;
+  type: string;
+  univers_numero: null | number;
+  univers_id: null | number;
+  categorie: string[];
+  description: string | null;
+}
 
 const cree: RequestHandler = async (req, res, next) => {
   try {
@@ -57,12 +85,47 @@ const getAll: RequestHandler = async (req, res, next) => {
 
 const getAllPublier: RequestHandler = async (req, res, next) => {
   try {
-    const resutat = await serieRepository.getAllSeriePublier();
+    const allarticleBrut =
+      (await serieRepository.getAllSeriePublier()) as EpisodeSliderBrut[];
+
+    const allArticle: EpisodeSlider[] = [];
+
+    for (const element of allarticleBrut) {
+      const elementExite = allArticle.find(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+
+      if (!elementExite) {
+        allArticle.push({
+          id: element.id,
+          nom: element.nom,
+          date: element.date,
+          image: element.image,
+          image_rectangle: element.image_rectangle,
+          publier: element.publier,
+          premium: element.premium,
+          type: element.type,
+          univers_numero: element.univers_numero,
+          univers_id: element.univers_id,
+          categorie: [],
+          description: element.description,
+        });
+      }
+
+      //trouver l'index de l'element
+      const index = allArticle.findIndex(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+      //lui ajouter la categorie si pas null
+      if (element.categorie) {
+        allArticle[index].categorie.push(element.categorie);
+      }
+    }
 
     res.status(201).send({
       message: "Serie trouvé avec succès",
       sucssces: true,
-      allArticle: resutat,
+      allArticle: allArticle,
     });
   } catch (err) {
     next(err);

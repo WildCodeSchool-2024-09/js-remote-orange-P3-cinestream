@@ -19,7 +19,11 @@
   font-size: 1em;
 }
 
-.pAuteur .span {
+.span {
   color: #00925d;
   font-size: 1em;
+}
+
+.pAuteurAdmin {
+  color: #f5c518;
 }

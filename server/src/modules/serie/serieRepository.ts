@@ -30,10 +30,13 @@ class SerieRepository {
     const query = `
 SELECT 
 a.*, 
-e.description AS description
+e.description AS description,
+C.nom AS categorie
 FROM article a
 LEFT JOIN saison s ON a.id = s.article_id AND s.numero = 1
 LEFT JOIN episode e ON s.id = e.saison_id AND e.numero = 1
+LEFT JOIN categorie_article AS CA ON CA.article_id = A.id
+LEFT JOIN categorie AS C ON C.id = CA.categorie_id
 WHERE a.publier = 1
 ORDER BY (a.nom = 'sans nom') ASC, a.nom ASC;
     `;

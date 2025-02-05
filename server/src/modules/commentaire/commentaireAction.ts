@@ -1,16 +1,68 @@
-import type { RequestHandler } from "express";
+import type { Request, RequestHandler } from "express";
+import utilisateurRepository from "../utilisateur/utilisateurRepository";
+import commentaireRepository from "./commentaireRepository";
+
+interface CustomRequest extends Request {
+  userId?: number;
+}
 
 //réccupère un commentaire par son id
-const getById: RequestHandler = async (req, res, next) => {
+const getById: RequestHandler = async (req: CustomRequest, res, next) => {
   try {
-    //récupérer le id de article et id de utilisateur
-    // -> id de article dans le body sous le nom de idA
-    // -> id utilisateur direct dans la request (req.userId)
-    //récupérer le commentaire par son id
-    //si le commentaire n'existe pas, retourner ""
-    //sinon, retourner le commentaire
-    res.status(201).send({
-      message: "mettre un message",
+    const idA = req.headers.ida;
+    const userId = Number(req.userId);
+
+    const userCommentaire = await commentaireRepository.getById(
+      Number(idA),
+      userId,
+    );
+    const photo_profil = await utilisateurRepository.getPhotoProfil(userId);
+
+    if (userCommentaire.length === 0) {
+      res.status(200).send({
+        message: "commentaire vide récupéré",
+        sucssces: true,
+        userCommentaire: "",
+        photo_profil: photo_profil[0].photo_profil,
+      });
+      return;
+    }
+
+    res.status(200).send({
+      message: "commentaire récupéré avec succès",
+      sucssces: true,
+      userCommentaire: userCommentaire[0].contenu,
+      photo_profil: photo_profil[0].photo_profil,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const update: RequestHandler = async (req: CustomRequest, res, next) => {
+  try {
+    const userId = Number(req.userId);
+    const { idA, valeur } = req.body;
+
+    const userCommentaire = await commentaireRepository.getById(
+      Number(idA),
+      userId,
+    );
+
+    //si utilisateur n'a pas de commentaire, créer un nouveau commentaire
+    if (valeur === "") {
+      //suprime le commentaire
+      await commentaireRepository.del(Number(idA), userId);
+    } else if (userCommentaire.length === 0) {
+      //crée un nouveux commentaire
+      await commentaireRepository.new(Number(idA), userId, valeur);
+    } else {
+      //sion on lui modifie son commentaire
+      await commentaireRepository.update(Number(idA), userId, valeur);
+    }
+
+    res.status(200).send({
+      message: "commentaire mis a jour avec succès",
       sucssces: true,
     });
   } catch (err) {
@@ -18,33 +70,25 @@ const getById: RequestHandler = async (req, res, next) => {
   }
 };
 
-const update: RequestHandler = async (req, res, next) => {
+const getAll: RequestHandler = async (req: CustomRequest, res, next) => {
   try {
-    //récupérer le id de article et id de utilisateur
-    // -> id de article dans le body sous le nom de idA
-    // -> id utilisateur direct dans la request (req.userId)
-    //regarder si l'utilisateur a mis un commentaire sur cette article
-    //si oui, mettre à jour le commentaire
-    //sinon, créer un nouveau commentaire
-    //retourner message succès
-    res.status(201).send({
-      message: "mettre un message",
-      sucssces: true,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
+    const idA = req.headers.ida;
 
-const getAll: RequestHandler = async (req, res, next) => {
-  try {
-    //récupérer le id de article
-    // -> id de article dans le body sous le nom de idA
-    //récupérer tout les commentaire de l'article
-    //retourner les commentaire
-    res.status(201).send({
+    const allCommentaire = await commentaireRepository.getAll(Number(idA));
+
+    const nbCommentaire = await commentaireRepository.getNbCommentaire(
+      Number(idA),
+    );
+    const moyenneNotes = await commentaireRepository.getmoyenneNotes(
+      Number(idA),
+    );
+
+    res.status(200).send({
       message: "mettre un message",
       sucssces: true,
+      allCommentaire: allCommentaire,
+      nbCommentaire: nbCommentaire[0].nb_commentaire,
+      moyenneNotes: moyenneNotes[0].moyenne_note,
     });
   } catch (err) {
     next(err);

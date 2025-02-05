@@ -19,3 +19,13 @@ export interface Saison {
   article_date: string;
   article_premium: number;
 }
+
+export interface Commentaire {
+  comentaire: string;
+  note: number;
+  nomUtilisateur: string;
+  article_id: number;
+  utilisateur_id: number;
+  commentaire_date: string;
+  utilisateur_is_admin: number;
+}
