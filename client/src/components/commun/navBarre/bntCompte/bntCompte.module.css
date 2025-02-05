@@ -1,7 +1,7 @@
 .divIconCompte {
   width: 3em;
   height: 3em;
-  background-image: url("/temporaire/profil/iconCompte.png");
+  background-image: url("/images/icon/iconCompte.png");
   border-radius: 50%;
   border: white 2px solid;
   object-fit: cover;

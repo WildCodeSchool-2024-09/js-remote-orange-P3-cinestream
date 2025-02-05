@@ -1,10 +1,9 @@
-import { ad } from "@faker-js/faker/dist/airline-C5Qwd7_q";
 import bcrypt from "bcrypt";
 import type { RequestHandler } from "express";
 import type { Request } from "express";
 import jwt from "jsonwebtoken";
-import { Result } from "../../../database/client";
 import type { Utilisateur } from "../../types/express";
+import uploadDynamicImages from "../middlewares/multer";
 import utilisateurRepository from "./utilisateurRepository";
 
 interface CustomRequest extends Request {
@@ -120,6 +119,7 @@ const getProfile: RequestHandler = async (req: CustomRequest, res, next) => {
         photo_profil: compte[0].photo_profil,
         abonement: abonement[0].actif,
         abonementExpire: abonement[0].date_fin,
+        photoProfile: compte[0].photo_profil,
       },
     });
   } catch (err) {
@@ -143,6 +143,57 @@ const updateProfile: RequestHandler = async (req: CustomRequest, res, next) => {
 
     res.send({
       success: true,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updatePhotoProfile: RequestHandler = async (
+  req: CustomRequest,
+  res,
+  next,
+) => {
+  try {
+    //récupérer l'id de l'utilisateur
+    const userId = Number(req.userId);
+
+    const results: {
+      image: string | null;
+    } = {
+      image: null,
+    };
+
+    // Upload dynamique pour plusieurs fichiers
+    const upload = uploadDynamicImages(
+      ["newPhotoProfil"], // Champs dans formData
+      (fieldName) => "utilisateur", // Dossier dynamique basé sur le champ
+      (req, file) => `photo-profil-${userId}`, // Nom dynamique du fichier
+    );
+
+    upload(req, res, async (err) => {
+      if (err) {
+        console.error("Erreur upload : ", err.message);
+        return res.status(400).send({ error: err.message });
+      }
+
+      if (req.files && typeof req.files === "object") {
+        const files = req.files as { [key: string]: Express.Multer.File[] };
+
+        if (files.newPhotoProfil) {
+          results.image = `utilisateur/${files.newPhotoProfil[0].filename}`;
+        }
+      }
+      //verifi qu'il a un truc a mettre a jour
+      if (results.image) {
+        await utilisateurRepository.updatePhotoProfil(userId, results);
+      }
+
+      // Réponse avec les chemins des fichiers uploadés
+      res.status(200).json({
+        message: "image bien mis a jour",
+        success: true,
+      });
     });
   } catch (err) {
     next(err);
@@ -188,4 +239,5 @@ export default {
   getProfile,
   updateProfile,
   buyAbonement,
+  updatePhotoProfile,
 };

@@ -1,4 +1,4 @@
-import { ar } from "@faker-js/faker/.";
+import e from "cors";
 import type { RequestHandler } from "express";
 import articleRepository from "../article/articleRepository";
 import detailUtilisateurRepository from "./detailUtilisateurRepository";
@@ -39,6 +39,8 @@ const getAllEpisode: RequestHandler = async (req, res, next) => {
     //prganiser les episodes par saison
     const allEpisodeOrganiser: Saison[] = [];
 
+    const categorie: string[] = [];
+
     for (const ligne of allEpisode) {
       //récupérer l'id de la saison
       const saisonId = ligne.saison_id;
@@ -62,15 +64,27 @@ const getAllEpisode: RequestHandler = async (req, res, next) => {
       const indexAAjouter = allEpisodeOrganiser.findIndex(
         (s) => s.saison_id === saisonId,
       );
-      //ajoute a la saison l'episode
-      allEpisodeOrganiser[indexAAjouter].episodes.push({
-        episode_id: ligne.episode_id,
-        episode_numero: ligne.episode_numero,
-        episode_nom: ligne.episode_nom,
-        episode_description: ligne.episode_description,
-        episode_lien_video: ligne.episode_lien_video,
-        episode_image: ligne.episode_image,
-      });
+
+      // Vérifier si l'épisode existe déjà dans la saison
+      const episodeExiste = allEpisodeOrganiser[indexAAjouter].episodes.some(
+        (e) => e.episode_id === ligne.episode_id,
+      );
+
+      //ajoute a la saison l'episode si il n'existe pas pour evitée les doublon
+      if (!episodeExiste) {
+        allEpisodeOrganiser[indexAAjouter].episodes.push({
+          episode_id: ligne.episode_id,
+          episode_numero: ligne.episode_numero,
+          episode_nom: ligne.episode_nom,
+          episode_description: ligne.episode_description,
+          episode_lien_video: ligne.episode_lien_video,
+          episode_image: ligne.episode_image,
+        });
+      }
+
+      if (ligne.categorie !== null && !categorie.includes(ligne.categorie)) {
+        categorie.push(ligne.categorie);
+      }
     }
 
     //retourner les episodes
@@ -78,6 +92,7 @@ const getAllEpisode: RequestHandler = async (req, res, next) => {
       message: "Serie récupéré avec succès",
       sucssces: true,
       allEpisode: allEpisodeOrganiser,
+      categorie: categorie,
     });
   } catch (err) {
     next(err);

@@ -11,12 +11,16 @@ interface presentationHeaderProps {
   allEpisodes: Saison[];
   episodeSelect: number;
   saisonSelect: number;
+  setModealLecture: (value: boolean) => void;
+  filmCategories: string[];
 }
 
 const PresentationHeader = ({
   allEpisodes,
   episodeSelect,
   saisonSelect,
+  setModealLecture,
+  filmCategories,
 }: presentationHeaderProps) => {
   const findIdSaion = () => {
     return allEpisodes.findIndex(
@@ -42,7 +46,10 @@ const PresentationHeader = ({
         style={{
           backgroundImage:
             allEpisodes.length > 0
-              ? `url(${import.meta.env.VITE_API_URL}/uploads/${allEpisodes[findIdSaion()].episodes[findIdEpisode()].episode_image})`
+              ? allEpisodes[findIdSaion()].episodes[findIdEpisode()]
+                  .episode_image !== null
+                ? `url(${import.meta.env.VITE_API_URL}/uploads/${allEpisodes[findIdSaion()].episodes[findIdEpisode()].episode_image})`
+                : `url("/public/images/404/image404.jpg")`
               : "url(#)",
         }}
       >
@@ -58,11 +65,15 @@ const PresentationHeader = ({
               numSaison={allEpisodes[findIdSaion()].saison_numero}
               nbEpisode={findNbEpisode()}
               allEpisodes={allEpisodes}
+              filmCategories={filmCategories}
             />
           )}
         </div>
         <div className={style.bntRegarder}>
-          <BntRegarder />
+          <BntRegarder
+            setModealLecture={setModealLecture}
+            allEpisodes={allEpisodes}
+          />
         </div>
         <div className={style.bntContainer}>
           <BntEdite />

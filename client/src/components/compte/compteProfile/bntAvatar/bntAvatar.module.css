@@ -26,6 +26,14 @@
   position: relative;
 }
 
+.contenerImage:hover {
+  outline: 4px dashed #28262d;
+}
+
+.inputAvatar {
+  display: none;
+}
+
 .imgAvatar {
   width: 100%;
   border-radius: 50%;
@@ -33,6 +41,11 @@
   outline: 2px solid white;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
+}
+
+.imgAvatar:hover {
+  opacity: 0.6;
 }
 
 .logoPhoto {

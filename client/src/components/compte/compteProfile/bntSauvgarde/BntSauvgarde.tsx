@@ -4,14 +4,22 @@ import style from "./bntSauvgarde.module.css";
 
 interface BntSauvgardeProps {
   updateCompte: () => Promise<boolean>;
+  updateCPhotoProfil: () => Promise<boolean>;
+  isPpModif: boolean;
 }
 
-const BntSauvgarde = ({ updateCompte }: BntSauvgardeProps) => {
+const BntSauvgarde = ({
+  updateCompte,
+  updateCPhotoProfil,
+  isPpModif,
+}: BntSauvgardeProps) => {
   //pour changer de routes
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    if (await updateCompte()) {
+    const isUpdatePhoto = isPpModif ? await updateCPhotoProfil() : true;
+    const isUpdateCompte = await updateCompte();
+    if (isUpdateCompte && isUpdatePhoto) {
       navigate("/");
       return;
     }

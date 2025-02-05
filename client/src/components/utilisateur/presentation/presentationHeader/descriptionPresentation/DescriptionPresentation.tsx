@@ -8,6 +8,7 @@ interface DescriptionPresentationProps {
   numSaison: number;
   nbEpisode: number;
   allEpisodes: Saison[];
+  filmCategories: string[];
 }
 
 const DescriptionPresentation = ({
@@ -17,9 +18,20 @@ const DescriptionPresentation = ({
   numSaison,
   nbEpisode,
   allEpisodes,
+  filmCategories,
 }: DescriptionPresentationProps) => {
   const traduireDate = (date: string) => {
     return new Date(date).getFullYear();
+  };
+  const definirCategorie = (categorie: string[]) => {
+    if (categorie.length === 0) return "";
+    let categorieString = "";
+
+    for (const element of categorie) {
+      categorieString += `• ${element} `;
+    }
+    // Retire le dernier caractère
+    return `${categorieString.slice(0, -1)}`;
   };
 
   return (
@@ -36,7 +48,7 @@ const DescriptionPresentation = ({
       )}
       <p className={style.infoDivert}>
         {nbEpisode} Episode {article_date && `• ${traduireDate(article_date)}`}{" "}
-        • Action • sience fiction
+        {filmCategories?.length > 0 && definirCategorie(filmCategories)}
       </p>
     </div>
   );

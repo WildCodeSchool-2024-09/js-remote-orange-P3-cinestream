@@ -16,10 +16,13 @@ class DetailUtilisateurRepository {
         e.image as episode_image,
         a.type as article_type,
         a.date as article_date,
-        a.premium as article_premium
+        a.premium as article_premium,
+        c.nom as categorie
     FROM saison as s
     LEFT JOIN episode as e ON e.saison_id = s.id
     LEFT JOIN article as a ON a.id = s.article_id
+    LEFT JOIN categorie_article as ca ON ca.article_id = a.id
+    LEFT JOIN categorie as c ON c.id = ca.categorie_id
     WHERE s.article_id = ? AND a.publier = 1
     ORDER BY s.numero, e.numero;
         `;
