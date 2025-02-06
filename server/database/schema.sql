@@ -132,36 +132,26 @@ CREATE TABLE token_serveur(
 
 
 -- valeurs par défaut
-INSERT INTO categorie (nom)
+INSERT INTO categorie (nom, image)
 VALUES 
-  ('Action'), 
-  ('Aventure'), 
-  ('Comédie'), 
-  ('Drame'), 
-  ('Fantastique'), 
-  ('Horreur'), 
-  ('Policier'), 
-  ('Science-fiction'), 
-  ('Thriller'), 
-  ('Western'), 
-  ('Animation'), 
-  ('Documentaire'), 
-  ('Biopic'), 
-  ('Historique'), 
-  ('Musical'), 
-  ('Romance'), 
-  ('Guerre'), 
-  ('Sport'), 
-  ('Famille'), 
-  ('Jeunesse'), 
-  ('Adulte'), 
-  ('Manga'), 
-  ('Anime'), 
-  ('Web-série'), 
-  ('Télé-réalité'), 
-  ('Talk-show'), 
-  ('Variété'), 
-  ('Emission');
+  ('Action', "icon_categorie/icon_action.jpg"), 
+  ('Aventure', "icon_categorie/icon_aventure.jpg"), 
+  ('Comédie' , "icon_categorie/icon_comedie.jpg"), 
+  ('Drame' , "icon_categorie/icon_dram.webp"), 
+  ('Fantastique' , "icon_categorie/icon_fantastique.jpg"), 
+  ('Horreur' , "icon_categorie/icon_horreur.jpg"),
+  ('Science-fiction' , "icon_categorie/icon_scienceFiction.jpg"), 
+  ('Western' , "icon_categorie/icon_western.jpg"), 
+  ('Animation' , "icon_categorie/icon_animation.jpg"), 
+  ('Documentaire' , "icon_categorie/icon_documentaire.jpg"),
+  ('Romance' , "icon_categorie/icon_romence.webp"), 
+  ('Guerre' , "icon_categorie/icon_guerre.jpg"), 
+  ('Famille' , "icon_categorie/icon_famille.avif"), 
+  ('Jeunesse' , "icon_categorie/icon_jeunesse.webp"), 
+  ('Adulte' , "icon_categorie/icon_adulte.avif"), 
+  ('Anime' , "icon_categorie/icon_anime.webp"), 
+  ('Web-série' , "icon_categorie/icon_webSerie.jpg"),
+  ('Emission' , "icon_categorie/icon_emisson.png");
 
 INSERT INTO plateforme (nom, image)
 VALUES 
