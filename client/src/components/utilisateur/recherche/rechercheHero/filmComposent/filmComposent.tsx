@@ -16,6 +16,7 @@ interface Article {
   type: string;
   univers_id: null | number;
   univers_numero: null | number;
+  categorie: string[];
 }
 
 interface FilmComposentProps {
@@ -71,7 +72,7 @@ const FilmComposent = ({
       }
     }
     if (categorie !== "all") {
-      if (film.type !== categorie) {
+      if (!film.categorie.includes(categorie)) {
         return false;
       }
     }
@@ -80,13 +81,11 @@ const FilmComposent = ({
       if (film.date === null) {
         return false;
       }
-      //date input
-      const dateInput = new Date(date);
-      const annerInput = dateInput.getFullYear();
       //date film
       const dateFilm = new Date(film.date); // Créer un objet Date
-      const annerFilm = dateFilm.getFullYear();
-      if (annerInput !== annerFilm) {
+      const annerFilm = dateFilm.getFullYear(); //récupérer l'année du film
+      //compare l'année du film avec l'année du filtre
+      if (Number(date) !== annerFilm) {
         return false;
       }
     }
@@ -100,6 +99,7 @@ const FilmComposent = ({
 
   const onFilmClick = (id: number) => {
     navigate(`/detail/${id}`);
+    window.scrollTo(0, 0);
   };
 
   const allFilmFilter = allFilm.filter((film) => filterFilm(film));

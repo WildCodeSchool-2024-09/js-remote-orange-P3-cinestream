@@ -2,6 +2,7 @@ import express from "express";
 import articleActions from "./modules/article/articleActions";
 import carousselActions from "./modules/caroussel/carousselActions";
 import categorieActions from "./modules/categorie/categorieActions";
+import commentaireAction from "./modules/commentaire/commentaireAction";
 import crudUniversAction from "./modules/crudUnivers/crudUniversAction";
 import detailUtilisateurAction from "./modules/detailUtilisateur/detailUtilisateurAction";
 import episodeActions from "./modules/episode/episodeActions";
@@ -272,6 +273,26 @@ router.post(
   "/api/utilisateur/details/updateFavorie",
   autentification.tokenIsCorrect,
   favorieAction.upadteUser,
+);
+
+//route pour récupéré le commentaire d'un utilisateur
+router.get(
+  "/api/utilisateur/details/commentaireUtilisateur",
+  autentification.tokenIsCorrect,
+  commentaireAction.getById,
+);
+
+//route pour récupéré le commentaire d'un utilisateur
+router.post(
+  "/api/utilisateur/details/commentaireUtilisateur/update",
+  autentification.tokenIsCorrect,
+  commentaireAction.update,
+);
+
+//route pour récupéré tout les commentaire d'un article
+router.get(
+  "/api/utilisateur/details/toutCommentaire",
+  commentaireAction.getAll,
 );
 
 //-------homePage------

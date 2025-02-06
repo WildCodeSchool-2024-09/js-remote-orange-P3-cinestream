@@ -1,9 +1,21 @@
 import styles from "./BntPlus.module.css";
 
-const BntPlus = () => {
+interface BntPlusProps {
+  compteur: number;
+  setCompteur: (value: number) => void;
+}
+
+const BntPlus = ({ compteur, setCompteur }: BntPlusProps) => {
+  const handleOnClickBnyPlus = () => {
+    setCompteur(compteur + 8);
+  };
   return (
     <div className={styles.container}>
-      <button type="button" className={styles.button}>
+      <button
+        type="button"
+        className={styles.button}
+        onClick={handleOnClickBnyPlus}
+      >
         afficher plus
       </button>
     </div>

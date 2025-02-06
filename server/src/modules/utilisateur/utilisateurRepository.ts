@@ -98,6 +98,14 @@ class UtilisateurRepository {
     return rows;
   }
 
+  //récupéré la photo de profile d'un utilisateur
+  async getPhotoProfil(id: number) {
+    const query = "SELECT photo_profil FROM utilisateur WHERE id = ?;";
+
+    const [rows] = await databaseClient.query(query, [id]);
+    return rows as Rows;
+  }
+
   //actualise si abonement est actif
   async actualiserAbonement(id: number) {
     const query =

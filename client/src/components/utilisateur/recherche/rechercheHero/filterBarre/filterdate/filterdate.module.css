@@ -14,17 +14,30 @@
   border-radius: 7px;
   cursor: pointer;
   width: 100%;
-  z-index: 20;
+  z-index: 1;
 }
 
-.fondCalendillier {
+.dateRenderIncorrect {
+  border: 3px orange solid;
+  outline: none;
+}
+
+.contenercalendrillier {
   position: absolute;
   top: 50%;
-  right: .75em;
+  right: .45em;
   transform: translateY(-50%);
   border-radius: 50%;
   width: 2.1em;
   height: 2.1em;
   background-color: #757575;
-  z-index: 1;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendrillier {
+  font-size: 1.4em;
+  color: rgb(0, 0, 0);
 }

@@ -53,7 +53,7 @@ CREATE TABLE commentaire (
   article_id INT,
   utilisateur_id INT,
   contenu TEXT NOT NULL,
-  DATE DATE NOT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (article_id, utilisateur_id),
   FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
   FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE

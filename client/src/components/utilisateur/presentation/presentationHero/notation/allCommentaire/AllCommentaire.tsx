@@ -1,24 +1,42 @@
+import { useEffect, useState } from "react";
+import type { Commentaire } from "../../../../../../types/vite-env";
 import styles from "./AllCommentaire.module.css";
 import AllCommentaireComposent from "./allCommentaireComposent/AllCommentaireComposent";
 import BntPlus from "./bntPlus/BntPlus";
 
-const AllCommentaire = () => {
+interface AllCommentaireProps {
+  getAllCommentaire: () => Promise<void>;
+  allCommentaire: Commentaire[];
+}
+
+const AllCommentaire = ({
+  getAllCommentaire,
+  allCommentaire,
+}: AllCommentaireProps) => {
+  const [compteur, setCompteur] = useState(4);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    getAllCommentaire();
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div className={styles.commentaire}>
-        <AllCommentaireComposent />
-      </div>
-      <div className={styles.commentaire}>
-        <AllCommentaireComposent />
-      </div>
-      <div className={styles.commentaire}>
-        <AllCommentaireComposent />
-      </div>
-      <div className={styles.commentaire}>
-        <AllCommentaireComposent />
-      </div>
+      {allCommentaire.map(
+        (commentaire, index) =>
+          index < compteur && (
+            <div
+              key={`${commentaire.article_id}, ${commentaire.utilisateur_id}`}
+              className={styles.commentaire}
+            >
+              <AllCommentaireComposent commentaire={commentaire} />
+            </div>
+          ),
+      )}
       <div className={styles.bntPlusContainer}>
-        <BntPlus />
+        {compteur < allCommentaire.length && (
+          <BntPlus compteur={compteur} setCompteur={setCompteur} />
+        )}
       </div>
     </div>
   );
