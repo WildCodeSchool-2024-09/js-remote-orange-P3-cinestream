@@ -227,10 +227,119 @@ const getPrentation5: RequestHandler = async (
   }
 };
 
+const getFilmPlatforme: RequestHandler = async (req, res, next) => {
+  try {
+    const idP = Number(req.headers.idp);
+
+    const articlePlatformeBrut = (await carousselRepository.getFilmPlatforme(
+      idP,
+    )) as EpisodeSliderBrut[];
+
+    const articlePlatforme = [] as EpisodeSlider[];
+
+    for (const element of articlePlatformeBrut) {
+      const elementExite = articlePlatforme.find(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+
+      if (!elementExite) {
+        articlePlatforme.push({
+          id: element.id,
+          nom: element.nom,
+          date: element.date,
+          image: element.image,
+          image_rectangle: element.image_rectangle,
+          publier: element.publier,
+          premium: element.premium,
+          type: element.type,
+          univers_numero: element.univers_numero,
+          univers_id: element.univers_id,
+          categorie: [],
+          moyenne_note: element.moyenne_note,
+          description: element.description,
+        });
+      }
+
+      //trouver l'index de l'element
+      const index = articlePlatforme.findIndex(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+      //lui ajouter la categorie si pas null
+      if (element.categorie) {
+        articlePlatforme[index].categorie.push(element.categorie);
+      }
+    }
+
+    res.status(200).send({
+      message: "Article mis a jour et récupérer",
+      sucssces: true,
+      articlePlatforme: articlePlatforme,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+//les film qui on une certaine categorie
+const getFilmCategorie: RequestHandler = async (req, res, next) => {
+  try {
+    const idC = Number(req.headers.idc);
+
+    const articleCategorieBrut = (await carousselRepository.getFilmCategorie(
+      idC,
+    )) as EpisodeSliderBrut[];
+
+    const articleCategorie = [] as EpisodeSlider[];
+
+    for (const element of articleCategorieBrut) {
+      const elementExite = articleCategorie.find(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+
+      if (!elementExite) {
+        articleCategorie.push({
+          id: element.id,
+          nom: element.nom,
+          date: element.date,
+          image: element.image,
+          image_rectangle: element.image_rectangle,
+          publier: element.publier,
+          premium: element.premium,
+          type: element.type,
+          univers_numero: element.univers_numero,
+          univers_id: element.univers_id,
+          categorie: [],
+          moyenne_note: element.moyenne_note,
+          description: element.description,
+        });
+      }
+
+      //trouver l'index de l'element
+      const index = articleCategorie.findIndex(
+        (e: EpisodeSlider) => e.id === element.id,
+      );
+      //lui ajouter la categorie si pas null
+      if (element.categorie) {
+        articleCategorie[index].categorie.push(element.categorie);
+      }
+    }
+
+    res.status(200).send({
+      message: "Article mis a jour et récupérer",
+      sucssces: true,
+      articleCategorie: articleCategorie,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   getRecent,
   getFilms,
   getSeries,
   getTopNotes,
   getPrentation5,
+  getFilmPlatforme,
+  getFilmCategorie,
 };

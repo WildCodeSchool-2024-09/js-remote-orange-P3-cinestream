@@ -308,6 +308,18 @@ router.get(
   carousselActions.getPrentation5,
 );
 
+//filme qui on une certaine platforme
+router.get(
+  "/api/utilisateur/caroussel/platforme",
+  carousselActions.getFilmPlatforme,
+);
+
+//filme qui on une certaine categorie
+router.get(
+  "/api/utilisateur/caroussel/categorie",
+  carousselActions.getFilmCategorie,
+);
+
 //filme récent
 router.get("/api/utilisateur/caroussel/recent", carousselActions.getRecent);
 

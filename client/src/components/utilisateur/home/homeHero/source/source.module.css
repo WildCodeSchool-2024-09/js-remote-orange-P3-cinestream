@@ -17,6 +17,13 @@
   aspect-ratio: 2 / 1;
   background-color: #08080a;
   border-radius: 25px;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shadowSelect {
+  background-color: #333;
 }
 
 /* image */
@@ -25,4 +32,5 @@
   width: 70%;
   margin: auto;
   object-fit: contain;
+  z-index: 4;
 }

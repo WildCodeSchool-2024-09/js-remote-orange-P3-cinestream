@@ -4,7 +4,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "../../../../commun/slider/sliderDefauts.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import articleAleatoir from "../../../../../hook/articleRandom";
 import { sliderClike } from "../../../../commun/slider/sliderClike";
+import SliderFilmSource from "./sliderFilmSource/SliderFilmSource";
 import style from "./source.module.css";
 
 interface Platforme {
@@ -13,8 +15,26 @@ interface Platforme {
   image: string;
 }
 
+interface Article {
+  id: number;
+  nom: string;
+  date: string | null;
+  image: string | null;
+  image_rectangle: string | null;
+  publier: number;
+  premium: number;
+  type: string;
+  univers_id: number | null;
+  univers_numero: number | null;
+  categorie: string[];
+  moyenne_note: number;
+  description: string | null;
+}
+
 const Source = () => {
   const [listePlatforme, setListePlatforme] = useState([] as Platforme[]);
+  const [platformeSelect, setPlatformeSelect] = useState(0);
+  const [allFilmPlatforme, setAllFilmPlatforme] = useState([] as Article[]);
 
   useEffect(() => {
     const getAllPlatforme = async () => {
@@ -27,7 +47,9 @@ const Source = () => {
             },
           },
         );
-        setListePlatforme(data.platforme);
+        if (data.sucssces) {
+          setListePlatforme(articleAleatoir(data.platforme, 7));
+        }
       } catch (error) {
         console.error(
           "eurreur l'ore de la récupération de tout les producteur",
@@ -59,38 +81,69 @@ const Source = () => {
       },
     ],
   };
+  //gestion du slide filme de platforme
+  const getFilmPlatforme = async (idP: number) => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/utilisateur/caroussel/platforme`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            idP: idP,
+          },
+        },
+      );
+      setAllFilmPlatforme(articleAleatoir(data.articlePlatforme, 22));
+    } catch (error) {
+      console.error("eurreur l'ore de la récupération de tout les producteur");
+    }
+  };
 
-  const handClikePlatforme = () => {};
+  //gestion de slide platforme
+  const handClikePlatforme = (idPlatforme: string | null) => {
+    if (idPlatforme === null) return;
+
+    if (Number(idPlatforme) === platformeSelect) {
+      setPlatformeSelect(0);
+      return;
+    }
+    setPlatformeSelect(Number(idPlatforme));
+    getFilmPlatforme(Number(idPlatforme));
+  };
 
   const { handleMouseDown, handleMouseMove, handleMouseUp } =
     sliderClike(handClikePlatforme);
 
   return (
-    <div className={`slider-container ${style.sliderContainerSource}`}>
-      <Slider {...settings}>
-        <div className={`${style.containerElement}`}>
-          <div className={`${style.containerImage}`}>
-            <img src="/temporaire/logo_canal+.png" alt="" />
-          </div>
-        </div>
-
-        {listePlatforme.map((platforme) => (
-          <div
-            key={platforme.id}
-            className={`${style.containerElement}`}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-          >
-            <div className={`${style.containerImage}`}>
-              <img
-                src={`${import.meta.env.VITE_API_URL}/api/image/${platforme.image}`}
-                alt={`platforme ${platforme.nom}`}
-              />
+    <div>
+      <div className={`slider-container ${style.sliderContainerSource}`}>
+        <Slider {...settings}>
+          {listePlatforme.map((platforme) => (
+            <div key={platforme.id} className={`${style.containerElement}`}>
+              <div
+                className={
+                  platforme.id === platformeSelect
+                    ? `${style.containerImage} ${style.shadowSelect}`
+                    : `${style.containerImage}`
+                }
+                data-id={platforme.id}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+              >
+                <img
+                  src={`${import.meta.env.VITE_API_URL}/api/image/${platforme.image}`}
+                  alt={`platforme ${platforme.nom}`}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
+
+      {platformeSelect !== 0 && allFilmPlatforme.length > 0 && (
+        <SliderFilmSource allFilmPlatforme={allFilmPlatforme} />
+      )}
     </div>
   );
 };
