@@ -75,16 +75,18 @@ const ListeSeries = ({ recherche }: { recherche: string }) => {
     return false;
   };
 
+  const filmFiltrer = series.filter((serie: Serie) => filtreRecherche(serie));
+
   return (
     <div className={`${style.contenerAllSerie}`}>
-      {series.length > 0 ? (
-        series.map((serie: Serie) => {
-          return filtreRecherche(serie) ? (
+      {filmFiltrer.length > 0 ? (
+        filmFiltrer.map((serie: Serie) => {
+          return (
             // verrifie que en mdode addUnivers qu'il sauto affcihe pas lui meme
             serie.id !== Number(paramsUniversIdA) ? (
               <FilmComposent key={serie.id} data={serie} />
             ) : null
-          ) : null;
+          );
         })
       ) : (
         <p className={`${style.pAucunResultat}`}>Aucun résultat</p>
