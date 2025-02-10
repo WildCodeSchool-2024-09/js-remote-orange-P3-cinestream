@@ -28,9 +28,20 @@ const AllCommentaireComposent = ({
     );
 
     const minutesTotales = Math.floor(difference / 60000);
+    const ans = Math.floor(minutesTotales / 525600);
+    const mois = Math.floor(minutesTotales / 43800);
+    const jours = Math.floor(minutesTotales / 1440);
     const heures = Math.floor(minutesTotales / 60);
     const minutes = minutesTotales % 60;
-
+    if (ans > 0) {
+      return `${ans} ans`;
+    }
+    if (mois > 0) {
+      return `${mois} mois`;
+    }
+    if (jours > 0) {
+      return `${jours} jours`;
+    }
     if (heures > 0) {
       return `${heures} h`;
     }

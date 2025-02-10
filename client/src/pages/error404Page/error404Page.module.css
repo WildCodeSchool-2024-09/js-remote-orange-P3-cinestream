@@ -91,7 +91,8 @@
   height: var(--pilleHeight);
   background-color: rosybrown;
   z-index: 3;
-  animation: animationCharge 20s linear infinite;
+  /* animation: animationCharge 20s linear infinite; */
+  animation: animationCharge 3s linear infinite;
 
   @media screen and (max-width: 768px) {
     width: var(--pilleWidthMobile);
