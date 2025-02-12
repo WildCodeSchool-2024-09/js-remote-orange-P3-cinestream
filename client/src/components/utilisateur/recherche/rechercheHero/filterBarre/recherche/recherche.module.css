@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   position: relative;
+  width: 26em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 .recherche input {
@@ -12,6 +17,7 @@
   padding: 0.2em .5em;
   border-radius: 7px;
   color: white;
+  width: 100%;
 }
 
 .recherche .icon {

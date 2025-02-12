@@ -34,6 +34,14 @@ const Episode = ({
     draggable: true,
     focusOnSelect: false,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const findIdSaion = () => {

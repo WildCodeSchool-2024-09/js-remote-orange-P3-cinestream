@@ -33,11 +33,11 @@ const AllCommentaire = ({
             </div>
           ),
       )}
-      <div className={styles.bntPlusContainer}>
-        {compteur < allCommentaire.length && (
+      {compteur < allCommentaire.length && (
+        <div className={styles.bntPlusContainer}>
           <BntPlus compteur={compteur} setCompteur={setCompteur} />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

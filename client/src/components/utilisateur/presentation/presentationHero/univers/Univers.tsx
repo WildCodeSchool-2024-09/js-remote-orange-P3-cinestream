@@ -38,6 +38,14 @@ const Univers = () => {
     arrows: true,
     touchMove: true,
     cssEase: "ease-out",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>

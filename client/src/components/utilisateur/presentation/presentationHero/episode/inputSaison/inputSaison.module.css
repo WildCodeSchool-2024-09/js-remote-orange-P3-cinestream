@@ -7,6 +7,11 @@
   font-size: 1.2em;
   border-radius: 8px;
   padding: 0.2em 0.4em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.1em;
+    margin-right: 0.7em;
+  }
 }
 
 .dropdownMenu:hover {

@@ -4,6 +4,10 @@
   margin-top: 70px;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 4em;
+  }
 }
 
 .titreSectionFilme {
@@ -12,6 +16,11 @@
   font-family: "Rubik", sans-serif;
   font-weight: 500;
   padding-left: 70px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0.7em;
+    font-size: 1.5em;
+  }
 }
 
 .sliderContainerFilme {
@@ -19,6 +28,11 @@
   padding-left: 50px;
   box-sizing: border-box;
   padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .containerElement {

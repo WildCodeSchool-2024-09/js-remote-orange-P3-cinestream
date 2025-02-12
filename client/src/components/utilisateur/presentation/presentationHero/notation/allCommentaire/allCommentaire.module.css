@@ -5,12 +5,21 @@
   margin-top: 3em;
   margin-left: 4em;
   margin-right: 4em;
+
+  @media screen and (max-width: 1024px) {
+    margin-left: 0.7em;
+    margin-right: 0.7em;
+  }
 }
 
 .commentaire {
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
+
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+  }
 }
 
 .bntPlusContainer {

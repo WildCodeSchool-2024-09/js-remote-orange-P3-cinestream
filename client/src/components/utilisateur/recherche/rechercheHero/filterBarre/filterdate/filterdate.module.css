@@ -1,6 +1,10 @@
 .contenerInputDate {
   position: relative;
-  max-width: 14em;
+  width: 8.5em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 .filterDate {
@@ -8,6 +12,7 @@
   font-size: 1.5em;
   color: white;
   border: 3px #28262d solid;
+  box-sizing: border-box;
   background-color: transparent;
   padding: 0.2em .5em;
   box-sizing: border-box;

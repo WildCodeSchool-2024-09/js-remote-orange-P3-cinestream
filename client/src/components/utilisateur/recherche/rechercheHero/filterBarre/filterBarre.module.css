@@ -3,55 +3,12 @@
   justify-content: flex-start;
   align-items: center;
   padding: 20px;
-  gap: 25px;
+  gap: 1.6em;
   margin-left: 30px;
-}
 
-.recherche,
-.categorie,
-.filterDate,
-.type {
-  margin-right: 15px;
-}
-
-.recherche:last-child,
-.categorie:last-child,
-.filterDate:last-child,
-.type:last-child {
-  margin-right: 0;
-}
-
-/* Media queries pour rendre le design responsive */
-@media (max-width: 768px) {
-  .filterBar {
+  @media screen and (max-width: 1024px) {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 15px;
-    margin-left: 20px;
-  }
-
-  .recherche,
-  .categorie,
-  .filterDate,
-  .type {
-    margin-right: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .filterBar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 5px;
-    gap: 10px;
-    margin-left: 10px;
-  }
-
-  .recherche,
-  .categorie,
-  .filterDate,
-  .type {
-    margin-right: 5px;
+    margin-right: 1em;
+    margin-left: 1em;
   }
 }
