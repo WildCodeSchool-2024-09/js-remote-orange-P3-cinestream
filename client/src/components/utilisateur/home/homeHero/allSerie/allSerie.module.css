@@ -5,6 +5,10 @@
   font-weight: 500;
   margin-top: 70px;
   padding-left: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0.4em;
+  }
 }
 
 .sliderContainerSerie {
@@ -12,6 +16,11 @@
   padding-left: 50px;
   box-sizing: border-box;
   padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* un élément complet */

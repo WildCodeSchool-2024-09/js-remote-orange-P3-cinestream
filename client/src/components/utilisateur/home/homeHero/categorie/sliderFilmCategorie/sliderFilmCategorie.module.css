@@ -4,6 +4,11 @@
   box-sizing: border-box;
   padding-right: 50px;
   margin-top: 1em;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* un élémeent du caroussel */
@@ -14,6 +19,7 @@
 /* contener de image */
 .containerImage {
   width: 80%;
+  margin: 0 auto;
   aspect-ratio: 1 / 1.5;
   border-radius: 25px;
   position: relative;

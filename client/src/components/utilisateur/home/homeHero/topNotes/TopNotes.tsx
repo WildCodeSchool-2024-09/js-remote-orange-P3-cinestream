@@ -52,6 +52,7 @@ const TopNotes = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -62,6 +63,14 @@ const TopNotes = () => {
     draggable: true, // Permet de glisser avec la souris
     focusOnSelect: false, // Empêche la mise au focus des slides
     arrows: true, // Active les flèches
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const definirNotes = (note: number) => {
@@ -91,49 +100,53 @@ const TopNotes = () => {
 
   return (
     <>
-      <p className={`${style.titreTopNotes}`}>Les plus populaires</p>
-      <div className={`slider-container ${style.sliderContainerTopNotes}`}>
-        <div>
-          <Slider {...settings}>
-            {listeTopNotes.map((element, index) => (
-              <div key={element.id} className={`${style.elementCourselle}`}>
-                <div
-                  className={`${style.containerFlex}`}
-                  data-id={element.id}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                >
-                  <div className={`${style.containerPlaceFilme}`}>
-                    <p className={`${style.PlaceFilme}`}>{index + 1}</p>
+      {listeTopNotes.length > 0 && (
+        <>
+          <p className={`${style.titreTopNotes}`}>Les plus populaires</p>
+          <div className={`slider-container ${style.sliderContainerTopNotes}`}>
+            <div>
+              <Slider {...settings}>
+                {listeTopNotes.map((element, index) => (
+                  <div key={element.id} className={`${style.elementCourselle}`}>
+                    <div
+                      className={`${style.containerFlex}`}
+                      data-id={element.id}
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                    >
+                      <div className={`${style.containerPlaceFilme}`}>
+                        <p className={`${style.PlaceFilme}`}>{index + 1}</p>
+                      </div>
+                      <div className={`${style.containerImage}`}>
+                        <img
+                          src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                          alt={`affiche ${element.nom}`}
+                        />
+                      </div>
+                      <div className={`${style.containerInfo}`}>
+                        {element.premium === 1 ? (
+                          <p className={`${style.pPrenuime}`}>👑</p>
+                        ) : (
+                          <p className={`${style.pPrenuimeVide}`}>#</p>
+                        )}
+                        <p className={`${style.pTitre}`}>{element.nom}</p>
+                        <p className={`${style.pType}`}>
+                          {definirCategorie(element.categorie)}
+                        </p>
+                        <p className={`${style.pNotes}`}>
+                          {definirNotes(Number(element.moyenne_note))}{" "}
+                          <span>| {element.type}</span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className={`${style.containerImage}`}>
-                    <img
-                      src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
-                      alt={`affiche ${element.nom}`}
-                    />
-                  </div>
-                  <div className={`${style.containerInfo}`}>
-                    {element.premium === 1 ? (
-                      <p className={`${style.pPrenuime}`}>👑</p>
-                    ) : (
-                      <p className={`${style.pPrenuimeVide}`}>#</p>
-                    )}
-                    <p className={`${style.pTitre}`}>{element.nom}</p>
-                    <p className={`${style.pType}`}>
-                      {definirCategorie(element.categorie)}
-                    </p>
-                    <p className={`${style.pNotes}`}>
-                      {definirNotes(Number(element.moyenne_note))}{" "}
-                      <span>| {element.type}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

@@ -4,6 +4,11 @@
   padding-left: 50px;
   box-sizing: border-box;
   padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* un élémeent du caroussel */
@@ -14,6 +19,7 @@
 /* contener de image */
 .containerImage {
   width: 85%;
+  margin: 0 auto;
   aspect-ratio: 2 / 1;
   background-color: #08080a;
   border-radius: 25px;
@@ -24,6 +30,8 @@
 
 .shadowSelect {
   background-color: #333;
+  border: #333 2px solid;
+  box-sizing: border-box;
 }
 
 /* image */

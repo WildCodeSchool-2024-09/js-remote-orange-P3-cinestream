@@ -61,6 +61,7 @@ const Source = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0,
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -75,8 +76,7 @@ const Source = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          centerMode: true,
+          slidesToShow: 1,
         },
       },
     ],
@@ -116,30 +116,32 @@ const Source = () => {
 
   return (
     <div>
-      <div className={`slider-container ${style.sliderContainerSource}`}>
-        <Slider {...settings}>
-          {listePlatforme.map((platforme) => (
-            <div key={platforme.id} className={`${style.containerElement}`}>
-              <div
-                className={
-                  platforme.id === platformeSelect
-                    ? `${style.containerImage} ${style.shadowSelect}`
-                    : `${style.containerImage}`
-                }
-                data-id={platforme.id}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/api/image/${platforme.image}`}
-                  alt={`platforme ${platforme.nom}`}
-                />
+      {listePlatforme.length > 0 && (
+        <div className={`slider-container ${style.sliderContainerSource}`}>
+          <Slider {...settings}>
+            {listePlatforme.map((platforme) => (
+              <div key={platforme.id} className={`${style.containerElement}`}>
+                <div
+                  className={
+                    platforme.id === platformeSelect
+                      ? `${style.containerImage} ${style.shadowSelect}`
+                      : `${style.containerImage}`
+                  }
+                  data-id={platforme.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/api/image/${platforme.image}`}
+                    alt={`platforme ${platforme.nom}`}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+            ))}
+          </Slider>
+        </div>
+      )}
 
       {platformeSelect !== 0 && allFilmPlatforme.length > 0 && (
         <SliderFilmSource allFilmPlatforme={allFilmPlatforme} />

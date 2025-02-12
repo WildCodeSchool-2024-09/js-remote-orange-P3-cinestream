@@ -7,6 +7,10 @@
   padding-left: 50px;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0.4em;
+  }
 }
 
 /* le contener du slider */
@@ -14,6 +18,11 @@
   padding-left: 50px;
   box-sizing: border-box;
   padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* un élémeent du caroussel */
@@ -23,6 +32,7 @@
 
 /* contener de image */
 .containerImage {
+  margin: 0 auto;
   width: 80%;
   aspect-ratio: 1 / 1.5;
   border-radius: 25px;
