@@ -54,6 +54,7 @@ const Favorie = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -69,7 +70,6 @@ const Favorie = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1,
-          centerMode: true,
         },
       },
     ],

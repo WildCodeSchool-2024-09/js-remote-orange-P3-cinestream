@@ -47,6 +47,7 @@ const AllFilme = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -57,6 +58,14 @@ const AllFilme = () => {
     draggable: true, // Permet de glisser avec la souris
     focusOnSelect: false, // Empêche la mise au focus des slides
     arrows: true, // Active les flèches
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const handClikeFilms = (id: string | null) => {
@@ -69,37 +78,41 @@ const AllFilme = () => {
 
   return (
     <>
-      <p className={`${style.titreSectionFilme}`}>Films</p>
-      <div className={`slider-container ${style.sliderContainerFilme}`}>
-        <div>
-          <Slider {...settings}>
-            {listeFilms.map((film) => (
-              <div className={`${style.elementCourselle}`} key={film.id}>
-                <div
-                  className={`${style.containerElement}`}
-                  data-id={film.id}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                >
-                  <div className={`${style.containerImage}`}>
-                    <img
-                      src={`${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`}
-                      alt={film.nom}
-                    />
+      {listeFilms.length > 0 && (
+        <>
+          <p className={`${style.titreSectionFilme}`}>Films</p>
+          <div className={`slider-container ${style.sliderContainerFilme}`}>
+            <div>
+              <Slider {...settings}>
+                {listeFilms.map((film) => (
+                  <div className={`${style.elementCourselle}`} key={film.id}>
+                    <div
+                      className={`${style.containerElement}`}
+                      data-id={film.id}
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                    >
+                      <div className={`${style.containerImage}`}>
+                        <img
+                          src={`${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`}
+                          alt={film.nom}
+                        />
+                      </div>
+                      <div className={`${style.containerInfo}`}>
+                        <p className={`${style.titreFilme}`}>{film.nom}</p>
+                        <p className={`${style.desciptionFilme}`}>
+                          {film.description !== null && film.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className={`${style.containerInfo}`}>
-                    <p className={`${style.titreFilme}`}>{film.nom}</p>
-                    <p className={`${style.desciptionFilme}`}>
-                      {film.description !== null && film.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

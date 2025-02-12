@@ -47,6 +47,7 @@ const AllSerie = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -57,6 +58,14 @@ const AllSerie = () => {
     draggable: true, // Permet de glisser avec la souris
     focusOnSelect: false, // Empêche la mise au focus des slides
     arrows: true, // Active les flèches
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const handClikeSeries = (id: string | null) => {
@@ -69,38 +78,42 @@ const AllSerie = () => {
 
   return (
     <>
-      <p className={`${style.titreSectionSerise}`}>Series</p>
-      <div className={`slider-container ${style.sliderContainerSerie}`}>
-        <div>
-          <Slider {...settings}>
-            {listeSeries.length > 0 &&
-              listeSeries.map((serie) => (
-                <div className={`${style.elementCourselle}`} key={serie.id}>
-                  <div
-                    className={`${style.containerElement}`}
-                    data-id={serie.id}
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUp}
-                  >
-                    <div className={`${style.containerImage}`}>
-                      <img
-                        src={`${import.meta.env.VITE_API_URL}/uploads/${serie.image_rectangle}`}
-                        alt={serie.nom}
-                      />
+      {listeSeries.length > 0 && (
+        <>
+          <p className={`${style.titreSectionSerise}`}>Series</p>
+          <div className={`slider-container ${style.sliderContainerSerie}`}>
+            <div>
+              <Slider {...settings}>
+                {listeSeries.length > 0 &&
+                  listeSeries.map((serie) => (
+                    <div className={`${style.elementCourselle}`} key={serie.id}>
+                      <div
+                        className={`${style.containerElement}`}
+                        data-id={serie.id}
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseUp={handleMouseUp}
+                      >
+                        <div className={`${style.containerImage}`}>
+                          <img
+                            src={`${import.meta.env.VITE_API_URL}/uploads/${serie.image_rectangle}`}
+                            alt={serie.nom}
+                          />
+                        </div>
+                        <div className={`${style.containerInfo}`}>
+                          <p className={`${style.titreFilme}`}>{serie.nom}</p>
+                          <p className={`${style.desciptionFilme}`}>
+                            {serie.description !== null && serie.description}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className={`${style.containerInfo}`}>
-                      <p className={`${style.titreFilme}`}>{serie.nom}</p>
-                      <p className={`${style.desciptionFilme}`}>
-                        {serie.description !== null && serie.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </Slider>
-        </div>
-      </div>
+                  ))}
+              </Slider>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

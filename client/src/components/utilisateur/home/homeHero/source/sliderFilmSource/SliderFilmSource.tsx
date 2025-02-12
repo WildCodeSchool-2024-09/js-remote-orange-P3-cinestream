@@ -30,6 +30,7 @@ const SliderFilmSource = ({ allFilmPlatforme }: PlatformeProps) => {
   const navigate = useNavigate();
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -45,7 +46,6 @@ const SliderFilmSource = ({ allFilmPlatforme }: PlatformeProps) => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 1,
-          centerMode: true,
         },
       },
     ],
@@ -78,32 +78,34 @@ const SliderFilmSource = ({ allFilmPlatforme }: PlatformeProps) => {
 
   return (
     <>
-      <div className={`slider-container ${style.sliderContainerSource}`}>
-        <Slider {...settings}>
-          {allFilmPlatforme.map((element) => (
-            <div key={element.id} className={`${style.containerElement}`}>
-              <div
-                className={`${style.containerImage}`}
-                data-id={element.id}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
-                  alt={element.nom}
-                />
-                <p className={`${style.pTitreFilme}`}>{element.nom}</p>
-                <p className={`${style.pNotesType}`}>
-                  {definirNotes(Number(element.moyenne_note))}{" "}
-                  <span> {definirCategorie(element.categorie)}</span>
-                </p>
-                <div className={`${style.shadowBottum}`} />
+      {allFilmPlatforme.length > 0 && (
+        <div className={`slider-container ${style.sliderContainerSource}`}>
+          <Slider {...settings}>
+            {allFilmPlatforme.map((element) => (
+              <div key={element.id} className={`${style.containerElement}`}>
+                <div
+                  className={`${style.containerImage}`}
+                  data-id={element.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                    alt={element.nom}
+                  />
+                  <p className={`${style.pTitreFilme}`}>{element.nom}</p>
+                  <p className={`${style.pNotesType}`}>
+                    {definirNotes(Number(element.moyenne_note))}{" "}
+                    <span> {definirCategorie(element.categorie)}</span>
+                  </p>
+                  <div className={`${style.shadowBottum}`} />
+                </div>
               </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+            ))}
+          </Slider>
+        </div>
+      )}
     </>
   );
 };

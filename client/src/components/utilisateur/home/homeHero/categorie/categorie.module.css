@@ -4,6 +4,11 @@
   padding-left: 50px;
   box-sizing: border-box;
   padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* un élémeent du caroussel */
@@ -15,6 +20,7 @@
 .containerImage {
   position: relative;
   width: 90%;
+  margin: 0 auto;
   aspect-ratio: 2.12 / 1;
   border-radius: 25px;
   overflow: hidden;

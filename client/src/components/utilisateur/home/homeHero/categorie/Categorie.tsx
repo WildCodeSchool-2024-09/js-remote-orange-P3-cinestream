@@ -59,6 +59,7 @@ const Categorie = () => {
   }, []);
 
   const settings = {
+    initialSlide: 0, //slide initial
     dots: false, // Désactive les points de navigation
     infinite: false,
     speed: 500,
@@ -73,8 +74,7 @@ const Categorie = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          centerMode: true,
+          slidesToShow: 1,
         },
       },
     ],
@@ -119,44 +119,46 @@ const Categorie = () => {
 
   return (
     <div>
-      <div className={`slider-container ${style.sliderContainerCategorie}`}>
-        <Slider {...settings}>
-          {listeCategories.map((categorie) => (
-            <div key={categorie.id} className={`${style.containerElement}`}>
-              <div
-                className={`${style.containerImage}`}
-                data-id={categorie.id}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-              >
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/api/image/${categorie.image}`}
-                  alt={`categorie ${categorie.nom}`}
-                />
-
-                <p
-                  className={
-                    categorieSelect === categorie.id
-                      ? `${style.pType} ${style.pTypeSelect}`
-                      : `${style.pType}`
-                  }
-                >
-                  {categorie.nom}
-                </p>
-
+      {listeCategories.length > 0 && (
+        <div className={`slider-container ${style.sliderContainerCategorie}`}>
+          <Slider {...settings}>
+            {listeCategories.map((categorie) => (
+              <div key={categorie.id} className={`${style.containerElement}`}>
                 <div
-                  className={
-                    categorieSelect === categorie.id
-                      ? `${style.flouGris} ${style.flouVert}`
-                      : `${style.flouGris}`
-                  }
-                />
+                  className={`${style.containerImage}`}
+                  data-id={categorie.id}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/api/image/${categorie.image}`}
+                    alt={`categorie ${categorie.nom}`}
+                  />
+
+                  <p
+                    className={
+                      categorieSelect === categorie.id
+                        ? `${style.pType} ${style.pTypeSelect}`
+                        : `${style.pType}`
+                    }
+                  >
+                    {categorie.nom}
+                  </p>
+
+                  <div
+                    className={
+                      categorieSelect === categorie.id
+                        ? `${style.flouGris} ${style.flouVert}`
+                        : `${style.flouGris}`
+                    }
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+            ))}
+          </Slider>
+        </div>
+      )}
       {categorieSelect !== 0 && allFilmCategorie.length !== 0 && (
         <SliderFilmCategorie allFilmCategorie={allFilmCategorie} />
       )}
