@@ -1,3 +1,11 @@
+.contenerCategorie {
+  width: 14em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
 .categorieInput {
   font-size: 1.5em;
   color: white;
@@ -5,8 +13,9 @@
   background-color: transparent;
   padding: 0.2em .5em;
   border-radius: 7px;
-  max-width: 8em;
+  width: 100%;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .categorieInput option {

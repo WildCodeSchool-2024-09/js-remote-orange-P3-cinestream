@@ -3,12 +3,10 @@ import styles from "./rechercheHeader.module.css";
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <div className={styles.navbarre}>
-        <NavBarre />
-      </div>
-      <h1 className={styles.recherchetitle}>Tous les films</h1>
-    </header>
+    <div className={styles.header}>
+      <NavBarre />
+      <p className={styles.recherchetitle}>Tous les films</p>
+    </div>
   );
 };
 

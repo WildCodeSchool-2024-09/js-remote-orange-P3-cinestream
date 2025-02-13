@@ -2,84 +2,44 @@
   background-image: url("/images/home-background.png");
   background-size: cover;
   background-position: center;
-  padding: 280px;
+  width: 100%;
+  height: 70vh;
   position: relative;
+
+  @media screen and (max-width: 1024px) {
+    height: 30vh;
+  }
 }
 
 .header::before {
   content: "";
   position: absolute;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 160px;
-  pointer-events: none;
+  height: 40%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), #0d0c0f);
 }
+
 .header::after {
   content: "";
   position: absolute;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 50px;
-  pointer-events: none;
-}
-.header::before {
-  top: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0), #0d0c0f);
-}
-.header::after {
-  bottom: 0;
+  height: 30%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #0d0c0f);
 }
 
 .recherchetitle {
   color: white;
   font-size: 3em;
-  margin: 0;
   position: absolute;
-  bottom: 160px;
-  left: 20px;
-}
+  bottom: 20%;
+  left: 10%;
+  z-index: 2;
 
-.navbarre {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-/* Media queries pour rendre le design responsive */
-@media (max-width: 768px) {
-  .header {
-    padding: 140px;
-  }
-
-  .recherchetitle {
-    font-size: 2em;
-    bottom: 80px;
-    left: 10px;
-  }
-
-  .navbarre {
-    font-size: 0.7em;
-    padding: 8px 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    padding: 70px;
-  }
-
-  .recherchetitle {
+  @media screen and (max-width: 1024px) {
     font-size: 1.5em;
-    bottom: 40px;
-    left: 5px;
-  }
-
-  .navbarre {
-    font-size: 0.2em;
-    padding: 6px 12px;
   }
 }

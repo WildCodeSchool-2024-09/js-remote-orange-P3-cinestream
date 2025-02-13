@@ -19,5 +19,8 @@
 }
 
 .bntFavorie:hover {
-  background-color: darkred;
+  /* que sur pc */
+  @media (pointer: fine) {
+    background-color: darkred;
+  }
 }

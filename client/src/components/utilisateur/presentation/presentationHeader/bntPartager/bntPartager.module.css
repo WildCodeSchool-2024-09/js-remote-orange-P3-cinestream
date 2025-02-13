@@ -8,7 +8,11 @@
   align-items: center;
   cursor: pointer;
   border-radius: 15px;
-  margin-right: 10px;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+    padding: 10px 10px;
+  }
 }
 
 .bntPartager:hover {
@@ -25,6 +29,7 @@
   justify-content: center;
   margin-right: 10px;
 }
+
 .icon svg {
   fill: black;
   width: 12px;

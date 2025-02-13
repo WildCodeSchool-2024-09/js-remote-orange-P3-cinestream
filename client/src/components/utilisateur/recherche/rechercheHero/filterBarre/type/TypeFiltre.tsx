@@ -7,7 +7,7 @@ interface TypeProps {
 
 const Type = ({ type, setType }: TypeProps) => {
   return (
-    <>
+    <div className={`${styles.contenerType}`}>
       <select
         className={`${styles.typeInput}`}
         value={type}
@@ -17,7 +17,7 @@ const Type = ({ type, setType }: TypeProps) => {
         <option value="film">Film</option>
         <option value="serie">Série</option>
       </select>
-    </>
+    </div>
   );
 };
 

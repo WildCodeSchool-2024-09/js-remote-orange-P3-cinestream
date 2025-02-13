@@ -1,3 +1,11 @@
+.contenerType {
+  width: 8em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
 .typeInput {
   font-size: 1.5em;
   color: white;
@@ -6,6 +14,8 @@
   padding: 0.2em .5em;
   border-radius: 7px;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .typeInput option {

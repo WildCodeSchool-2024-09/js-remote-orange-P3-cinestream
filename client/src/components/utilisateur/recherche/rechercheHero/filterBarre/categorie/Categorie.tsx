@@ -38,18 +38,20 @@ const Categorie = ({ categorie, setCategorie }: CategorieProps) => {
   }, []);
 
   return (
-    <select
-      className={`${styles.categorieInput}`}
-      value={categorie}
-      onChange={(e) => setCategorie(e.target.value)}
-    >
-      <option value="all">tous</option>
-      {allCategorie.map((categorie) => (
-        <option key={categorie.id} value={categorie.nom}>
-          {categorie.nom}
-        </option>
-      ))}
-    </select>
+    <div className={`${styles.contenerCategorie}`}>
+      <select
+        className={`${styles.categorieInput}`}
+        value={categorie}
+        onChange={(e) => setCategorie(e.target.value)}
+      >
+        <option value="all">tous</option>
+        {allCategorie.map((categorie) => (
+          <option key={categorie.id} value={categorie.nom}>
+            {categorie.nom}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
