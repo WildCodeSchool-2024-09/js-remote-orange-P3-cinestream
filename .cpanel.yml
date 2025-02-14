@@ -1,0 +1,13 @@
+deployment:
+  phases:
+    install:
+      - cd ./client && npm install --production
+      - cd ./server && npm install --production
+
+    build:
+      - cd ./client && npm run build
+      - cd ./server && npm run build
+
+    deploy:
+      - cp -R ./client/dist ~/public_html/projet3/
+      - cp -R ./client/dist ~/public_html/projet3-api/

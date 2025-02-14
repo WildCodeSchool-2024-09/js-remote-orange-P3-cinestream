@@ -13,20 +13,17 @@ const app = express();
 
 app.use(express.json());
 
-if (
-  process.env.CLIENT_URL != null &&
-  process.env.CLIENT_URL2 != null &&
-  process.env.SERVEUR_URL != null &&
-  process.env.CLIENT_URL_NETWORK != null
-) {
+const corsOrigin = [];
+
+process.env.CLIENT_URL && corsOrigin.push(process.env.CLIENT_URL);
+process.env.CLIENT_URL2 && corsOrigin.push(process.env.CLIENT_URL2);
+process.env.SERVEUR_URL && corsOrigin.push(process.env.SERVEUR_URL);
+process.env.CLIENT_URL_NETWORK && corsOrigin.push(process.env.CLIENT_URL_NETWORK);
+
+if (corsOrigin.length > 0) {
   app.use(
     cors({
-      origin: [
-        process.env.CLIENT_URL,
-        process.env.CLIENT_URL2,
-        process.env.SERVEUR_URL,
-        process.env.CLIENT_URL_NETWORK,
-      ],
+      origin: corsOrigin,
     }),
   );
 } else {
