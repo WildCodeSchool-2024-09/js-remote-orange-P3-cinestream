@@ -9,5 +9,5 @@ deployment:
       - cd ./server && npm run build
 
     deploy:
-      - cp -R ./client/dist ~/public_html/projet3/
-      - cp -R ./client/dist ~/public_html/projet3-api/
+      - cp -R ./client/dist /home/ficl4036/public_html/projet3/
+      - cp -R ./server/dist /home/ficl4036/public_html/projet3-api/
