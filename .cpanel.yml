@@ -1,8 +1,8 @@
-# deployment:
-#   phases:
-#     install:
-#       - cd ./client && npm install --production
-#       - cd ./server && npm install --production
+deployment:
+  phases:
+    install:
+      - cd ./client && npm install --production
+      - cd ./server && npm install --production
 
 #     build:
 #       - cd ./client && npm run build
