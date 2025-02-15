@@ -127,11 +127,16 @@ const getAllPublier: RequestHandler = async (req, res, next) => {
       sucssces: true,
       allArticle: allArticle,
     });
-  } catch (err) {
+  } catch (err: unknown) {
+    let errorMessage = "Une erreur inconnue s'est produite";
+
+    if (err instanceof Error) {
+      errorMessage = err.message;
+    }
     res.status(400).send({
       message: "eurreur",
       sucssces: false,
-      eurreur: err,
+      eurreur: errorMessage,
     });
     // next(err);
   }
