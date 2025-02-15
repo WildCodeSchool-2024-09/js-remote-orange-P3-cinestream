@@ -133,7 +133,7 @@ const getAllPublier: RequestHandler = async (req, res, next) => {
       sucssces: false,
       eurreur: err,
     });
-    next(err);
+    // next(err);
   }
 };
 

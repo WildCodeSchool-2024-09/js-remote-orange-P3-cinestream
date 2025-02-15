@@ -39,9 +39,9 @@ LEFT JOIN categorie_article AS CA ON CA.article_id = a.id
 LEFT JOIN categorie AS C ON C.id = CA.categorie_id
 WHERE a.publier = 1
 ORDER BY (a.nom = 'sans nom') ASC, a.nom ASC;
-    `;
+`;
 
-    const [rows] = await databaseClient.query(query, []);
+    const [rows] = await databaseClient.query(query);
 
     return rows as Rows;
   }
