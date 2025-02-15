@@ -1,23 +1,29 @@
 ---
 deployment:
   tasks:
+      # supprimer les fichiers inutiles qui pose problème
       - rm package.json
       - rm package-lock.json
 
+      # installer les dépendances
       - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
 
+      # faire les installations
       - cd ./client && npm install
       - cd ..
       - cd ./server && npm install
       - cd ..
 
+      # build
       - cd ./client && npm run build
+      - cp ./.htaccess ./dist/
       - cd ..
       - cd ./server && npm run build
       - cd ..
 
+      # copier les fichiers
       - mkdir -p /home/ficl4036/public_html/projet3
       - mkdir -p /home/ficl4036/public_html/projet3-api
 
-      - cp -R ./client/dist/* /home/ficl4036/public_html/projet3/
+      - cp -R ./client/dist/. /home/ficl4036/public_html/projet3/
       - cp -R ./server/dist/* /home/ficl4036/public_html/projet3-api/
