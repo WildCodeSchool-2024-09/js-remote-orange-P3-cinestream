@@ -1,13 +1,15 @@
-# deployment:
-#   phases:
-#     install:
-#       - cd ./client && npm install --production
-#       - cd ./server && npm install --production
+deployment:
+  tasks:
+      - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
 
-#     build:
-#       - cd ./client && npm run build
-#       - cd ./server && npm run build
+      - cd ./client && npm install --production
+      - cd ./server && npm install --production
 
-#     deploy:
-#       - cp -R ./client/dist /home/ficl4036/public_html/projet3/
-#       - cp -R ./server/dist /home/ficl4036/public_html/projet3-api/
+      - cd ./client && npm run build
+      - cd ./server && npm run build
+
+      - mkdir -p /home/ficl4036/public_html/projet3
+      - mkdir -p /home/ficl4036/public_html/projet3-api
+
+      - cp -R ./client/dist/* /home/ficl4036/public_html/projet3/
+      - cp -R ./server/dist/* /home/ficl4036/public_html/projet3-api/
