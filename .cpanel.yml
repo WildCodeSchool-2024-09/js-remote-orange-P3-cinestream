@@ -18,11 +18,12 @@ deployment:
       - cp /home/ficl4036/00ConfigSites/clientProjet3/.env ./client/ 
       - cd ./client && npm run build
       - cd ..
+      - cp ./client/.htaccess ./client/dist/
+
       - >
         if [ -d ./server/dist/public/uploads ]; then
           cp ./server/dist/public/uploads/. ./server/public/uploads/
         fi
-
       - cd ./server && npm run build
       - cd ..
 
@@ -31,4 +32,3 @@ deployment:
       - mkdir -p /home/ficl4036/public_html/projet3-api
 
       - cp -R ./client/dist/. /home/ficl4036/public_html/projet3/
-      - cp /home/ficl4036/00ConfigSites/clientProjet3/.htaccess /home/ficl4036/public_html/projet3/
