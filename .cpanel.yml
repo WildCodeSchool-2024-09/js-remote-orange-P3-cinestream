@@ -7,6 +7,7 @@ deployment:
 
       # installer les dépendances
       - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
+      - export NODE_OPTIONS="--max-old-space-size=16384"
 
       # faire les installations
       - cd ./client && npm install
@@ -16,7 +17,8 @@ deployment:
 
       # build
       - cp /home/ficl4036/00ConfigSites/clientProjet3/.env ./client/
-      - cd ./client && NODE_OPTIONS="--max-old-space-size=16384" npm run build
+      - echo $NODE_OPTIONS
+      - cd ./client && npm run build
       - cd ..
       - cp ./client/.htaccess ./client/dist/
 
@@ -24,7 +26,7 @@ deployment:
         if [ -d ./server/dist/public/uploads ]; then
           cp ./server/dist/public/uploads/. ./server/public/uploads/
         fi
-      - cd ./server && NODE_OPTIONS="--max-old-space-size=16384" npm run build
+      - cd ./server && npm run build
       - cd ..
 
       # copier les fichiers
