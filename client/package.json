@@ -7,6 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "exclude": [
+    "node_modules"
+  ],
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "axios": "^1.7.9",
