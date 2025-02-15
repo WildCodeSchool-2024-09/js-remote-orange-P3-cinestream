@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
 import BntAjouterSerie from "./bntAjouterSerie/BntAjouterSerie";
-import style from "./crudEpisode.module.css";
+import style from "./crudUnivers.module.css";
 import ElementCurd from "./elementCurd/ElementCurd";
 
 interface CrudUniversProps {
