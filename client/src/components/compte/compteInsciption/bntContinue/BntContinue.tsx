@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import style from "./BntContinue.module.css";
+import style from "./bntContinue.module.css";
 
 interface BntContinueProps {
   valide: {

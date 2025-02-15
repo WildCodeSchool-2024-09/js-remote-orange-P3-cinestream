@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
-import style from "./BntCompte.module.css";
+import style from "./bntCompte.module.css";
 
 const BntCompte = () => {
   const { token } = UseTokenContext();

@@ -7,7 +7,7 @@ import BntSauvgarde from "../../../components/compte/compteProfile/bntSauvgarde/
 import InputNom from "../../../components/compte/compteProfile/inputNom/InputNom";
 import OffreAbonement from "../../../components/compte/compteProfile/offreAbonement/OffreAbonement";
 import { UseTokenContext } from "../../../context/tokenContext";
-import style from "./CompteProfile.module.css";
+import style from "./compteProfile.module.css";
 
 const CompteProfile = () => {
   const [spedo, setSpedo] = useState<string>("");

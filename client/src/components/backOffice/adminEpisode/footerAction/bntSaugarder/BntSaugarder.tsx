@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import style from "./BntSaugarder.module.css";
+import style from "./bntSaugarder.module.css";
 
 interface BntSaugarderProps {
   updateEpisode: () => Promise<boolean>;

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import style from "./InputMail.module.css";
+import style from "./inputMail.module.css";
 
 interface ValideProps {
   email: boolean;

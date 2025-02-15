@@ -1,4 +1,4 @@
-import styles from "./AllCommentaireComposent.module.css";
+import styles from "./allCommentaireComposent.module.css";
 
 interface Commentaire {
   comentaire: string;

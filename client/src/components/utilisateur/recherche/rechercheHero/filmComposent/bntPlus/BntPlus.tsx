@@ -1,4 +1,4 @@
-import style from "./BntPlus.module.css";
+import style from "./bntPlus.module.css";
 
 interface BntPlusProps {
   compteur: number;

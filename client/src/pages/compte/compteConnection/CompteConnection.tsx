@@ -3,7 +3,7 @@ import BntClose from "../../../components/compte/compteConnection/bntClose/BntCl
 import BntConnection from "../../../components/compte/compteConnection/bntConnection/BntConnection";
 import InputMail from "../../../components/compte/compteConnection/inputMail/InputMail";
 import InputMotDePasse from "../../../components/compte/compteConnection/inputMotDePasse/InputMotDePasse";
-import style from "./CompteConnection.module.css";
+import style from "./compteConnection.module.css";
 
 const CompteConnection = () => {
   const [email, setEmail] = useState("");

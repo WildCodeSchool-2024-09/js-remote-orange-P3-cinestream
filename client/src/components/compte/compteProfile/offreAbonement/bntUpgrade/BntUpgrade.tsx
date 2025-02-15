@@ -1,6 +1,6 @@
 import axios from "axios";
 import { UseTokenContext } from "../../../../../context/tokenContext";
-import style from "./BntUpgrade.module.css";
+import style from "./bntUpgrade.module.css";
 
 interface OffreAbonementProps {
   abonement: boolean;

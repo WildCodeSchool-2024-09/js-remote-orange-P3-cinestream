@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../../../../../commun/slider/sliderDefauts.css";
 import { useNavigate } from "react-router-dom";
 import { sliderClike } from "../../../../../commun/slider/sliderClike";
-import style from "./SliderFilmSource.module.css";
+import style from "./sliderFilmSource.module.css";
 
 interface Article {
   id: number;
