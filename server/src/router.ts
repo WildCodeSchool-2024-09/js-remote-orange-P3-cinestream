@@ -16,6 +16,56 @@ import serieActions from "./modules/serie/serieActions";
 import utilisateurActions from "./modules/utilisateur/utilisateurActions";
 
 const router = express.Router();
+//a sup
+import databaseClient from "../database/client";
+import type { RequestHandler } from "express";
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+
+const home: RequestHandler = async (req, res, next) => {
+  try {
+    const query = "SELECT * FROM categorie;";
+    const [rows] = await databaseClient.query(query);
+
+    res.status(201).send({
+      message: "Serie crée avec succès",
+      sucssces: true,
+      data: {
+        nom: "test",
+        mail: "fefef@gmail.com",
+        motDePasse: "fefef",
+      },
+      env: {
+        DB_HOST: DB_HOST,
+        DB_PORT: DB_PORT,
+        DB_USER: DB_USER,
+        DB_PASSWORD: DB_PASSWORD,
+        DB_NAME: DB_NAME,
+      },
+      reponse: rows,
+    });
+  } catch (err: any) {
+    // En cas d'erreur, renvoie une erreur avec un message approprié
+    res.status(500).send({
+      message: "Erreur lors de la connexion à la base de données",
+      success: false,
+      error: err.message,
+      env: {
+        DB_HOST: DB_HOST,
+        DB_PORT: DB_PORT,
+        DB_USER: DB_USER,
+        DB_PASSWORD: DB_PASSWORD,
+        DB_NAME: DB_NAME,
+      },
+    });
+    next(err);
+  }
+};
+//home teste
+router.get(
+  "/api",
+  home,
+);
+//fin a sup
 
 //route utilisateur
 //inscription
