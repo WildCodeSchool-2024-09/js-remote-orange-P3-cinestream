@@ -16,7 +16,7 @@ deployment:
 
       # build
       - cp /home/ficl4036/00ConfigSites/clientProjet3/.env ./client/
-      - cd ./client && NODE_OPTIONS="--max-old-space-size=8192" npm run build
+      - cd ./client && NODE_OPTIONS="--max-old-space-size=16384" npm run build
       - cd ..
       - cp ./client/.htaccess ./client/dist/
 
@@ -24,7 +24,7 @@ deployment:
         if [ -d ./server/dist/public/uploads ]; then
           cp ./server/dist/public/uploads/. ./server/public/uploads/
         fi
-      - cd ./server && NODE_OPTIONS="--max-old-space-size=8192" npm run build
+      - cd ./server && NODE_OPTIONS="--max-old-space-size=16384" npm run build
       - cd ..
 
       # copier les fichiers
