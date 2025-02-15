@@ -1,13 +1,20 @@
 ---
 deployment:
   tasks:
+      - rm package.json
+      - rm package-lock.json
+
       - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
 
       - cd ./client && npm install --production
+      - cd ..
       - cd ./server && npm install --production
+      - cd ..
 
       - cd ./client && npm run build
+      - cd ..
       - cd ./server && npm run build
+      - cd ..
 
       - mkdir -p /home/ficl4036/public_html/projet3
       - mkdir -p /home/ficl4036/public_html/projet3-api
