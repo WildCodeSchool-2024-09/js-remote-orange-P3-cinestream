@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UseTokenContext } from "../../../../../../context/tokenContext";
 import BntEnvoyer from "./bntEnvoyer/BntEnvoyer";
 import styles from "./commentaireUtilisateur.module.css";
@@ -26,6 +26,7 @@ const CommentaireUtilisateur = ({
   );
   const { token } = UseTokenContext();
   const { idA } = useParams();
+  const navigate = useNavigate();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -55,6 +56,8 @@ const CommentaireUtilisateur = ({
     };
     if (token) {
       getUserCommentaire();
+    } else {
+      setCommentaireAJour(true);
     }
   }, []);
 
@@ -97,6 +100,9 @@ const CommentaireUtilisateur = ({
           onChange={(e) => {
             setUserCommentaire(e.target.value);
             setCommentaireAJour(false);
+            if (!token) {
+              navigate("/connection");
+            }
           }}
         />
         {token && (
