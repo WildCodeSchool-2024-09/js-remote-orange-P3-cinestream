@@ -18,7 +18,8 @@ const corsOrigin = [];
 process.env.CLIENT_URL && corsOrigin.push(process.env.CLIENT_URL);
 process.env.CLIENT_URL2 && corsOrigin.push(process.env.CLIENT_URL2);
 process.env.SERVEUR_URL && corsOrigin.push(process.env.SERVEUR_URL);
-process.env.CLIENT_URL_NETWORK && corsOrigin.push(process.env.CLIENT_URL_NETWORK);
+process.env.CLIENT_URL_NETWORK &&
+  corsOrigin.push(process.env.CLIENT_URL_NETWORK);
 
 if (corsOrigin.length > 0) {
   app.use(
