@@ -15,7 +15,7 @@ CREATE TABLE abonement (
   actif TINYINT(1) DEFAULT 0,
   date_fin DATE DEFAULT NULL,
   utilisateur_id INT,
-  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id)
+  FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id) ON DELETE CASCADE
 );
 
 -- univers
