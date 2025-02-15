@@ -128,6 +128,11 @@ const getAllPublier: RequestHandler = async (req, res, next) => {
       allArticle: allArticle,
     });
   } catch (err) {
+    res.status(400).send({
+      message: "eurreur",
+      sucssces: false,
+      eurreur: err,
+    });
     next(err);
   }
 };
