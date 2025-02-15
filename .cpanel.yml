@@ -6,9 +6,9 @@ deployment:
 
       - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
 
-      - cd ./client && npm install --production
+      - cd ./client && npm install
       - cd ..
-      - cd ./server && npm install --production
+      - cd ./server && npm install
       - cd ..
 
       - cd ./client && npm run build
