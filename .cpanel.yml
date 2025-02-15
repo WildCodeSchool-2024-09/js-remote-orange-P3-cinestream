@@ -1,3 +1,4 @@
+---
 deployment:
   tasks:
       - export PATH="$PATH:/opt/alt/alt-nodejs20/root/usr/bin/"
