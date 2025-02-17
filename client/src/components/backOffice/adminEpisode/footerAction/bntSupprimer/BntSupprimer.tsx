@@ -2,7 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UseTokenContext } from "../../../../../context/tokenContext";
-import style from "./BntSupprimer.module.css";
+import style from "./bntSupprimer.module.css";
 
 const BntSupprimer = () => {
   const { token } = UseTokenContext();

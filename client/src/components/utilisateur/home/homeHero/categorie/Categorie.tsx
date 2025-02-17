@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import articleAleatoir from "../../../../../hook/articleRandom";
 import { sliderClike } from "../../../../commun/slider/sliderClike";
-import style from "./Categorie.module.css";
+import style from "./categorie.module.css";
 import SliderFilmCategorie from "./sliderFilmCategorie/SliderFilmCategorie";
 
 interface Categorie {

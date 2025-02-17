@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
 import BntFermerCommun from "../../communBackOffice/bntFermerCommun/BntFermerCommun";
 import FooterAction from "../footerAction/FooterAction";
-import style from "./InfoGeneral.tsx.module.css";
+import style from "./infoGeneral.tsx.module.css";
 import InputCheck from "./inputCheck/InputCheck";
 import InputDateSerie from "./inputDateSerie/InputDateSerie";
 import InputImageHaurisontal from "./inputImageHaurisontal/InputImageHaurisontal";

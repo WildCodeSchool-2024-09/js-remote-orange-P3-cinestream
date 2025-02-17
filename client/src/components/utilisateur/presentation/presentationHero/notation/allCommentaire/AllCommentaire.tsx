@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Commentaire } from "../../../../../../types/vite-env";
-import styles from "./AllCommentaire.module.css";
+import styles from "./allCommentaire.module.css";
 import AllCommentaireComposent from "./allCommentaireComposent/AllCommentaireComposent";
 import BntPlus from "./bntPlus/BntPlus";
 

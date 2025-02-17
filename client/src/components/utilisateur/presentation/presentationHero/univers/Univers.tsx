@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import { sliderClike } from "../../../../commun/slider/sliderClike";
-import style from "./Univers.module.css";
+import style from "./univers.module.css";
 
 interface Univers {
   id: number;

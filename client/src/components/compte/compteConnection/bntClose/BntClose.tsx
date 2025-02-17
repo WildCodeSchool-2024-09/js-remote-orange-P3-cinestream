@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import style from "./BntClose.module.css";
+import style from "./bntClose.module.css";
 
 const BntClose = () => {
   return (

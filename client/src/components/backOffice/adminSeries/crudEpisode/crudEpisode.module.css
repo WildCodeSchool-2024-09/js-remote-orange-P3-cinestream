@@ -5,8 +5,8 @@
   border-radius: 1.3em;
   display: flex;
   flex-direction: column;
-  gap: 2em;
   align-items: start;
+  gap: 2em;
 }
 
 .titreSection {

@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { UseTokenContext } from "../../../../context/tokenContext";
-import style from "./CrudEpisode.module.css";
 import InputSaison from "./InputSaison/InputSaison";
 import BntAjouterEpisode from "./bntAjouterEpisode/BntAjouterEpisode";
+import style from "./crudEpisode.module.css";
 import ElementCurd from "./elementCurd/ElementCurd";
 
 interface Episode {

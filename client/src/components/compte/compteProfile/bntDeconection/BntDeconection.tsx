@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
-import style from "./BntDeconection.module.css";
+import style from "./bntDeconection.module.css";
 
 const BntDeconection = () => {
   //pour changer de routes

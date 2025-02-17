@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import style from "./InputNom.module.css";
+import style from "./inputNom.module.css";
 
 interface InputNomProps {
   spedo: string;

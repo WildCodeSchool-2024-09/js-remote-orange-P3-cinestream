@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { UseTokenContext } from "../../../../context/tokenContext";
-import style from "./Routes.module.css";
+import style from "./routes.module.css";
 
 const Routes = () => {
   const location = useLocation();

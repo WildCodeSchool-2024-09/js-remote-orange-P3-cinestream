@@ -1,9 +1,9 @@
 import { UseTokenContext } from "../../../../context/tokenContext";
-import style from "./HomeHero.module.css";
 import AllFilme from "./allFilme/AllFilme";
 import AllSerie from "./allSerie/AllSerie";
 import Categorie from "./categorie/Categorie";
 import Favorie from "./favorie/Favorie";
+import style from "./homeHero.module.css";
 import Recent from "./recent/Recent";
 import Source from "./source/Source";
 import TopNotes from "./topNotes/TopNotes";

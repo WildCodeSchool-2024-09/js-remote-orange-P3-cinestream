@@ -5,7 +5,7 @@ import CrudEpisode from "../../../components/backOffice/adminSeries/crudEpisode/
 import CrudUnivers from "../../../components/backOffice/adminSeries/crudUnisers/CrudUnivers";
 import InfoGeneral from "../../../components/backOffice/adminSeries/infoGeneral/InfoGeneral";
 import { UseTokenContext } from "../../../context/tokenContext";
-import style from "./AdminSeries.module.css";
+import style from "./adminSeries.module.css";
 
 const AdminSeries = () => {
   const [titre, setTitre] = useState("");

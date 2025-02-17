@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import style from "./InputNom.module.css";
+import style from "./inputNom.module.css";
 
 interface ValideProps {
   nom: boolean;

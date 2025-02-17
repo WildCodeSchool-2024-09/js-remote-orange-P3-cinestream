@@ -1,6 +1,6 @@
 import type React from "react";
 import { useEffect, useState } from "react";
-import style from "./InputMotDePasse.module.css";
+import style from "./inputMotDePasse.module.css";
 
 interface ValideProps {
   email: boolean;

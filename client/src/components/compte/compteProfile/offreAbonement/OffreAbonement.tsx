@@ -1,5 +1,5 @@
-import style from "./OffreAbonement.module.css";
 import BntUpgrade from "./bntUpgrade/BntUpgrade";
+import style from "./offreAbonement.module.css";
 
 interface OffreAbonementProps {
   abonement: boolean;

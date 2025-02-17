@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import style from "./BntAdmin.module.css";
+import style from "./bntAdmin.module.css";
 
 const BntAdmin = () => {
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import style from "./InputMotDePasse.module.css";
+import style from "./inputMotDePasse.module.css";
 
 interface ValideProps {
   nom: boolean;
