@@ -133,7 +133,7 @@ const FilmComposent = ({
                     src={
                       film.image
                         ? `${import.meta.env.VITE_API_URL}/uploads/${film.image}`
-                        : "/public/images/404/fondFilmSansImage.png"
+                        : "/images/404/fondFilmSansImage.png"
                     }
                     alt={film.nom}
                   />
