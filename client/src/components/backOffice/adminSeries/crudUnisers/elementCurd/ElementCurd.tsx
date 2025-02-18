@@ -116,7 +116,7 @@ const ElementCurd = ({
       return;
     }
   };
-  console.log(article);
+
   return (
     <div
       className={`${style.contenerElement}`}
@@ -141,9 +141,9 @@ const ElementCurd = ({
         <p className={`${style.place}`}>N°{article.univers_numero}</p>
         <div className={`${style.contenerInfo}`}>
           <p className={`${style.titreSerie}`}>{article.nom}</p>
-          {article.description && <p className={`${style.desciptionSerie}`}>
-            {article.description}
-          </p>}
+          {article.description && (
+            <p className={`${style.desciptionSerie}`}>{article.description}</p>
+          )}
         </div>
       </div>
       <div className={`${style.contenerDroite}`}>
