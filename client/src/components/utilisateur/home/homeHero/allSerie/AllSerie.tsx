@@ -96,7 +96,11 @@ const AllSerie = () => {
                       >
                         <div className={`${style.containerImage}`}>
                           <img
-                            src={`${import.meta.env.VITE_API_URL}/uploads/${serie.image_rectangle}`}
+                            src={
+                              serie.image_rectangle
+                                ? `${import.meta.env.VITE_API_URL}/uploads/${serie.image_rectangle}`
+                                : "/images/404/fondFilmSansImage.png"
+                            }
                             alt={serie.nom}
                           />
                         </div>

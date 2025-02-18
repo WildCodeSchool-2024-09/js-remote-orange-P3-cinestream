@@ -95,7 +95,11 @@ const AllFilme = () => {
                     >
                       <div className={`${style.containerImage}`}>
                         <img
-                          src={`${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`}
+                          src={
+                            film.image_rectangle
+                              ? `${import.meta.env.VITE_API_URL}/uploads/${film.image_rectangle}`
+                              : "/images/404/fondFilmSansImage.png"
+                          }
                           alt={film.nom}
                         />
                       </div>

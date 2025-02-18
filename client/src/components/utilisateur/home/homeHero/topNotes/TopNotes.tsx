@@ -120,7 +120,11 @@ const TopNotes = () => {
                       </div>
                       <div className={`${style.containerImage}`}>
                         <img
-                          src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                          src={
+                            element.image
+                              ? `${import.meta.env.VITE_API_URL}/uploads/${element.image}`
+                              : "/images/404/fondFilmSansImage.png"
+                          }
                           alt={`affiche ${element.nom}`}
                         />
                       </div>

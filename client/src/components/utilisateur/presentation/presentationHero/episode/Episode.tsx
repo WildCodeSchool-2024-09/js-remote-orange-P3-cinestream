@@ -91,7 +91,7 @@ const Episode = ({
                         src={
                           episode.episode_image !== null
                             ? `${import.meta.env.VITE_API_URL}/uploads/${episode.episode_image}`
-                            : "/public/images/404/image404.jpg"
+                            : "/images/404/fondFilmSansImage.png"
                         }
                         alt=""
                       />

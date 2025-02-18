@@ -60,7 +60,7 @@ const FilmComposent = ({ data }: { data: FilmData }) => {
   //function qui set image
   const defurl = () => {
     if (data.image === null) {
-      return "/public/images/404/image404.jpg";
+      return "/public/images/404/fondFilmSansImage.png";
     }
     return `${import.meta.env.VITE_API_URL}/uploads/${data.image}`;
   };

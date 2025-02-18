@@ -132,7 +132,7 @@ const ElementCurd = ({
             src={
               article.image
                 ? `${import.meta.env.VITE_API_URL}/uploads/${article.image}`
-                : "/public/images/404/image404.jpg"
+                : "/public/images/404/fondFilmSansImage.png"
             }
             alt="icon episode"
           />
