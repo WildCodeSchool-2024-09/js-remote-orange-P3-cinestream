@@ -102,8 +102,8 @@ const HomeHeader = () => {
             film5.length > 0
               ? film5[indexSelect].image_rectangle
                 ? `${import.meta.env.VITE_API_URL}/uploads/${film5[indexSelect].image_rectangle}`
-                : ""
-              : ""
+                : "/images/404/fondFilmSansImage.png"
+              : "#"
           }
           alt="affiche du filme"
         />

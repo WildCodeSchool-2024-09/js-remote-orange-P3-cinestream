@@ -71,7 +71,7 @@ const ElementCurd = ({
             src={
               element.episode_image
                 ? `${import.meta.env.VITE_API_URL}/uploads/${element.episode_image}`
-                : "/public/images/404/image404.jpg"
+                : "/images/404/fondFilmSansImage.png"
             }
             alt="icon episode"
           />

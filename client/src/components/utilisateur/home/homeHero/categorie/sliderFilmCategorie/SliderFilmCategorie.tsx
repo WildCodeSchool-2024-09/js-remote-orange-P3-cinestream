@@ -93,7 +93,11 @@ const SliderFilmCategorie = ({
                   onMouseUp={handleMouseUp}
                 >
                   <img
-                    src={`${import.meta.env.VITE_API_URL}/uploads/${element.image}`}
+                    src={
+                      element.image
+                        ? `${import.meta.env.VITE_API_URL}/uploads/${element.image}`
+                        : "/images/404/fondFilmSansImage.png"
+                    }
                     alt={element.nom}
                   />
                   <p className={`${style.pTitreFilme}`}>{element.nom}</p>

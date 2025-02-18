@@ -21,6 +21,7 @@ interface Article {
   type: string;
   univers_id: number;
   univers_numero: number;
+  description: string;
 }
 
 const CrudUnivers = ({ updateInfoGeneral }: CrudUniversProps) => {

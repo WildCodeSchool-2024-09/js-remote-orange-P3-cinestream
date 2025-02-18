@@ -113,7 +113,11 @@ const Univers = () => {
                       >
                         <div className={`${style.containerImage}`}>
                           <img
-                            src={`${import.meta.env.VITE_API_URL}/uploads/${element.image_rectangle}`}
+                            src={
+                              element.image_rectangle
+                                ? `${import.meta.env.VITE_API_URL}/uploads/${element.image_rectangle}`
+                                : "/images/404/fondFilmSansImage.png"
+                            }
                             alt=""
                           />
                         </div>

@@ -49,7 +49,7 @@ const PresentationHeader = ({
               ? allEpisodes[findIdSaion()].episodes[findIdEpisode()]
                   .episode_image !== null
                 ? `url(${import.meta.env.VITE_API_URL}/uploads/${allEpisodes[findIdSaion()].episodes[findIdEpisode()].episode_image})`
-                : `url("/public/images/404/image404.jpg")`
+                : `url("/images/404/fondFilmSansImage.png")`
               : "url(#)",
         }}
       >
