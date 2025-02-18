@@ -17,6 +17,7 @@ interface Article {
   type: string;
   univers_id: number;
   univers_numero: number;
+  description: string;
 }
 
 interface ElementCurdProps {
@@ -141,9 +142,7 @@ const ElementCurd = ({
         <div className={`${style.contenerInfo}`}>
           <p className={`${style.titreSerie}`}>{article.nom}</p>
           <p className={`${style.desciptionSerie}`}>
-            un film ou le perssonage principal est un veritable proffesionel de
-            espoionnage et ne fait jamais de betise il est iréropchable et tout
-            le monde s'en rend compte tellement il est fort
+            {article.description ? article.description : ""}
           </p>
         </div>
       </div>

@@ -26,8 +26,16 @@ WHERE a.id = ?;
 
   //récupère tout les articles de l'univers
   async getAllById(idU: number) {
-    const query =
-      "SELECT * FROM article as a WHERE a.univers_id = ? ORDER BY a.univers_numero ASC;";
+    const query = `
+SELECT 
+  a.*,
+  e.description as description
+FROM article as a
+LEFT JOIN saison as s ON s.article_id = a.id AND s.numero = 1
+LEFT JOIN episode as e ON e.saison_id = s.id AND e.numero = 1
+WHERE a.univers_id = ? 
+ORDER BY a.univers_numero ASC;
+`;
 
     const [rows] = await databaseClient.query(query, [idU]);
 
