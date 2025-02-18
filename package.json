@@ -10,10 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/WildCodeSchool-2024-09/CineStream.git"
   },
-  "workspaces": [
-    "client",
-    "server"
-  ],
+  "workspaces": ["client", "server"],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "check": "biome check --error-on-warnings --no-errors-on-unmatched --staged . && npm run check-types --workspaces --if-present",
