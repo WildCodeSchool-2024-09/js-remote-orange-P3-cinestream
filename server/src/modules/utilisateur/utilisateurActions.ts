@@ -83,7 +83,7 @@ const connexion: RequestHandler = async (req, res, next) => {
     }
     // généré un token
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
-      expiresIn: "7d",
+      expiresIn: "2d",
     });
 
     res.send({

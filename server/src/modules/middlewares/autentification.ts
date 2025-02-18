@@ -121,6 +121,18 @@ const tokenIsCorrect: RequestHandler = async (
     ) {
       //récupér id utilisateur
       const userId = TokenClaire.userId;
+
+      //vérifier que l'utilisateur existe
+      const compteBd = await utilisateurRepository.findAllById(userId);
+      if (compteBd.length === 0) {
+        res.status(404).send({
+          message: "Compte supprimé",
+          success: false,
+        });
+        return;
+      }
+
+      //retourne l'id de l'utilisateur pour la suite des middleware
       req.userId = userId;
       next();
     } else {

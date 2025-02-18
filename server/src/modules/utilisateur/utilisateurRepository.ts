@@ -88,7 +88,7 @@ class UtilisateurRepository {
         `;
 
     const [rows] = await databaseClient.query(query, [id]);
-    return rows;
+    return rows as Rows;
   }
 
   async findAbonnementById(id: number) {
