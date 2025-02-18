@@ -141,9 +141,9 @@ const ElementCurd = ({
         <p className={`${style.place}`}>N°{article.univers_numero}</p>
         <div className={`${style.contenerInfo}`}>
           <p className={`${style.titreSerie}`}>{article.nom}</p>
-          <p className={`${style.desciptionSerie}`}>
-            {article.description ? article.description : ""}
-          </p>
+          {article.description && (
+            <p className={`${style.desciptionSerie}`}>{article.description}</p>
+          )}
         </div>
       </div>
       <div className={`${style.contenerDroite}`}>
