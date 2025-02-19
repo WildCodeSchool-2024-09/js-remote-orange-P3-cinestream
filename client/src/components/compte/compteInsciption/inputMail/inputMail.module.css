@@ -1,0 +1,47 @@
+/* contener */
+.contenerInputMail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+/* p titre */
+.contenerInputMail p {
+  color: white;
+  font-size: 1.1em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+}
+
+/* input */
+.contenerInputMail input {
+  width: 100%;
+  background-color: #08080a;
+  border-radius: 13px;
+  font-size: 1.1em;
+  padding: 0.8em;
+  box-sizing: border-box;
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+}
+
+/* qaund c'est bon */
+.focusVert {
+  border: rgb(255, 255, 255) 2px solid;
+}
+
+.focusVert:focus {
+  outline: none;
+  border: green 2px solid;
+}
+
+/* quand c'est pas bon */
+.focusRouge {
+  border: rgb(40, 38, 44) 2px solid;
+}
+
+.focusRouge:focus {
+  outline: none;
+  border: red 2px solid;
+}

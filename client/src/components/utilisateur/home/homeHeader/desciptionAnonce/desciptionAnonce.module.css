@@ -1,0 +1,70 @@
+/* contener */
+.desciptionAnonce {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1em;
+}
+
+/* type serie/filme */
+.headerType {
+  color: rgb(255, 255, 255);
+  background-color: #0d0c0f;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-family: "Rubik", sans-serif;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 1024px) {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+/* titre */
+.headerTitre {
+  color: rgb(255, 255, 255);
+  font-size: 3.5rem;
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2rem;
+  }
+}
+
+/* durrée/date/type */
+.headerInfoFilme {
+  color: rgb(255, 255, 255, 0.5);
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8rem;
+  }
+}
+
+/* desciption */
+.headerDescription {
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  max-width: 40%;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media screen and (max-width: 1300px) {
+    max-width: 50%;
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    max-width: 88%;
+    font-size: 1rem;
+  }
+}

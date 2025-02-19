@@ -1,0 +1,33 @@
+.contenerCommentaire {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+
+  @media screen and (max-width: 1024px) {
+    gap: 0.3em;
+  }
+}
+
+.pNotes {
+  color: white;
+  font-size: 1.3em;
+}
+
+.pTexte {
+  color: #9ca4ab;
+  font-size: 1em;
+}
+
+.pAuteur {
+  color: #9ca4ab;
+  font-size: 1em;
+}
+
+.span {
+  color: #00925d;
+  font-size: 1em;
+}
+
+.pAuteurAdmin {
+  color: #f5c518;
+}

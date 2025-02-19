@@ -1,0 +1,92 @@
+.parentContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 70px;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 4em;
+  }
+}
+
+.titreSectionFilme {
+  color: white;
+  font-size: 2em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  padding-left: 70px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0.7em;
+    font-size: 1.5em;
+  }
+}
+
+.sliderContainerFilme {
+  margin-top: 0.8em;
+  padding-left: 50px;
+  box-sizing: border-box;
+  padding-right: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.containerElement {
+  margin: 0 1em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px 25px 0 0;
+  cursor: pointer;
+}
+
+.containerImage {
+  width: 100%;
+  aspect-ratio: 1.53 / 1;
+  overflow: hidden;
+  border-radius: 25px;
+}
+
+.containerImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.titreFilme {
+  color: white;
+  font-size: 1.4em;
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+  margin-top: 0.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.titreFilmeSelected {
+  color: #f5c518;
+}
+
+.desciptionFilme {
+  font-size: 0.8em;
+  font-family: "Rubik", sans-serif;
+  color: #9ca4ab;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp: 2;
+  -ms-line-clamp: 2;
+  -o-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.5;
+  max-height: calc(1.5em * 2);
+  min-height: calc(1.5em * 2);
+  margin-top: 0.2em;
+}

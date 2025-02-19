@@ -1,0 +1,25 @@
+.bntFermerRecherche {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1.2em;
+  right: 1.2em;
+}
+
+.bntFermerRecherche:hover {
+  background-color: rgb(31, 41, 55, 1);
+}
+
+.iconCroix {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  color: #fff;
+}

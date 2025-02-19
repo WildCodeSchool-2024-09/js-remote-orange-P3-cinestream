@@ -1,0 +1,41 @@
+.bntRegarder {
+  background-color: #00925d;
+  color: white;
+  border: none;
+  padding: .7em 1.2em;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+  width: auto;
+  height: 20px;
+  text-align: center;
+  line-height: 50px;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 14px;
+  }
+}
+
+.bntRegarder:hover {
+  background-color: darkgreen;
+}
+
+.icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.icon svg {
+  fill: green;
+  width: 20px;
+  height: 12px;
+}

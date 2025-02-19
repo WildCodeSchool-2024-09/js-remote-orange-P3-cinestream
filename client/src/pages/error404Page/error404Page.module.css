@@ -1,0 +1,145 @@
+:root {
+  --pilleWidth: 4vw;
+  --pilleHeight: 10vw;
+  --pilleWidthMobile: 15vw;
+  --pilleHeightMobile: 35vw;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+.container404 {
+  background-image: url("/images/404/image404.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.transparent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(7px);
+  height: 50vh;
+  width: 50vh;
+  box-shadow: 0 4px 20px #00000026;
+  border-radius: 30px;
+}
+
+.pilleBout {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(83, 81, 81);
+  width: 2vw;
+  height: 1vw;
+  border-radius: 7px 7px 0 0;
+
+  @media screen and (max-width: 768px) {
+    width: 6.5vw;
+    height: 2.5vw;
+  }
+}
+
+.pille {
+  position: absolute;
+  position: relative;
+  display: flex;
+  align-items: end;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--pilleWidth);
+  height: var(--pilleHeight);
+  background-color: transparent;
+  z-index: 1;
+
+  @media screen and (max-width: 768px) {
+    width: var(--pilleWidthMobile);
+    height: var(--pilleHeightMobile);
+  }
+}
+
+.pilleBorder {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--pilleWidth);
+  height: var(--pilleHeight);
+  background-color: transparent;
+  border: rgb(83, 81, 81) 7px solid;
+  border-radius: 10px;
+  z-index: 5;
+
+  @media screen and (max-width: 768px) {
+    width: var(--pilleWidthMobile);
+    height: var(--pilleHeightMobile);
+    border: rgb(83, 81, 81) 5px solid;
+  }
+}
+
+.pilleCharge {
+  top: 0;
+  left: 0;
+  width: var(--pilleWidth);
+  height: var(--pilleHeight);
+  background-color: rosybrown;
+  z-index: 3;
+  /* animation: animationCharge 20s linear infinite; */
+  animation: animationCharge 3s linear infinite;
+
+  @media screen and (max-width: 768px) {
+    width: var(--pilleWidthMobile);
+    height: var(--pilleHeightMobile);
+  }
+}
+
+@keyframes animationCharge {
+  0% {
+    background-color: rgb(255, 0, 0);
+    height: 0%;
+  }
+
+  25% {
+    background-color: rgb(255, 111, 0);
+    height: 25%;
+  }
+
+  50% {
+    background-color: rgb(242, 255, 0);
+    height: 50%;
+  }
+
+  75% {
+    background-color: rgb(17, 255, 0);
+    height: 75%;
+  }
+
+  100% {
+    background-color: rgb(12, 130, 28);
+    height: 100%;
+  }
+}
+
+.transparent p {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(0, 0, 0);
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-align: center;
+  width: 90%;
+
+  @media screen and (max-width: 768px) {
+    font-size: 5vw;
+    color: red;
+  }
+}

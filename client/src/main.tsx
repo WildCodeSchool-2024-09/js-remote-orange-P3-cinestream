@@ -1,34 +1,68 @@
-// Import necessary modules from React and React Router
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-/* ************************************************************************* */
+//import pages
+import AdminEpisode from "./pages/backOffice/adminEpisode/AdminEpisode";
+import AdminRecherche from "./pages/backOffice/adminRecherche/AdminRecherche";
+import AdminSeries from "./pages/backOffice/adminSeries/AdminSeries";
+import CompteConnection from "./pages/compte/compteConnection/CompteConnection";
+import CompteInsciption from "./pages/compte/compteInsciption/CompteInsciption";
+import CompteProfile from "./pages/compte/compteProfile/CompteProfile";
+import Error404Page from "./pages/error404Page/Error404Page";
+import Home from "./pages/utilisateur/home/Home";
+import Presentation from "./pages/utilisateur/presentation/Presentation";
+import Recherche from "./pages/utilisateur/recherche/Recherche";
 
-// Import the main app component
-import App from "./App";
+//conexte
+import { TokenProvider } from "./context/tokenContext";
 
-// Import additional components for new routes
-// Try creating these components in the "pages" folder
+//import css
+import "./main.css";
 
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
-
-/* ************************************************************************* */
-
-// Create router configuration with routes
-// You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
-    path: "/", // The root path
-    element: <App />, // Renders the App component for the home page
+    path: "/",
+    element: <Home />,
   },
-  // Try adding a new route! For example, "/about" with an About component
+  {
+    path: "connection",
+    element: <CompteConnection />,
+  },
+  {
+    path: "insciption",
+    element: <CompteInsciption />,
+  },
+  {
+    path: "compte",
+    element: <CompteProfile />,
+  },
+  {
+    path: "detail/:idA",
+    element: <Presentation />,
+  },
+  {
+    path: "recherche",
+    element: <Recherche />,
+  },
+  {
+    path: "admin/recherche",
+    element: <AdminRecherche />,
+  },
+  {
+    path: "admin/organisation/:id/:numS?",
+    element: <AdminSeries />,
+  },
+  {
+    path: "admin/description/article/:idA/saison/:numS/:idS/episode/:idE",
+    element: <AdminEpisode />,
+  },
+  {
+    path: "*",
+    element: <Error404Page />,
+  },
 ]);
 
-/* ************************************************************************* */
-
-// Find the root element in the HTML document
 const rootElement = document.getElementById("root");
 if (rootElement == null) {
   throw new Error(`Your HTML Document should contain a <div id="root"></div>`);
@@ -37,32 +71,8 @@ if (rootElement == null) {
 // Render the app inside the root element
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+    <TokenProvider>
+      <RouterProvider router={router} />
+    </TokenProvider>
+  </StrictMode>,
 );
-
-/**
- * Helpful Notes:
- * 
- * 1. Adding More Routes:
- *    To add more pages to your app, first create a new component (e.g., About.tsx).
- *    Then, import that component above like this:
- * 
- *    import About from "./pages/About";
- * 
- *    Add a new route to the router:
- * 
- *      {
- *        path: "/about",
- *        element: <About />,  // Renders the About component
- *      }
- * 
- * 2. Try Nested Routes:
- *    For more complex applications, you can nest routes. This lets you have sub-pages within a main page.
- *    Documentation: https://reactrouter.com/en/main/start/tutorial#nested-routes
- * 
- * 3. Experiment with Dynamic Routes:
- *    You can create routes that take parameters (e.g., /users/:id).
- *    Documentation: https://reactrouter.com/en/main/start/tutorial#url-params-in-loaders
- */
-

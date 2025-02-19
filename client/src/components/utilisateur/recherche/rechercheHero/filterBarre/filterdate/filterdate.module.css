@@ -1,0 +1,48 @@
+.contenerInputDate {
+  position: relative;
+  width: 8.5em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.filterDate {
+  position: relative;
+  font-size: 1.5em;
+  color: white;
+  border: 3px #28262d solid;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 0.2em .5em;
+  box-sizing: border-box;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 100%;
+  z-index: 1;
+}
+
+.dateRenderIncorrect {
+  border: 3px orange solid;
+  outline: none;
+}
+
+.contenercalendrillier {
+  position: absolute;
+  top: 50%;
+  right: .45em;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 2.1em;
+  height: 2.1em;
+  background-color: #757575;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendrillier {
+  font-size: 1.4em;
+  color: rgb(0, 0, 0);
+}

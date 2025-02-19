@@ -1,0 +1,20 @@
+.signupButton {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 1em;
+  }
+}
+
+.signupButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Fond légèrement blanc au survol */
+  border-color: white;
+  /* Bordure reste blanche */
+}

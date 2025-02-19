@@ -5,26 +5,42 @@
     "dev": "tsx watch --clear-screen=false ./src/main",
     "db:migrate": "tsx ./bin/migrate",
     "db:seed": "tsx ./bin/seed",
-    "build": "tsx ./bin/migrate && tsc ./src/main --outDir ../dist --esModuleInterop",
+    "build": "tsc --outDir ./dist --esModuleInterop && npm run copy-public",
+    "copy-public": "cp -r ./public ./dist/public",
     "start": "node ../dist/src/main",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "sleep": "sleep 3",
+    "new:admin": "concurrently \"npm run dev\" \"npm run sleep && tsx ./bin/newAdmin.ts\""
+  },
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "module": "CommonJS",
+    "target": "ES6"
   },
   "dependencies": {
+    "@types/multer": "^1.4.12",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.0.3",
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.13",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
-    "tsx": "^4.19.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.7.3",
+    "tsx": "^4.19.1"
   }
 }

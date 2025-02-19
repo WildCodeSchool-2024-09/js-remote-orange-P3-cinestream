@@ -1,0 +1,26 @@
+.bntFavorie {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 1.4rem;
+  padding: 8px 28px 12px 28px;
+  border-radius: 10px;
+  border: white 2px solid;
+  box-sizing: content-box;
+  cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    font-size: .8rem;
+    padding: 7px 15px 9px 15px;
+  }
+}
+
+.bntFavorieActive {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.bntFavorie:hover {
+  /* que sur pc */
+  @media (pointer: fine) {
+    background-color: darkred;
+  }
+}

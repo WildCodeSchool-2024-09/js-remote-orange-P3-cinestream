@@ -1,14 +1,18 @@
-// to make the file a module and avoid the TypeScript error
-export type {};
-
 declare global {
   namespace Express {
     export interface Request {
-      /* ************************************************************************* */
-      // Add your custom properties here, for example:
-      //
-      // user?: { ... }
-      /* ************************************************************************* */
+      user?: Utilisateur;
     }
   }
+}
+
+// src/types/index.d.ts
+export interface Utilisateur {
+  id: number;
+  mail: string;
+  password: string;
+  speudo: string;
+  photo_profil?: string | null;
+  is_admin: boolean;
+  date_inscription: string;
 }

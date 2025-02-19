@@ -1,0 +1,99 @@
+.header {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  position: relative;
+  z-index: 0;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  pointer-events: none;
+  top: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), #0d0c0f);
+  z-index: 1;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  pointer-events: none;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #0d0c0f);
+  z-index: 1;
+}
+
+.contenerNavBarre {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.descriptionPresentation {
+  color: white;
+  font-size: 2em;
+  margin: 0;
+  position: absolute;
+  bottom: 7rem;
+  left: 4rem;
+  z-index: 3;
+
+  @media screen and (max-width: 1024px) {
+    bottom: 10em;
+    left: 0.5em;
+    font-size: 1.2em;
+    width: 90%;
+    overflow: hidden;
+  }
+}
+
+.bntRegarder {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 3rem;
+  left: 4rem;
+  z-index: 3;
+
+  @media screen and (max-width: 1024px) {
+    bottom: 7em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.bntContainer {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 3em;
+  right: 4rem;
+  z-index: 3;
+  gap: 0.8em;
+
+  @media screen and (max-width: 1024px) {
+    bottom: 3em;
+    left: 0;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+.paragraphWhite {
+  color: #9ca4ab;
+  font-size: 1em;
+  margin: 20px 4em 20px 4em;
+
+  @media screen and (max-width: 1024px) {
+    margin: 20px 0.7em 20px 0.7em;
+  }
+}

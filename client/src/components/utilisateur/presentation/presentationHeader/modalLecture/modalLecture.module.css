@@ -1,0 +1,54 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1000;
+  pointer-events: auto;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bntFermerRecherche {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bntFermerRecherche:hover {
+  background-color: rgb(31, 41, 55, 1);
+}
+
+.iconCroix {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  color: #fff;
+}
+
+.iframVideoX {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border: none;
+}
+
+.iframVideoY {
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border: none;
+}

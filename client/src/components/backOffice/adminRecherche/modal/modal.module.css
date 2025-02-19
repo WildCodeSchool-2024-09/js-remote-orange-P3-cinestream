@@ -1,0 +1,66 @@
+.cacheFond {
+  position: fixed;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0d0c0f;
+  z-index: 10;
+  overflow: scroll;
+}
+
+.contenerModal {
+  position: absolute;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 35%;
+  aspect-ratio: 1.2 / 1;
+  background-color: rgb(17 24 39);
+  border: rgb(55, 65, 81) 3px solid;
+  border-radius: 40px;
+
+  @media screen and (max-width: 1100px) {
+    width: 90%;
+  }
+}
+
+.flexBntFilm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  gap: 3em;
+
+  @media screen and (max-width: 1024px) {
+    width: 50%;
+    gap: 2em;
+  }
+}
+
+.bntFilm {
+  width: 100%;
+  color: white;
+  background-color: rgb(37 99 235);
+  font-size: 2.6em;
+  border: none;
+  padding: 0.23em 0;
+  border-radius: 13px;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2.2em;
+    padding: 0.2em 0;
+  }
+}
+
+.bntFilm:hover {
+  cursor: pointer;
+  background-color: rgb(29 78 216);
+  outline: 2px solid rgb(59, 130, 246);
+}

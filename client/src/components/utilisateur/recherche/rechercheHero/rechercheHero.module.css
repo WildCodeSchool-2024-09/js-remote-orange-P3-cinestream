@@ -1,0 +1,46 @@
+.hero {
+  padding: 2%;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.filmComposent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 1%;
+  }
+
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filmComposent {
+    gap: 1%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 0.5%;
+  }
+
+  .filterBar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1%;
+  }
+
+  .filmComposent {
+    gap: 0.5%;
+  }
+}

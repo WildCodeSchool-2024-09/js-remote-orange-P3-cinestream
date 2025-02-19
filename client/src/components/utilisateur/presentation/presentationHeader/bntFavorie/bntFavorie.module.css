@@ -1,0 +1,49 @@
+.bntFavorie {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 15px;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+    padding: 10px 10px;
+  }
+}
+
+.bntFavorieActive {
+  background-color: rgb(52, 5, 5);
+}
+
+.bntFavorie:hover {
+  /* que sur pc */
+  @media (pointer: fine) {
+    background-color: darkred;
+  }
+}
+
+.icon {
+  background-color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.icon svg {
+  fill: red;
+  width: 12px;
+  height: 12px;
+}
+
+.coeurNoir svg {
+  fill: black;
+  color: black;
+}

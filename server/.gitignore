@@ -1,3 +1,14 @@
 node_modules
 coverage
 .env
+
+bin/admin.json
+public/uploads/episode/*
+public/uploads/serieHaurisontal/*
+public/uploads/serieVertical/*
+public/uploads/utilisateur/*
+
+!public/uploads/episode/.gitkeep
+!public/uploads/serieHaurisontal/.gitkeep
+!public/uploads/serieVertical/.gitkeep
+!public/uploads/utilisateur/.gitkeep

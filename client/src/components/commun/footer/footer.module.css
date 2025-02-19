@@ -1,0 +1,24 @@
+.contenerSection {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.logoFooter {
+  width: 12em;
+  height: auto;
+
+  @media screen and (max-width: 1024px) {
+    width: 7em;
+  }
+}
+
+.Coyrite {
+  margin-top: 0.5em;
+  padding-bottom: 1.5em;
+  font-size: 1em;
+  color: #333;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 0.3em;
+  }
+}

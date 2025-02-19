@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 3em 4em 0 4em;
+
+  @media screen and (max-width: 1024px) {
+    margin: 4em 0.7em 0 0.7em;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header .star {
+  margin-right: 0.6em;
+  color: white;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1em;
+    margin-right: 0.4em;
+  }
+}
+
+.pTitreAvis {
+  font-size: 1.5em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: white;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.3em;
+  }
+}
+
+.pTitreAvis span {
+  font-size: 0.55em;
+  color: #9ca4ab;
+  margin-left: 0.55em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.5em;
+    margin-left: 0.4em;
+  }
+}
+
+.TextAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.8em;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1.3em;
+    width: 100%;
+  }
+}
+
+.TextAvatar img {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  border: white 2px solid;
+  box-sizing: border-box;
+  object-fit: cover;
+  object-position: center;
+
+  @media screen and (max-width: 1024px) {
+    width: 5em;
+    height: 5em;
+  }
+}
+
+.inputCommentaire {
+  flex-grow: 1;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px white solid;
+  font-size: 1.3em;
+  color: white;
+  padding: 0.3em 1em 0.3em 0.6em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    box-sizing: border-box;
+    height: 38px;
+    font-size: 1em;
+  }
+}
+
+.inputCommentaire:focus {
+  outline: none;
+  border: 2px green solid;
+}
+
+.modificationEnCour {
+  border: 2px #f5c518 solid;
+}

@@ -1,0 +1,20 @@
+.bntAction {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.bntAction:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.iconCroix {
+  font-size: 2em;
+  color: white;
+}

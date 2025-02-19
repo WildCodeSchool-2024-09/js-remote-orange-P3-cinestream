@@ -1,0 +1,21 @@
+.etoileUtilisateur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+  font-size: 35px;
+
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+  }
+}
+
+.contenerEtoile {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}

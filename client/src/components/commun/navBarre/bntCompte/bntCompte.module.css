@@ -1,0 +1,16 @@
+.conetnerImage {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  border: white 2px solid;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.imageAvatar {
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,65 @@
+.contenerAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10em;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 5em;
+  }
+}
+
+.pCharger {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.contenerImage {
+  width: 13em;
+  height: 13em;
+  border-radius: 50%;
+  padding: 0.5em;
+  outline: 4px solid #28262d;
+  margin-top: 1em;
+  position: relative;
+}
+
+.contenerImage:hover {
+  outline: 4px dashed #28262d;
+}
+
+.inputAvatar {
+  display: none;
+}
+
+.imgAvatar {
+  width: 100%;
+  border-radius: 50%;
+  height: 100%;
+  outline: 2px solid white;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+
+.imgAvatar:hover {
+  opacity: 0.6;
+}
+
+.logoPhoto {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 3px solid #0d0c0f;
+  background-color: #00925d;
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+}

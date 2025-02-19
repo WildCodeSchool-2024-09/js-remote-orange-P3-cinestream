@@ -1,0 +1,73 @@
+.contenerTitreAndImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex: 1;
+  gap: 0.5em;
+
+  @media screen and (max-width: 1024px) {
+    flex: none;
+  }
+}
+
+.pTitreInputImage {
+  color: white;
+  font-size: 1.2em;
+}
+
+.contenerInput {
+  width: 100%;
+  aspect-ratio: 1 / 1.5;
+  border: 2px dashed rgb(55, 65, 81);
+  border-radius: 8px;
+  background-color: rgb(31, 41, 55);
+  color: rgb(156, 163, 175);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+  }
+}
+
+.contenerInput:hover {
+  background-color: transparent;
+  border-color: rgb(37 99 235);
+}
+
+.inputImage {
+  display: none;
+}
+
+/* label en entier */
+.labelInputImage {
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* texte du label */
+.textLabelImage {
+  display: block;
+  pointer-events: none;
+}
+
+.labelInputImage.drag-over {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: rgb(37 99 235);
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imagePreview:hover {
+  filter: opacity(0.6);
+}

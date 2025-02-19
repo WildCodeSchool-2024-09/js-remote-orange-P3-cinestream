@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+}
+
+#root {
+  background-color: #0d0c0f;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  /* background: #1a1a1a; */
+  background: #2a2a2a;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background: #555; */
+  background: #555555;
+
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+  /* background: #777777; */
+}

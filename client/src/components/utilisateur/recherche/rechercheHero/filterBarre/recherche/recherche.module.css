@@ -1,0 +1,30 @@
+.recherche {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 26em;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.recherche input {
+  font-size: 1.5em;
+  color: white;
+  border: 3px #28262d solid;
+  background-color: transparent;
+  padding: 0.2em .5em;
+  border-radius: 7px;
+  color: white;
+  width: 100%;
+}
+
+.recherche .icon {
+  margin-left: 10px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: .6em;
+}

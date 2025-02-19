@@ -1,0 +1,22 @@
+.divIconAdmin {
+  width: 3em;
+  height: 3em;
+  background-color: rgba(255, 0, 0, 0.805);
+  border-radius: 50%;
+  border: white 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pIconAdmin {
+  text-align: center;
+  font-size: 2.3em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0.1em;
+}

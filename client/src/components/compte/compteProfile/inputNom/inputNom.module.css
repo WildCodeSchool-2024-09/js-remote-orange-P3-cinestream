@@ -1,0 +1,52 @@
+.contenerRename {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 6em;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 2.2em;
+  }
+}
+
+.ptexteNom {
+  color: white;
+  font-size: 1.5em;
+  font-family: "Rubik", sans-serif;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.2em;
+  }
+}
+
+.inputNom {
+  margin-top: .5em;
+  font-family: "Rubik", sans-serif;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  width: 35em;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.8em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+    width: 23em;
+    border-radius: 11px;
+  }
+}
+
+.inputNom:focus {
+  outline: none;
+  border: 2px red solid;
+}
+
+.inputNomCorrect:focus {
+  outline: none;
+  border: 2px green solid;
+}
+
+.inputNomCorrect {
+  border: 2px solid white;
+}

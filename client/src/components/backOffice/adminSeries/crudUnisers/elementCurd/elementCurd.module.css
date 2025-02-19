@@ -1,0 +1,141 @@
+.contenerElement {
+  background-color: rgb(31, 41, 55);
+  width: 100%;
+  border-radius: 10px;
+  padding: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 20px;
+  }
+}
+
+.contenerElement:hover {
+  background-color: rgb(37, 47, 61);
+  cursor: pointer;
+}
+
+.contenerGauche {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.contenerImage {
+  height: 12em;
+  aspect-ratio: 1 / 1.5;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 1 / 1.5;
+  }
+}
+
+.contenerImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.place {
+  color: rgb(156 163 175);
+  font-size: 2em;
+}
+
+.contenerInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2em;
+  gap: 0.5em;
+  width: 53%;
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+    margin-left: 0;
+  }
+}
+
+.titreSerie {
+  color: white;
+  font-size: 1.2em;
+  text-transform: capitalize;
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.desciptionSerie {
+  color: rgb(156 163 175);
+  font-size: 1em;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.desciptionSerie::first-letter {
+  text-transform: uppercase;
+}
+
+.contenerDroite {
+  display: flex;
+  gap: 1em;
+  margin-right: 1em;
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+    justify-content: space-between;
+  }
+}
+
+.bntAction {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.bntAction:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.iconFleche {
+  font-size: 1.6em;
+  color: white;
+}
+
+.iconCroix {
+  font-size: 2em;
+  color: white;
+}

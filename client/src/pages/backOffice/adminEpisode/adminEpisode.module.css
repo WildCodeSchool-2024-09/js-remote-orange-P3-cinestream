@@ -1,0 +1,42 @@
+.bodyPage {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  width: 75vw;
+  margin: auto;
+  padding-bottom: 9rem;
+
+  @media screen and (max-width: 1024px) {
+    width: 90vw;
+    padding-bottom: 6rem;
+  }
+}
+
+.flexTitreFermer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2em;
+}
+
+.pTitrePage {
+  color: white;
+  font-size: 2.2em;
+  font-weight: 500;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.6em;
+  }
+}
+
+.contenerSection {
+  background-color: rgb(17 24 39);
+  padding: 1.5em;
+  box-sizing: border-box;
+  border-radius: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: start;
+  width: 100%;
+}

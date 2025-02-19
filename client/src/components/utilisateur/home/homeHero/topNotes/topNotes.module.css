@@ -1,0 +1,128 @@
+.titreTopNotes {
+  color: white;
+  font-size: 2em;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  margin-top: 70px;
+  padding-left: 50px;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0.4em;
+  }
+}
+
+.sliderContainerTopNotes {
+  margin-top: 0px;
+}
+
+/* un élément complet */
+
+.containerFlex {
+  display: flex;
+  justify-content: center;
+  align-content: space-between;
+  height: auto;
+  background-color: #08080a;
+  margin: 0em 2em;
+  border-radius: 30px;
+  padding: 1em;
+  cursor: pointer;
+}
+
+/* place du filme */
+.containerPlaceFilme {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 0.7em;
+  flex: 1;
+  flex-shrink: 0;
+}
+
+.PlaceFilme {
+  color: white;
+  font-size: 3em;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  padding-right: 0.15em;
+}
+
+/* image */
+.containerImage {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 15px;
+  overflow: hidden;
+  flex: 2;
+  flex-shrink: 0;
+}
+
+.containerImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* les info */
+.containerInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0.1em 0 0.1em 0.8em;
+  flex: 3;
+  flex-shrink: 0;
+  max-width: 100%;
+  /* Pour limiter la largeur du container */
+  overflow: hidden;
+  /* Empêcher le débordement de texte */
+}
+
+.pPrenuime {
+  font-size: 1.3em;
+  border: #28262d 2px solid;
+  width: fit-content;
+  padding: 0 0.2em 0.3em 0.2em;
+  border-radius: 10px;
+}
+
+.pPrenuimeVide {
+  font-size: 1.3em;
+  color: transparent;
+  padding: 0 0.2em 0.3em 0.2em;
+  border: transparent 2px solid;
+}
+
+.pGratuit {
+  opacity: 0;
+}
+
+.pTitre {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pType {
+  color: #9ca4ab;
+  text-transform: capitalize;
+  font-family: "Rubik", sans-serif;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pNotes {
+  color: white;
+  font-family: "Rubik", sans-serif;
+}
+
+.pNotes span {
+  color: #9ca4ab;
+  text-transform: capitalize;
+}

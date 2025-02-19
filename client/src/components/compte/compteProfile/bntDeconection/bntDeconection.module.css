@@ -1,0 +1,21 @@
+.BntDeconection {
+  color: white;
+  border: 1px solid white;
+  background-color: transparent;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.3em;
+  padding: 0.5em 1em;
+  border-radius: 11px;
+  box-sizing: border-box;
+  align-self: start;
+  transition: all 0.3s;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 0.8em;
+  }
+}
+
+.BntDeconection:hover {
+  scale: 1.05;
+  transition: all 0.3s;
+}

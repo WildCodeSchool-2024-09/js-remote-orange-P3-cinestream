@@ -1,0 +1,29 @@
+.contenerPoint {
+  position: absolute;
+  bottom: 4%;
+  right: 4%;
+  display: flex;
+  gap: 1em;
+  z-index: 4;
+
+  @media screen and (max-width: 1024px) {
+    bottom: 4%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+.point {
+  padding: .5em;
+  background-color: rgb(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    padding: .4em;
+  }
+}
+
+.pointSelectionner {
+  background-color: rgb(255, 255, 255);
+}

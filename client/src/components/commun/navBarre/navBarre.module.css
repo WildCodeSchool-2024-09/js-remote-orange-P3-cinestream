@@ -1,0 +1,107 @@
+.contenerNavBarre {
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+}
+
+.navBarre {
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.navBarreMobile {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    top: 0;
+    right: 0;
+  }
+}
+
+.logo img {
+  height: 8em;
+  display: block;
+  margin-left: 2em;
+  margin-top: 1em;
+  cursor: pointer;
+
+  @media screen and (max-width: 1024px) {
+    height: 5em;
+    margin-left: 0.4em;
+    margin-top: 0.4em;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.3em;
+  margin-top: 2em;
+  margin-right: 1.5em;
+}
+
+.bntMenuBurger {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: block;
+    background-color: white;
+    padding: 0.5em;
+    border-radius: 50%;
+    border: none;
+    margin-right: 0.8em;
+    margin-top: 0.8em;
+    cursor: pointer;
+    z-index: 51;
+  }
+}
+
+.IconMenuBurger {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: block;
+    font-size: 2.5em;
+    color: rgb(17 24 39);
+  }
+}
+
+.burger {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 2em;
+    right: 2em;
+    background-color: rgb(31, 41, 55, 1);
+    overflow: hidden;
+    overflow-y: auto;
+    width: 60vw;
+    scrollbar-width: none;
+    border-radius: 30px;
+    padding: 1.5em 0em;
+  }
+}
+
+.boutonMobile {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}

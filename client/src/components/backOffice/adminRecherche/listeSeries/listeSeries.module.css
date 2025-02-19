@@ -1,0 +1,34 @@
+.contenerAllSerie {
+  background-color: rgb(17 24 39);
+  max-height: 90vh;
+  width: 100%;
+  border-radius: 1.3em;
+  padding: 2em;
+  gap: 2em;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+
+  @media screen and (max-width: 1024px) {
+    max-height: 80vh;
+    padding: 1em;
+    border-radius: 1em;
+    gap: 1.5em;
+  }
+}
+
+.pAucunResultat {
+  color: white;
+  font-size: 4em;
+  text-align: center;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2em;
+  }
+}
