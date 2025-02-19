@@ -99,9 +99,10 @@ const tokenIsCorrect: RequestHandler = async (
     //récupér le boy de la requête
     const { token } = req.body.token ? req.body : req.headers;
     if (!token) {
-      res.status(400).send({
+      res.status(203).send({
         message: "Token invalide",
         tokenIsIncorrect: true,
+        success: false,
       });
       return;
     }
@@ -125,9 +126,10 @@ const tokenIsCorrect: RequestHandler = async (
       //vérifier que l'utilisateur existe
       const compteBd = await utilisateurRepository.findAllById(userId);
       if (compteBd.length === 0) {
-        res.status(404).send({
+        res.status(203).send({
           message: "Compte supprimé",
           success: false,
+          tokenIsIncorrect: true,
         });
         return;
       }
@@ -136,9 +138,10 @@ const tokenIsCorrect: RequestHandler = async (
       req.userId = userId;
       next();
     } else {
-      res.status(400).send({
+      res.status(203).send({
         message: "Token invalide",
         tokenIsIncorrect: true,
+        success: false,
       });
       return;
     }
@@ -148,6 +151,7 @@ const tokenIsCorrect: RequestHandler = async (
       res.send({
         message: "Token expier",
         tokenIsIncorrect: true,
+        success: false,
       });
       return;
     }

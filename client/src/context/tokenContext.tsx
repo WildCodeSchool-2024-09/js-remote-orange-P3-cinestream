@@ -52,6 +52,8 @@ const TokenProvider = ({ children }: { children: ReactNode }) => {
           localStorage.removeItem("token");
           setToken(null);
           setIsAdmin(false);
+          //rafraichir la page pour recharger le site
+          window.location.reload();
           return false;
         }
         setIsAdmin(data.isAdmin);
