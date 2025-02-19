@@ -9,6 +9,7 @@
   @media screen and (max-width: 1024px) {
     margin-left: 0.7em;
     margin-right: 0.7em;
+    gap: 2.5em;
   }
 }
 

@@ -37,7 +37,9 @@ const AllSerie = () => {
             },
           },
         );
-        setListeSeries(articleAleatoir(data.article, 13));
+        setListeSeries(
+          articleAleatoir(data.article as Article[], 13).splice(0, 30),
+        );
       } catch (error) {
         console.error("eurreur l'ore de la récupération des filme récent");
       }
