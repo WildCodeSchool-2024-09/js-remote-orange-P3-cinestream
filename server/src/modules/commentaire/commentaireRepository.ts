@@ -50,6 +50,7 @@ SELECT
   c.date as commentaire_date,
   n.valeur as note,
   u.speudo as nomUtilisateur,
+  u.photo_profil as photo_utilisateur,
   u.is_admin as utilisateur_is_admin,
   c.article_id as article_id,
   c.utilisateur_id as utilisateur_id

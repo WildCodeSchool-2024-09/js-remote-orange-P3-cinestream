@@ -88,7 +88,7 @@ const getRecent: RequestHandler = async (req, res, next) => {
     res.status(200).send({
       message: "Article mis a jour et récupérer",
       sucssces: true,
-      article: article,
+      article: article.slice(0, 20),
     });
   } catch (err) {
     next(err);
@@ -164,7 +164,7 @@ const getTopNotes: RequestHandler = async (req, res, next) => {
     res.status(200).send({
       message: "Article mis a jour et récupérer",
       sucssces: true,
-      topNotes: article,
+      topNotes: article.slice(0, 20),
     });
   } catch (err) {
     next(err);

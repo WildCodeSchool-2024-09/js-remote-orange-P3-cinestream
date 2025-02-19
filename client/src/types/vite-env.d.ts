@@ -28,4 +28,5 @@ export interface Commentaire {
   utilisateur_id: number;
   commentaire_date: string;
   utilisateur_is_admin: number;
+  photo_utilisateur?: string | null;
 }

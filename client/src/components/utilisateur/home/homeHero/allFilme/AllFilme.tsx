@@ -37,7 +37,9 @@ const AllFilme = () => {
             },
           },
         );
-        setListeFilms(articleAleatoir(data.article, 58));
+        setListeFilms(
+          articleAleatoir(data.article as Article[], 48).splice(0, 30),
+        );
       } catch (error) {
         console.error("eurreur l'ore de la récupération des filme récent");
       }

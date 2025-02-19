@@ -16,8 +16,7 @@ LEFT JOIN categorie_article AS CA ON CA.article_id = A.id
 LEFT JOIN categorie AS C ON C.id = CA.categorie_id
 WHERE publier=1 AND (A.date < CURRENT_DATE + INTERVAL 1 DAY OR A.date IS NULL)
 GROUP BY A.id, C.nom
-ORDER BY A.date DESC 
-LIMIT 40;
+ORDER BY A.date DESC;
 `;
     const [articleRecent] = await databaseClient.query(query, []);
 
@@ -77,8 +76,7 @@ LEFT JOIN categorie_article AS CA ON CA.article_id = A.id
 LEFT JOIN categorie AS C ON C.id = CA.categorie_id
 WHERE publier=1 AND (A.date < CURRENT_DATE + INTERVAL 1 DAY OR A.date IS NULL)
 GROUP BY A.id, C.nom
-ORDER BY moyenne_note DESC 
-LIMIT 100;
+ORDER BY moyenne_note DESC;
 `;
     const [articleTopNotes] = await databaseClient.query(query, []);
 
@@ -132,7 +130,6 @@ ORDER BY RAND()
 
   //récupère les article qui font parti d'une platforme
   async getFilmPlatforme(idP: number): Promise<Rows> {
-    //recupère les 20 plus récent article
     const query = `
 SELECT 
   A.*, 
@@ -162,7 +159,6 @@ ORDER BY A.id ASC;
 
   //récupère les article qui font parti d'une categorie
   async getFilmCategorie(idC: number): Promise<Rows> {
-    //recupère les 20 plus récent article
     const query = `
 SELECT 
   A.*, 

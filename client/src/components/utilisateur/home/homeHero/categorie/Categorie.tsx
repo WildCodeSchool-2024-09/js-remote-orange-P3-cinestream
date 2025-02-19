@@ -93,7 +93,9 @@ const Categorie = () => {
         },
       );
       if (data.sucssces) {
-        setAllFilmCategorie(articleAleatoir(data.articleCategorie, 87));
+        setAllFilmCategorie(
+          articleAleatoir(data.articleCategorie as Article[], 87).splice(0, 25),
+        );
       }
     } catch (error) {
       console.error(

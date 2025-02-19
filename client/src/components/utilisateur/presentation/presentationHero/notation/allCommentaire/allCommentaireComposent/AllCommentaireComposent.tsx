@@ -8,6 +8,7 @@ interface Commentaire {
   utilisateur_id: number;
   commentaire_date: string;
   utilisateur_is_admin: number;
+  photo_utilisateur?: string | null;
 }
 
 interface AllCommentaireComposentProps {
@@ -53,9 +54,20 @@ const AllCommentaireComposent = ({
 
   return (
     <div className={styles.contenerCommentaire}>
-      {commentaire.note && (
-        <p className={styles.pNotes}>⭐ {commentaire.note}</p>
-      )}
+      <div className={styles.contenerPpNotes}>
+        <img
+          className={styles.photoUtilisateur}
+          src={
+            commentaire.photo_utilisateur
+              ? `${import.meta.env.VITE_API_URL}/uploads/${commentaire.photo_utilisateur}`
+              : "/images/icon/iconCompte.png"
+          }
+          alt="pp"
+        />
+        {commentaire.note && (
+          <p className={styles.pNotes}>⭐ {commentaire.note}</p>
+        )}
+      </div>
       <p className={styles.pTexte}>{commentaire.comentaire}</p>
       <p className={styles.pAuteur}>
         <span

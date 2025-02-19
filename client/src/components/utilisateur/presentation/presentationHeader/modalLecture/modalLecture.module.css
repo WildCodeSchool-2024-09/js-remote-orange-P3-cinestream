@@ -51,4 +51,9 @@
   aspect-ratio: 16 / 9;
   margin: 0 auto;
   border: none;
+
+  /* appareil tactile */
+  @media (pointer: coarse) {
+    height: 96%;
+  }
 }

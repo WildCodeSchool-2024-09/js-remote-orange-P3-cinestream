@@ -13,9 +13,15 @@ function generateSeedFromDate(date: Date): number {
 }
 
 // Fonction pour générer un nombre aléatoire avec une seed (basée sur le générateur de Mersenne Twister ou similaire)
-function randomSeed(seed: number): () => number {
-  const x = Math.sin(seed) * 10000; // Une méthode simple pour générer des nombres pseudo-aléatoires
-  return () => x - Math.floor(x);
+function randomSeed(seed1: number): () => number {
+  let seed = seed1;
+  return () => {
+    seed += 0x6d2b79f5;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
 // Fonction pour mélanger un tableau en utilisant une seed

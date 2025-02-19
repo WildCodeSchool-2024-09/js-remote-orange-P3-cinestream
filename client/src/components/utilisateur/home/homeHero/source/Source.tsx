@@ -93,7 +93,9 @@ const Source = () => {
           },
         },
       );
-      setAllFilmPlatforme(articleAleatoir(data.articlePlatforme, 22));
+      setAllFilmPlatforme(
+        articleAleatoir(data.articlePlatforme as Article[], 22).splice(0, 30),
+      );
     } catch (error) {
       console.error("eurreur l'ore de la récupération de tout les producteur");
     }
