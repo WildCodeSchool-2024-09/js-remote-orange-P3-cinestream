@@ -28,7 +28,7 @@ const OffreAbonement = ({
       </div>
       <div className={`${style.carte} ${abonement && style.carteSelect}`}>
         <div className={`${style.flexAbonementTitre}`}>
-          <p className={`${style.abonementTitre}`}>Premuium</p>
+          <p className={`${style.abonementTitre}`}>Premium</p>
           <img
             src={
               abonement
