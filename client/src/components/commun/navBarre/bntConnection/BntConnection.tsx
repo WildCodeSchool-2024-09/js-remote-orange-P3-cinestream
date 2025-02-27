@@ -6,7 +6,7 @@ const BntConnection = () => {
     <>
       <Link to="/connection">
         <button type="button" className={style.loginButton}>
-          Connection
+          Connexion
         </button>
       </Link>
     </>
